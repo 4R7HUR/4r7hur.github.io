@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gallery</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .square {
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%;
+      overflow: hidden;
+      border: 1px solid #000; /* Border for the square */
+    }
+
+    .square img {
+      position: absolute;
+      width: 100%;
+      height: auto;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .inner-layer {
+      position: absolute;
+      width: 25%;
+      height: 25%;
+      border: 1px solid black;
+      box-sizing: border-box;
+      background-color: transparent;
+    }
+  </style>
+</head>
+<body>
+
+<div id="gallery" class="mt-4"></div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const pages = {
+      page_1: { page: 1, file: 'sketch-book/IMG_3994.jpg', hexColor: '#9f9f99' },
+      page_2: { page: 2, file: 'sketch-book/IMG_3995.jpg', hexColor: '#888772' },
+      page_3: { page: 2, file: 'sketch-book/IMG_3996.jpg', hexColor: '#a8a8a5' },
+      page_4: { page: 2, file: 'sketch-book/IMG_3997.jpg', hexColor: '#8b8182' },
+      page_5: { page: 2, file: 'sketch-book/IMG_3998.jpg', hexColor: '#a8a7a3' },
+      page_6: { page: 2, file: 'sketch-book/IMG_3999.jpg', hexColor: '#758c9d' },
+      page_7: { page: 2, file: 'sketch-book/IMG_4001.jpg', hexColor: '#647d8f' }
+    };
+
+    let html = '<div class="container"><div class="row">';
+
+    Object.keys(pages).forEach(pageKey => {
+      const page = pages[pageKey];
+      html += `
+        <div class="col-4 col-md-3 col-lg-2">
+          <div class="square">
+            <img src="${page.file}" alt="Image" />
+            <div class="inner-layer" style="background-color: ${page.hexColor};"></div>
+          </div>
+        </div>
+      `;
+    });
+
+    html += '</div></div>';
+    document.getElementById('gallery').innerHTML = html;
+  });
+</script>
+
+</body>
+</html>

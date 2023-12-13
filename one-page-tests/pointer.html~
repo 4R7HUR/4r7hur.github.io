@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: red;
+  position: absolute;
+  transition: width 0.5s, height 0.5s; /* Add CSS transition for smooth size animation */
+}
+</style>
+</head>
+<body>
+<div id="circle"></div>
+
+<script>
+function moveCircle() {
+  var circle = document.getElementById('circle');
+  var circleSize = 50; // Diameter of the circle
+  var maxX = window.innerWidth - circleSize;
+  var maxY = window.innerHeight - circleSize;
+  var initialX = maxX / 2; // Initial X position at the center of the screen
+  var initialY = maxY / 2; // Initial Y position at the center of the screen
+  circle.style.left = initialX + 'px';
+  circle.style.top = initialY + 'px';
+  var directionX = 1; // Initialize the direction along the X-axis
+  var directionY = 1; // Initialize the direction along the Y-axis
+  var minSize = 20; // Define the minimum size of the circle
+  var maxSize = 200; // Define the maximum size of the circle
+
+  function move() {
+    //console.log('Moving...');
+    var newX = Math.random() * maxX;
+    var newY = Math.random() * maxY;
+    var newSize = Math.floor(Math.random() * (maxSize - minSize + 1)) + minSize; // Random size between minSize and maxSize
+    var duration = Math.random() * 1000 + 100; // Random duration between 0.5 and 2.5 seconds for faster movement
+    var startTime = Date.now();
+    var currentTime;
+
+    function moveStep() {
+      currentTime = Date.now() - startTime;
+      if (currentTime < duration) {
+        var currentX = circle.offsetLeft;
+        var currentY = circle.offsetTop;
+        var deltaX = (newX - currentX) / duration * 5 * directionX; // Increased multiplier for faster speed
+        var deltaY = (newY - currentY) / duration * 5 * directionY; // Increased multiplier for faster speed
+        var nextX = currentX + deltaX;
+        var nextY = currentY + deltaY;
+
+        if (nextX >= 0 && nextX <= maxX) {
+          circle.style.left = nextX + 'px';
+        } else {
+          directionX *= -1; // Reverse the X direction if the boundary is reached
+        }
+
+        if (nextY >= 0 && nextY <= maxY) {
+          circle.style.top = nextY + 'px';
+        } else {
+          directionY *= -1; // Reverse the Y direction if the boundary is reached
+        }
+
+        if (newSize >= minSize && newSize <= maxSize) {
+          circle.style.width = newSize + 'px';
+          circle.style.height = newSize + 'px';
+        }
+
+        //console.log('Current Position:', circle.style.left, circle.style.top);
+        requestAnimationFrame(moveStep);
+      } else {
+        console.log('Movement finished. Changing direction and speed...');
+        directionX = Math.random() < 0.5 ? -1 : 1; // Randomly change direction along the X-axis
+        directionY = Math.random() < 0.5 ? -1 : 1; // Randomly change direction along the Y-axis
+        newX = Math.random() * maxX;
+        newY = Math.random() * maxY;
+        move();
+      }
+    }
+
+    moveStep();
+  }
+
+  move();
+}
+
+moveCircle();
+</script>
+</body>
+</html>
