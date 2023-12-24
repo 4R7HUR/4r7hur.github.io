@@ -1,3 +1,24 @@
+//Add svg to DOM
+const dynamicSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+dynamicSvg.setAttribute("id", "dynamicSvg");
+document.body.prepend(dynamicSvg);
+
+const path_names = [
+    'a', 'b', 'c', 'd', 'e', 'f', 'g','h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+    's', 't', 'u', 'v', 'w', 'x','y','z',1, 2, 3, 4, 5, 6, 7, 8, 9
+];
+
+path_names.forEach((element, index) => {
+    p = createPath(element,element,'',1,'#000');
+    dynamicSvg.appendChild(p);
+    p = createPath('drawing_' + index,'drawing','',1,'#000');
+    dynamicSvg.appendChild(p);
+});
+
+
+let dynamicSvgWidth = $("#dynamicSvg").width();
+let dynamicSvgHeight = $("#dynamicSvg").height();
+
 //variables
 
 const sharpie = {
@@ -38,163 +59,116 @@ const sharpie = {
 };
 
 const sketch_book = {
-     page_1: {
-     	page: 1,
-     	hex: "#0090ee",
-     	width: 202,//mm
-     	height: 333,//mm 
-     	file: "sketch-book/IMG_3994.jpg",    	
-     },
-     page_2: {
-     	page: 2,
-     	hex: "#0090ee",
-     	width: 202,//mm
-     	height: 333,//mm 
-     	file: "sketch-book/IMG_3995.jpg",    	
-     },
-     
-     page_3: {
-     	page: 2,
-     	hex: "#0090ee",
-     	width: 202,//mm
-     	height: 333,//mm 
-     	file: "sketch-book/IMG_3995.jpg",    	
-     },
-     page_4: {
-     	page: 2,
-     	hex: "#0090ee",
-     	width: 202,//mm
-     	height: 333,//mm 
-     	file: "sketch-book/IMG_3995.jpg",    	
-     },
-     page_5: {
-     	page: 2,
-     	hex: "#0090ee",
-     	width: 202,//mm
-     	height: 333,//mm 
-     	file: "sketch-book/IMG_3995.jpg",    	
-     },
-     page_6: {
-     	page: 2,
-     	hex: "#0090ee",
-     	width: 202,//mm
-     	height: 333,//mm 
-     	file: "sketch-book/IMG_3995.jpg",    	
-     },
-     page_7: {
-     	page: 2,
-     	hex: "#0090ee",
-     	width: 202,//mm
-     	height: 333,//mm 
-     	file: "sketch-book/IMG_3995.jpg",    	
-     },
-    };
-    
-console.log(sketch_book);
+    page_1: {
+        page: 1,
+        hex: "#0090ee",
+        width: 202,//mm
+        height: 333,//mm 
+        file: "sketch-book/IMG_3994.jpg",
+    },
+    page_2: {
+        page: 2,
+        hex: "#0090ee",
+        width: 202,//mm
+        height: 333,//mm 
+        file: "sketch-book/IMG_3995.jpg",
+    },
 
-let currentArrayIndex = 0; // Start with the first array
-let coordinate_arrays = [];
-
-let svg = $('svg');
-let svg_width = svg.width();
-let svg_height = svg.height();
-
-svg.find('path').attr('opacity','1');
-svg.find('g.lines path').attr('stroke',sharpie.thick.black);
-svg.find('g#s path').attr('stroke',sharpie.thick.teal);
-svg.find('g#b path').attr('stroke',sharpie.fine.gray);
-svg.find('g#c path').attr('stroke',sharpie.thick.red);
-svg.find('g#paper rect').attr('width',svg_width);
-svg.find('g#paper rect').attr('height',svg_height);
-
-
-let print = {};
-print.width = 297//mm
-print.height = 297//mm
-print.thick_sharpie = 1//mm
-print.thin_sharpie = 0.4//mm
-
-let stroke_dasharray = '';
-
-//functions
-function getRandom(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-//action!
-
-thin_sharpie_px = (svg_width/print.width) * print.thin_sharpie
-thick_sharpie_px = (svg_width/print.width) * print.thick_sharpie
-
-svg.find('path').attr('stroke-width',thin_sharpie_px);
-svg.find('g.linesss path, g.s path, g#c path').attr('stroke-width',thick_sharpie_px);
-
-//Set random dasharray disabled..
-svg.find('g.linessssssss path').each(function() {
-
-  stroke_dasharray = '';
-  
-  stroke_dasharray += getRandom(10, 30) + ' ';//length
-  stroke_dasharray += getRandom(10, 30) + ' ';//gap  
-  stroke_dasharray += getRandom(10, 30) + ' ';//length
-  stroke_dasharray += getRandom(10, 30) + ' ';//gap  
-  //stroke_dasharray += getRandom(1, 30) + ' ';//length
-  //stroke_dasharray += getRandom(1, 30) + ' ';//gap  
-  
-  console.log(stroke_dasharray);
-  
-  $(this).attr('stroke-dasharray', stroke_dasharray); // Set the stroke-dasharray for the current path
-});
-
-  
-
-let paths = svg.find('.lines path');
-let thirds = [];
-
-
-paths.each(function(index) {coordinate_arrays.push([]);});
-
-
-let d = '';
-
-
-
-const createSwatch = (color, name, category) => {
-    const swatch = document.createElement('span');
-    swatch.style.display = 'inline-block';
-    swatch.style.width = '3%';
-    swatch.style.height = '33px';
-    swatch.style.border = '1px solid black';
-    swatch.style.backgroundColor = color;
-    swatch.style.margin = '0 1px 1px 0';
-    swatch.setAttribute('title', `${category} | ${name}`);
-
-    return swatch;
+    page_3: {
+        page: 2,
+        hex: "#0090ee",
+        width: 202,//mm
+        height: 333,//mm 
+        file: "sketch-book/IMG_3995.jpg",
+    },
+    page_4: {
+        page: 2,
+        hex: "#0090ee",
+        width: 202,//mm
+        height: 333,//mm 
+        file: "sketch-book/IMG_3995.jpg",
+    },
+    page_5: {
+        page: 2,
+        hex: "#0090ee",
+        width: 202,//mm
+        height: 333,//mm 
+        file: "sketch-book/IMG_3995.jpg",
+    },
+    page_6: {
+        page: 2,
+        hex: "#0090ee",
+        width: 202,//mm
+        height: 333,//mm 
+        file: "sketch-book/IMG_3995.jpg",
+    },
+    page_7: {
+        page: 2,
+        hex: "#0090ee",
+        width: 202,//mm
+        height: 333,//mm 
+        file: "sketch-book/IMG_3995.jpg",
+    },
 };
 
-const container = document.createElement('div');
-container.className = "container";
-const row = document.createElement('div');
-row.className = "row";
 
-for (const category in sharpie) {
-    const colors = sharpie[category];
-    for (const color in colors) {
-        const swatch = createSwatch(colors[color], color, category);
-        row.appendChild(swatch);
+
+
+
+
+//FUNCTIONS
+function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function createPath(id,c1ass,d,stroke_width,stroke){
+
+    let path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('id', id);
+    path.setAttribute('class', c1ass);
+    path.setAttribute('d', d);
+    path.setAttribute('stroke-width', stroke_width);  
+    path.setAttribute('stroke', stroke);
+      
+    
+    path.setAttribute('fill', 'none');
+    //path.setAttribute('stroke-dasharray', "none");
+    //path.setAttribute('opacity', 1);
+    //path.setAttribute('fill-opacity', 1);
+
+    return path;
+
+}
+
+
+
+
+// Event Listeners
+document.addEventListener('keydown', function (event) {
+    const keyPressed = event.key.toLowerCase(); // Convert the typed key to lowercase for case-insensitive comparison
+    console.log("The " + keyPressed + " key was pressed..");
+    handleKeyPress(keyPressed);
+});
+
+// Function to handle key presses
+function handleKeyPress(key) {
+    const functionName = `_${key}`;
+    console.log(functionName);
+    if (typeof window[functionName] === 'function') {
+        window[functionName](key);
+    } else {
+        console.log(`No '${functionName}' function found for the '${key}'. key`);
     }
 }
 
-container.appendChild(row);
+function nCommas(str, n) {
+    const regex = new RegExp('^([^,]*,){' + n + '}[^,]*$');
+    return regex.test(str);
+}
 
-const body = document.body;
-const firstChild = body.firstChild;
-//body.insertBefore(container, firstChild);
-
-
-
-
-
+function copyArray(arr) {
+    return JSON.parse(JSON.stringify(arr));
+  }
 
 
 
@@ -223,8 +197,7 @@ const firstChild = body.firstChild;
 
 
 
-
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
         const svgData = $('svg')[0].outerHTML; // Select the first SVG element in the DOM
         console.log(svgData);
@@ -237,5 +210,5 @@ document.addEventListener('keydown', function(event) {
         window.URL.revokeObjectURL(svgURL);
     }
 });
-	
+
 

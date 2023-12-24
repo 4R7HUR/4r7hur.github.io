@@ -6,48 +6,6 @@
 </head>
 <body>
 
-<svg xmlns="http://www.w3.org/2000/svg">
-
-	<g id='paper'>
-      <rect width="100" height="100" style="fill:#dedede" />
-	</g> 
-
-	<g id='b'>
-    <path d="M33 66 L66 66 M44 55 L77 55" stroke="#ccc" stroke-width=".2" fill="none" opacity="0.5" stroke-dasharray="44, 4" /> 
-	</g> 
-	
-	<g class='y' data-scale="50">
-	</g> 	
-	
-	<g class="lines">
-    <path d="M10,10 L30,30 50,10 70,30 90,10" stroke="red" stroke-width="1" fill="none" />
-    <path d="M10,40 L30,60 50,40 70,60 90,40" stroke="purple" stroke-width="1" fill="none" />
-	</g> 
-
-    <g id='l'>
-	</g>
-			
-	<g class='y' data-scale="75">
-	</g> 
-	
-	<g id='p'>
-	</g>
-	
-	<g id='s'>
-    <path d="M33 66 L66 66 M44 55 L77 55" stroke="white" stroke-width="1" fill="none" opacity="0.75"  /> 
-	</g>
-	
-	<g class="lines">
-    <path d="M10,10 L30,30 50,10 70,30 90,10" stroke="red" stroke-width="1" fill="none" />
-    <path d="M10,20 L30,40 50,20 70,40 90,20" stroke="blue" stroke-width="1" fill="none" /> 
-	</g> 
-	
-	<g id='c'>
-    <path d="M10,20 L30,40 50,20 70,40 90,20" stroke="blue" stroke-width="1" fill="none" /> 
-	</g>
-
-</svg>
-
 <!-- Load jQuery from a CDN (for example, the jQuery CDN) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
@@ -63,8 +21,8 @@
     //{ purpose: 'TBC', fileName: 'd.js' },
     //{ purpose: 'TBC', fileName: 'e.js' },
     //{ purpose: 'TBC', fileName: 'f.js' },
-    //{ purpose: 'TBC', fileName: 'g.js' },
-    //{ purpose: 'TBC', fileName: 'h.js' },
+    { purpose: 'TBC', fileName: 'g.js' },
+    { purpose: 'TBC', fileName: 'h.js' },
     //{ purpose: 'TBC', fileName: 'i.js' },
     //{ purpose: 'TBC', fileName: 'j.js' },
     //{ purpose: 'TBC', fileName: 'k.js' },
@@ -73,6 +31,8 @@
     //{ purpose: 'TBC', fileName: 'n.js' },
     //{ purpose: 'TBC', fileName: 'o.js' },
     { purpose: 'little circles', fileName: 'p.js' },
+    //{ purpose: 'TBC', fileName: 'q.js' },
+    //{ purpose: 'TBC', fileName: 'r.js' },
     { purpose: 'squares', fileName: 's.js' },
     //{ purpose: 'TBC', fileName: 't.js' },
     //{ purpose: 'TBC', fileName: 'u.js' },
@@ -95,7 +55,7 @@
       const scriptTag = document.createElement('script');
       scriptTag.src = 'keyboard_functions/'+script.fileName;
       scriptTag.type = 'text/javascript';
-      document.head.appendChild(scriptTag);
+      document.body.appendChild(scriptTag);
     });
 </script> 
       

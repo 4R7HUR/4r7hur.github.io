@@ -1,73 +1,52 @@
-
-// Attach the event listener to the document
-//document.addEventListener("mousemove", trackMouse);
-
-svg.on("mousemove", trackMouse);
+$("#dynamicSvg").on("mousemove", trackMouse);
+let mouseTrack = [];
+let counter = 0;
+let pathIndex = 0;
+let M = [];
+let C = [[], [], []];
+let x;
+let y;
+let rounding = 2;
+let block = false;
 
 // Function to track mouse movement
 function trackMouse(event) {
-    let x = xy_factory(event.clientX, { rounding: 1, randomness: 1, });
-    let y = xy_factory(event.clientY, { rounding: 1, randomness: 1, });
 
-    let path = paths.eq(currentArrayIndex);
+    x = event.clientX;
+    y = event.clientY;
+    
+    x = Math.round(x / rounding) * rounding;
+    y = Math.round(y / rounding) * rounding;
 
-    let coordinate_array = coordinate_arrays[currentArrayIndex];
-    let coordinates_count = coordinate_array.length;
+    xy = x + ',' + y + ' ';
+    pathIndex = counter % 3;
 
-    coordinate_arrays[currentArrayIndex].push([x, y]);
-
-    //check to see if this is our first time for this set of coordinates   
-    if (coordinates_count === 0) {
-        d = 'M ' + x + ' ' + y + '';
-        path.attr('d', d);
+    if (counter <= 2) {
+        M[pathIndex] = 'M' + xy;
     }
 
-    if (coordinates_count > 0 && (coordinates_count % 3) === 0) {
+    C[pathIndex] += xy;
 
-        thirds.push({ x, y });
+    if (nCommas(C[pathIndex], 3)) {
+        myPath = $("#dynamicSvg path.drawing").eq(pathIndex);
+        newC = 'C' + C[pathIndex];
+        oldD = myPath.attr('d');
+        newD = oldD ? oldD + ' ' + newC : M[pathIndex] + newC;
+        myPath.attr('d', newD.trim());
+        C[pathIndex] = '';
 
-        path.attr('d', path.attr('d') + ' C ' + concatenateCoordinates(coordinate_array));
-        
+        if (counter > 500) {
+            counter = 3;
+            M.fill('M' + xy);
+            C = [[], [], []];
+            $("#dynamicSvg path.drawing:lt(3)").removeClass('drawing');
+        }
+
     }
 
-    currentArrayIndex = (currentArrayIndex + 1) % paths.length; // Cycle through the arrays
-
+    counter++;
+    mouseTrack.push([x, y]);
 }
-
-
-
-function concatenateCoordinates(coordinate_array) {
-    // Get the last three sub-arrays
-    var lastThreeSubArrays = coordinate_array.slice(-3);
-
-    // Concatenate and format the sub-arrays into a string
-    var resultString = lastThreeSubArrays.map(function (subArray) {
-        return subArray.join(' ');
-    }).join(', ');
-
-    return resultString;
-}
-
-function xy_factory(xy, options) {
-
-    // Access the 'rounding' value from the 'options' object
-    let roundingValue = options.rounding;
-    let randomness = options.randomness;
-
-    // Randomize
-    if (randomness) {
-        xy = xy + ((Math.random() * 2 * randomness) - randomness);
-    }
-
-    // Perform the rounding or other operations as needed
-    if (roundingValue) {
-        xy = Math.round(xy / roundingValue) * roundingValue;
-    }
-
-    // Return the result
-    return xy;
-}
-
 
 
 

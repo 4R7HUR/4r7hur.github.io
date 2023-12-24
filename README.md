@@ -14,3 +14,15 @@ Colours are selected based on a restricted pallet and an algorythm based on the 
 A gallery page seems like a good idea :-)
 
 aeiou, white shapes
+
+
+all keyboard functions should have the following variables avaialble to them
+
+thirds //comment here
+coordinate_arrays //comment here
+    console.log(key);
+    console.log(svgContainer);
+    console.log(coordinate_arrays);
+    console.log(thirds);
+    console.log(svg_width);
+    console.log(svg_height);
