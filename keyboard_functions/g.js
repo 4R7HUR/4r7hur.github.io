@@ -1,11 +1,15 @@
 //Using 'g' as a test case to get things in a good place
-function _g(key) {
+function _g(key, axis) {
+
+    if (axis === undefined) {
+        axis = 1;//1 for horizontal, 2 for verticle
+    }
+
     array = copyArray(mouseTrack);
     path = $("#" + key);
     d1 = path.attr('d');
 
     let spacer = 50;
-    let axis = 1;//1 for horizontal, 2 for verticle
     let sort = 'asc';
     let groupedCoordinates = groupCoordinatesByAxis(array, axis, spacer);
     let sortedCoordinates = sortGroupedCoordinates(groupedCoordinates, axis, sort);

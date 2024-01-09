@@ -1,6 +1,8 @@
 //Add svg to DOM
 const dynamicSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 dynamicSvg.setAttribute("id", "dynamicSvg");
+//dynamicSvg.setAttribute("opacity", "0.5");
+
 document.body.prepend(dynamicSvg);
 
 const path_names = [
@@ -11,7 +13,7 @@ const path_names = [
 path_names.forEach((element, index) => {
     p = createPath(element,element,'',1,'#000');
     dynamicSvg.appendChild(p);
-    p = createPath('drawing_' + index,'drawing','',1,'#000');
+    p = createPath('drawing_' + index,'drawing','','0.05vw','#000');
     dynamicSvg.appendChild(p);
 });
 
@@ -21,42 +23,39 @@ let dynamicSvgHeight = $("#dynamicSvg").height();
 
 //variables
 
-const sharpie = {
-    fine: {
-        baby_blue: "#0090ee",
-        black: "#020207",
-        blue: "#230094",
-        blue_green: "#00875a",
-        hot_pink: "#ff00ce",
-        karki: "#5b8e2b",
-        light_blue: "#458bd7",
-        dirty_pink: "#890082",
-        orange: "#cf7c27",
-        pink: "#ff00ce",
-        purple: "#480093",
-        yellow: "#d3cd20",
-    },
-    thick: {
-        black: "#05060a",
-        blue1: "#4b95e3",
-        blue2: "#0071e2",
-        blue3: "#0071e2",
-        brown: "#311512",
-        gray: "#546078",
-        green: "#009154",
-        leaf: "#6ec43a",
-        light_pink: "#ffdefb",
-        light_purple: "#7753db",
-        mouve: "#b00081",
-        orange: "#dd8836",
-        pink: "#f382de",
-        purple: "#440067",
-        red: "#d2001a",
-        red2: "#de0012",
-        teal: "#005993",
-        yellow: "#ddac04",
-    }
-};
+const sharpies = [
+    { nib: '0.1vw', color: 'baby_blue', hex: '#0090ee' },
+    { nib: '0.1vw', color: 'black', hex: '#020207' },
+    { nib: '0.1vw', color: 'blue', hex: '#230094' },
+    { nib: '0.1vw', color: 'blue_green', hex: '#00875a' },
+    { nib: '0.1vw', color: 'hot_pink', hex: '#ff00ce' },
+    { nib: '0.1vw', color: 'karki', hex: '#5b8e2b' },
+    { nib: '0.1vw', color: 'light_blue', hex: '#458bd7' },
+    { nib: '0.1vw', color: 'dirty_pink', hex: '#890082' },
+    { nib: '0.1vw', color: 'orange', hex: '#cf7c27' },
+    { nib: '0.1vw', color: 'pink', hex: '#ff00ce' },
+    { nib: '0.1vw', color: 'purple', hex: '#480093' },
+    { nib: '0.1vw', color: 'yellow', hex: '#d3cd20' },
+    { nib: '0.2vw', color: 'black', hex: '#05060a' },
+    { nib: '0.2vw', color: 'blue1', hex: '#4b95e3' },
+    { nib: '0.2vw', color: 'blue2', hex: '#0071e2' },
+    { nib: '0.2vw', color: 'blue3', hex: '#0071e2' },
+    { nib: '0.2vw', color: 'brown', hex: '#311512' },
+    { nib: '0.2vw', color: 'gray', hex: '#546078' },
+    { nib: '0.2vw', color: 'green', hex: '#009154' },
+    { nib: '0.2vw', color: 'leaf', hex: '#6ec43a' },
+    { nib: '0.2vw', color: 'light_pink', hex: '#ffdefb' },
+    { nib: '0.2vw', color: 'light_purple', hex: '#7753db' },
+    { nib: '0.2vw', color: 'mouve', hex: '#b00081' },
+    { nib: '0.2vw', color: 'orange', hex: '#dd8836' },
+    { nib: '0.2vw', color: 'pink', hex: '#f382de' },
+    { nib: '0.2vw', color: 'purple', hex: '#440067' },
+    { nib: '0.2vw', color: 'red', hex: '#d2001a' },
+    { nib: '0.2vw', color: 'red2', hex: '#de0012' },
+    { nib: '0.2vw', color: 'teal', hex: '#005993' },
+    { nib: '0.2vw', color: 'yellow', hex: '#ddac04' }
+];
+
 
 const sketch_book = {
     page_1: {
@@ -111,11 +110,6 @@ const sketch_book = {
     },
 };
 
-
-
-
-
-
 //FUNCTIONS
 function getRandom(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -128,8 +122,7 @@ function createPath(id,c1ass,d,stroke_width,stroke){
     path.setAttribute('class', c1ass);
     path.setAttribute('d', d);
     path.setAttribute('stroke-width', stroke_width);  
-    path.setAttribute('stroke', stroke);
-      
+    path.setAttribute('stroke', stroke);      
     
     path.setAttribute('fill', 'none');
     //path.setAttribute('stroke-dasharray', "none");
@@ -139,7 +132,6 @@ function createPath(id,c1ass,d,stroke_width,stroke){
     return path;
 
 }
-
 
 
 
@@ -153,13 +145,20 @@ document.addEventListener('keydown', function (event) {
 // Function to handle key presses
 function handleKeyPress(key) {
     const functionName = `_${key}`;
-    console.log(functionName);
     if (typeof window[functionName] === 'function') {
         window[functionName](key);
+        let sharpie = getSharpie(key);
+        $("#" + key).attr('stroke', sharpie.hex).attr('stroke-width', sharpie.nib).attr('data-colour', sharpie.color);    
     } else {
         console.log(`No '${functionName}' function found for the '${key}'. key`);
     }
 }
+
+function getSharpie(key){
+    //  % 23 
+    let index =  (key.charCodeAt() + sharpies.length) % sharpies.length;    
+    return sharpies[index];
+} 
 
 function nCommas(str, n) {
     const regex = new RegExp('^([^,]*,){' + n + '}[^,]*$');
