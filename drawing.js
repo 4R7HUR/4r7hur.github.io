@@ -1,4 +1,14 @@
 $("#dynamicSvg").on("mousemove", trackMouse);
+
+//trying the kids up
+//top annd tail
+//..
+//...
+//....
+//.....
+
+
+
 let mouseTrack = [];
 let counter = 0;
 let pathIndex = 0;
@@ -8,9 +18,14 @@ let x;
 let y;
 let rounding = 2;
 let block = false;
-
+let initialCounter = 0;
 // Function to track mouse movement
 function trackMouse(event) {
+
+    if (initialCounter < 100) {
+        initialCounter++;
+        return; // Do nothing until initialCounter reaches 10
+    }
 
     x = event.clientX;
     y = event.clientY;
@@ -35,7 +50,7 @@ function trackMouse(event) {
         myPath.attr('d', newD.trim());
         C[pathIndex] = '';
 
-        if (counter > 500) {
+        if (counter > 200) {
             counter = 3;
             M.fill('M' + xy);
             C = [[], [], []];
