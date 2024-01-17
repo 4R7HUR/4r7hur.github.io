@@ -1,65 +1,73 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>D & W</title>
-    <link rel="stylesheet" href="styles.css">
+  <title>D & W</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<!-- Load jQuery from a CDN (for example, the jQuery CDN) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-<!-- Link to your script.js file -->
-<script src="script.js"></script>
-<script src="drawing.js"></script>
-<script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="redirect.js"></script>
+  <script src="script.js"></script>
+  <script src="drawing.js"></script>
+  <script>
+
+const path_names_2 = {
+    'a': { 'description': 'small circles' },
+    'b': { 'description': 'TBC' },
+    'c': { 'description': 'TBC' },
+    'd': { 'description': 'horizontal outside' },
+    'e': { 'description': 'TBC' },
+    'f': { 'description': 'vertcial rough colouring' },
+    'g': { 'description': 'horizontal rough colouring' },
+    'h': { 'description': 'frantic curves' },
+    'i': { 'description': 'TBC' },
+    'j': { 'description': 'vertical outside' },
+    'k': { 'description': 'squares' }, // last one on the middle row :-)
+    'l': { 'description': 'spirals' },
+    'm': { 'description': 'TBC' },
+    'n': { 'description': 'TBC' },
+    'o': { 'description': 'TBC' },
+    'p': { 'description': 'TBC' },
+    'q': { 'description': 'TBC' },
+    'r': { 'description': 'TBC' },
+    's': { 'description': 'medium circles' },
+    't': { 'description': 'TBC' },
+    'u': { 'description': 'TBC' },
+    'v': { 'description': 'TBC' },
+    'w': { 'description': 'TBC' },
+    'x': { 'description': 'TBC' },
+    'y': { 'description': 'TBC' },
+    'z': { 'description': 'TBC' },
+    '1': { 'description': 'TBC' },
+    '2': { 'description': 'TBC' },
+    '3': { 'description': 'TBC' },
+    '4': { 'description': 'TBC' },
+    '5': { 'description': 'TBC' },
+    '6': { 'description': 'TBC' },
+    '7': { 'description': 'TBC' },
+    '8': { 'description': 'TBC' },
+    '9': { 'description': 'TBC', 'bob': 'red' }
+    // Add or modify descriptions as needed for each character
+};
+
+Object.keys(path_names_2).forEach((character) => {
+    const description = path_names_2[character].description.replace(/\s/g, '-');
+    console.log('character',character);
+    if (description !== 'TBC') {
+        const scriptTag = document.createElement('script');
+        scriptTag.src = 'keyboard_functions/' + character + '.js?' + description;
+        scriptTag.type = 'text/javascript';
+        document.body.appendChild(scriptTag);
+    }
+});
 
 
-    const scripts = [
-    { purpose: 'TBC', fileName: 'a.js' },
-    //{ purpose: 'background', fileName: 'b.js' },
-    { purpose: 'connected areas', fileName: 'c.js' },
-    { purpose: 'TBC', fileName: 'd.js' },
-    //{ purpose: 'TBC', fileName: 'e.js' },
-    { purpose: 'TBC', fileName: 'f.js' },
-    { purpose: 'TBC', fileName: 'g.js' },
-    { purpose: 'TBC', fileName: 'h.js' },
-    //{ purpose: 'TBC', fileName: 'i.js' },
-    { purpose: 'TBC', fileName: 'j.js' },
-    //{ purpose: 'TBC', fileName: 'k.js' },
-    { purpose: 'big circles', fileName: 'l.js' }, 
-    //{ purpose: 'TBC', fileName: 'm.js' },
-    //{ purpose: 'TBC', fileName: 'n.js' },
-    //{ purpose: 'TBC', fileName: 'o.js' },
-    { purpose: 'little circles', fileName: 'p.js' },
-    //{ purpose: 'TBC', fileName: 'q.js' },
-    //{ purpose: 'TBC', fileName: 'r.js' },
-    { purpose: 'squares', fileName: 's.js' },
-    //{ purpose: 'TBC', fileName: 't.js' },
-    //{ purpose: 'TBC', fileName: 'u.js' },
-    //{ purpose: 'TBC', fileName: 'v.js' },
-    //{ purpose: 'TBC', fileName: 'w.js' },
-    //{ purpose: 'TBC', fileName: 'x.js' },
-    { purpose: 'squares', fileName: 'y.js' },
-    //{ purpose: 'TBC', fileName: 'z.js' },
-    //{ purpose: 'TBC', fileName: '1.js' },
-    //{ purpose: 'TBC', fileName: '2.js' },
-    //{ purpose: 'TBC', fileName: '3.js' },
-    //{ purpose: 'TBC', fileName: '4.js' },
-    //{ purpose: 'TBC', fileName: '5.js' },
-    //{ purpose: 'TBC', fileName: '6.js' },
-    //{ purpose: 'TBC', fileName: '7.js' },
-    //{ purpose: 'TBC', fileName: '8.js' },
-    //{ purpose: 'TBC', fileName: '9.js' }
-    ];
-    scripts.forEach(script => {
-      const scriptTag = document.createElement('script');
-      scriptTag.src = 'keyboard_functions/'+script.fileName;
-      scriptTag.type = 'text/javascript';
-      document.body.appendChild(scriptTag);
-    });
-</script> 
-      
+
+  </script>
+
 </body>
 
 </html>
