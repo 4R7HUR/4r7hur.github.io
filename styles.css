@@ -2,14 +2,21 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden; /* Prevent scrollbars */
+    overflow: hidden; 
+    /*Jquery handels the background image*/
+    /*background-image: url('images/sketch-book/IMG_3995_crop.jpg');*/
+    
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed;
     
 }
 svg {
     width: 100%;
     height: 100%;
     margin: 0%;
-    /*background-color:#f3dfc8;*/
-    
+    /*cursor:wait;*/
+    /*background-color:#93907d;*/    
     
 }

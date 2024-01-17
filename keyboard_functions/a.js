@@ -1,4 +1,4 @@
-//Using 'g' as a test case to get things in a good place
+
 function _a(key, radius) {
 
     if (radius === undefined) {
@@ -19,9 +19,6 @@ function _a(key, radius) {
         }
     });
 	
-	// Now pathString contains the 'd' attribute for the SVG path
-	console.log(pathString);
-
 	path.attr('d', pathString);
 	
     

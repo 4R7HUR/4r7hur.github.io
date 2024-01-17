@@ -1,3 +1,6 @@
+//Set background image
+
+
 //Add svg to DOM
 const dynamicSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 dynamicSvg.setAttribute("id", "dynamicSvg");
@@ -5,17 +8,86 @@ dynamicSvg.setAttribute("id", "dynamicSvg");
 
 document.body.prepend(dynamicSvg);
 
+
 const path_names = [
-    'a', 'b', 'c', 'd', 'e', 'f', 'g','h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-    's', 't', 'u', 'v', 'w', 'x','y','z',1, 2, 3, 4, 5, 6, 7, 8, 9
+    { 'character': 'a', 'description': 'small circles' },
+    { 'character': 'b', 'description': 'TBC' },
+    { 'character': 'c', 'description': 'TBC' },
+    { 'character': 'd', 'description': 'horizontal outside' },
+    { 'character': 'e', 'description': 'TBC' },
+    { 'character': 'f', 'description': 'vertcial rough colouring' },
+    { 'character': 'g', 'description': 'horizontal rough colouring' },
+    { 'character': 'h', 'description': 'frantic curves' },
+    { 'character': 'i', 'description': 'TBC' },
+    { 'character': 'j', 'description': 'vertical outside' },
+    { 'character': 'k', 'description': 'squares' },//last one on the middle row :-)
+    { 'character': 'l', 'description': 'spirals' },
+    { 'character': 'm', 'description': 'TBC' },
+    { 'character': 'n', 'description': 'TBC' },
+    { 'character': 'o', 'description': 'TBC' },
+    { 'character': 'p', 'description': 'TBC' },
+    { 'character': 'q', 'description': 'TBC' },
+    { 'character': 'r', 'description': 'TBC' },
+    { 'character': 's', 'description': 'medium circles' },
+    { 'character': 't', 'description': 'TBC' },
+    { 'character': 'u', 'description': 'TBC' },
+    { 'character': 'v', 'description': 'TBC' },
+    { 'character': 'w', 'description': 'TBC' },
+    { 'character': 'x', 'description': 'TBC' },
+    { 'character': 'y', 'description': 'TBC' },
+    { 'character': 'z', 'description': 'TBC' },
+    { 'character': '1', 'description': 'TBC' },
+    { 'character': '2', 'description': 'TBC' },
+    { 'character': '3', 'description': 'TBC' },
+    { 'character': '4', 'description': 'TBC' },
+    { 'character': '5', 'description': 'TBC' },
+    { 'character': '6', 'description': 'TBC' },
+    { 'character': '7', 'description': 'TBC' },
+    { 'character': '8', 'description': 'TBC' },
+    { 'character': '9', 'description': 'TBC' }
+    // Add or modify descriptions as needed for each character
 ];
 
-path_names.forEach((element, index) => {
-    p = createPath(element,element,'',1,'#000');
-    dynamicSvg.appendChild(p);
-    p = createPath('drawing_' + index,'drawing','','0.05vw','#000');
-    dynamicSvg.appendChild(p);
+// Create a new array based on the characters in the input string
+const orderedPathNames = Array.from(new Set(string)).map(char => {
+    const foundItem = path_names.find(item => item.character === char);
+    return foundItem ? { ...foundItem } : null;
+}).filter(item => item !== null);
+
+console.log(orderedPathNames);
+
+
+let id_counter = 1;
+orderedPathNames.forEach((element, index) => {
+
+    const character = element.character;
+    const description = element.description;
+
+    if(description !== 'TBC'){
+        /**/
+        const path1 = createPath('drawing_' + (index + id_counter), 'drawing', 'description', '', '0.05vw', '#000');
+        //dynamicSvg.appendChild(path1);
+        id_counter++;
+    
+        const path2 = createPath('drawing_' + (index + id_counter), 'drawing', 'description', '', '0.05vw', '#000');
+        //dynamicSvg.appendChild(path2);
+        id_counter++;
+        
+        const path3 = createPath('drawing_' + (index + id_counter), 'drawing', 'description', '', '0.05vw', '#000');
+        //dynamicSvg.appendChild(path3);
+        id_counter++;
+        
+        const path4 = createPath(character, character, description, '', 1, '#000');
+        //dynamicSvg.appendChild(path4);        
+
+    }   
+
+
 });
+
+
+
+
 
 
 let dynamicSvgWidth = $("#dynamicSvg").width();
@@ -115,15 +187,16 @@ function getRandom(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function createPath(id,c1ass,d,stroke_width,stroke){
+function createPath(id, c1ass, description, d, stroke_width, stroke) {
 
     let path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('id', id);
     path.setAttribute('class', c1ass);
+    path.setAttribute('data-description', description);
     path.setAttribute('d', d);
-    path.setAttribute('stroke-width', stroke_width);  
-    path.setAttribute('stroke', stroke);      
-    
+    path.setAttribute('stroke-width', stroke_width);
+    path.setAttribute('stroke', stroke);
+
     path.setAttribute('fill', 'none');
     //path.setAttribute('stroke-dasharray', "none");
     //path.setAttribute('opacity', 1);
@@ -146,19 +219,20 @@ document.addEventListener('keydown', function (event) {
 function handleKeyPress(key) {
     const functionName = `_${key}`;
     if (typeof window[functionName] === 'function') {
-        window[functionName](key);
         let sharpie = getSharpie(key);
-        $("#" + key).attr('stroke', sharpie.hex).attr('stroke-width', sharpie.nib).attr('data-colour', sharpie.color);    
+        $("#" + key).attr('stroke', sharpie.hex).attr('stroke-width', sharpie.nib).attr('data-colour', sharpie.color);
+        window[functionName](key);
+
     } else {
         console.log(`No '${functionName}' function found for the '${key}'. key`);
     }
 }
 
-function getSharpie(key){
+function getSharpie(key) {
     //  % 23 
-    let index =  (key.charCodeAt() + sharpies.length) % sharpies.length;    
+    let index = (key.charCodeAt() + sharpies.length) % sharpies.length;
     return sharpies[index];
-} 
+}
 
 function nCommas(str, n) {
     const regex = new RegExp('^([^,]*,){' + n + '}[^,]*$');
@@ -167,32 +241,23 @@ function nCommas(str, n) {
 
 function copyArray(arr) {
     return JSON.parse(JSON.stringify(arr));
-  }
+}
 
+function getRandomItem(array) {
+    // Generate a random index
+    let randomIndex = Math.floor(Math.random() * array.length);
 
+    // Return the random item
+    return array[randomIndex];
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$(document).ready(function () {
+    var imageName = urlParams.get('imageName');
+    let imageNames = ['3994', '3995', '3996', '3997', '3998', '3999', '4001'];
+    imageName = (imageName && imageNames.indexOf(imageName) !== -1) ? imageName : getRandomItem(imageNames);
+    let imageURL = 'images/sketch-book/IMG_' + imageName + '_crop.jpg';
+    $('body').css('background-image', 'url(' + imageURL + ')');
+});
 
 
 
