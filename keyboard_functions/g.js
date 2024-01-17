@@ -9,7 +9,7 @@ function _g(key, axis) {
     path = $("#" + key);
     d1 = path.attr('d');
 
-    let spacer = 50;
+    let spacer = 100;
     let sort = 'asc';
     let groupedCoordinates = groupCoordinatesByAxis(array, axis, spacer);
     let sortedCoordinates = sortGroupedCoordinates(groupedCoordinates, axis, sort);
