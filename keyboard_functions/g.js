@@ -1,17 +1,16 @@
 //Using 'g' as a test case to get things in a good place
-function _g(key, axis) {
+function _g(key, coords_array, axis) {
 
     if (axis === undefined) {
         axis = 1;//1 for horizontal, 2 for verticle
     }
 
-    array = copyArray(mouseTrack);
     path = $("#" + key);
     d1 = path.attr('d');
 
     let spacer = 100;
     let sort = 'asc';
-    let groupedCoordinates = groupCoordinatesByAxis(array, axis, spacer);
+    let groupedCoordinates = groupCoordinatesByAxis(coords_array, axis, spacer);
     let sortedCoordinates = sortGroupedCoordinates(groupedCoordinates, axis, sort);
     sortedCoordinates = sortedCoordinates.flat(1);
 
@@ -24,13 +23,15 @@ function _g(key, axis) {
     }
 
     path.attr('d', d1 + d2);
+    path.attr('id', '');    
+
 
 }
 
-function groupCoordinatesByAxis(array, axis, spacer) {
+function groupCoordinatesByAxis(coords_array, axis, spacer) {
     let groupedArrays = {};
 
-    array.forEach(coordinate => {
+    coords_array.forEach(coordinate => {
         let index = Math.floor(coordinate[axis] / spacer) * spacer; // Determine the group index
 
         if (!groupedArrays[index]) {

@@ -1,17 +1,15 @@
 //Using 'g' as a test case to get things in a good place
 // _j uses this function to draw the path
-function _d(key, xy) {
+function _d(key, coords_array, xy) {
 
     if (xy === undefined) {
         xy = 'y';//1 for horizontal, 2 for verticle
     }
 
-    array = copyArray(mouseTrack);
-    path = $("#" + key); 
-      
+    path = $("#" + key);       
     
-    let groupSize = 10; // Define the size of each group based on x-value ranges
-    let groupedArrays = groupAndSortArrays(array, groupSize, xy);
+    let groupSize = 3; // Define the size of each group based on x-value ranges
+    let groupedArrays = groupAndSortArrays(coords_array, groupSize, xy);
     
     console.log(groupedArrays);
     pathString = '';
@@ -38,13 +36,15 @@ function _d(key, xy) {
     }
 
     pathString += ' Z'; // Close the path by connecting end to start
-    path.attr('d', pathString);    
+    path.attr('d', pathString);  
+    path.attr('id', '');    
+  
 }
 
-function groupAndSortArrays(array, groupSize, xy) {
+function groupAndSortArrays(coords_array, groupSize, xy) {
     let groupedArrays = [];
 
-    array.forEach(([x, y]) => {
+    coords_array.forEach(([x, y]) => {
         const groupIndex = xy === 'x' ? Math.floor(x / groupSize) : Math.floor(y / groupSize);
 
         if (!groupedArrays[groupIndex]) {

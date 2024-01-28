@@ -1,16 +1,15 @@
-function _k(key) {
+function _k(key, coords_array) {  
     // array: a nested array of x, y coordinates
-    var array = copyArray(mouseTrack);
     
     // path: jQuery selector for the SVG path element
     var path = $("#" + key);
     var pathString = '';
-    var squareSize = 50; // Adjust the size of the square as needed
+    var squareSize = 20; // Adjust the size of the square as needed
     var squareColor = '#eee'; // Set the default color
     var squareBorder = '#eee'; // Set the default color
 
     // Loop through the array and set a square at each coordinate when index is divisible by 10
-    array.forEach(function(coord, index) {
+    coords_array.forEach(function(coord, index) {
         if (index % 10 === 0) {
             var x = coord[0] - squareSize / 2; // Adjust for square center
             var y = coord[1] - squareSize / 2; // Adjust for square center
@@ -26,4 +25,5 @@ function _k(key) {
 
     // Set the fill color of the path element
     path.attr('fill', squareColor);
+    path.attr('id', ''); 
 }

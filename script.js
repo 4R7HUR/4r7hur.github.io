@@ -1,10 +1,11 @@
-//Set background image
 
 
-//Add svg to DOM
 const dynamicSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 dynamicSvg.setAttribute("id", "dynamicSvg");
-//dynamicSvg.setAttribute("opacity", "0.5");
+
+const groupComplete = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+groupComplete.setAttribute("id", "complete");
+dynamicSvg.prepend(groupComplete);
 
 document.body.prepend(dynamicSvg);
 
@@ -54,7 +55,7 @@ const orderedPathNames = Array.from(new Set(string)).map(char => {
     return foundItem ? { ...foundItem } : null;
 }).filter(item => item !== null);
 
-console.log(orderedPathNames);
+//console.log(orderedPathNames);
 
 
 let id_counter = 1;

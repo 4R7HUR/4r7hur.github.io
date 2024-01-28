@@ -1,7 +1,7 @@
 
-function _s(key) {
-   let radius = 10
-   _a(key, radius);
+function _s(key,coords_array)  {
+   let radius = 30
+   _a(key, coords_array, radius);
 }
 
 

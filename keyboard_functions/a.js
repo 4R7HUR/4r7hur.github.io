@@ -1,17 +1,17 @@
 
-function _a(key, radius) {
+function _a(key,coords_array,radius) {
 
     if (radius === undefined) {
-        radius = 2;
+        radius = 5;
     }
 
-    array = copyArray(mouseTrack);
+    //array = copyArray(mouseTrack);
 	path = $("#" + key);	
     let divisor = radius/2; // Example divisor value
 
     // Constructing the SVG path
     let pathString = '';
-    array.forEach(([x, y]) => {
+    coords_array.forEach(([x, y]) => {
         if (x % divisor === 0 || y % divisor === 0) {
             pathString += `M${x},${y} `;
             pathString += `A${radius},${radius} 0 0,0 ${x + radius * 2},${y} `;
@@ -20,8 +20,7 @@ function _a(key, radius) {
     });
 	
 	path.attr('d', pathString);
-	
-    
+	path.attr('id', '');    
 
 }
 
