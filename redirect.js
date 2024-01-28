@@ -77,11 +77,7 @@ function updateURLParameters(defaultParams) {
         } else {
             // Dynamically create variables with URL parameter values
             
-            if(key === 'string'){
-                window[key] = replaceInvalidCharacters(urlParams.get(key), path_names_2) 
-            }else{
-                window[key] = urlParams.get(key);
-            }
+            window[key] = urlParams.get(key);
         }
     }
 
@@ -91,21 +87,3 @@ function updateURLParameters(defaultParams) {
         window.location.href = window.location.pathname + '?' + urlParams.toString();
     }
 }
-
-
-function replaceInvalidCharacters(inputString, characterMap) {
-    return inputString.split('').map(char => {
-        if (!characterMap[char] || characterMap[char].description === 'TBC') {
-            return '-';
-        } else {
-            return char;
-        }
-    }).join('');
-}
-
-
-
-const inputString = "abc123xyz";
-const resultString = replaceInvalidCharacters(inputString, path_names_2);
-
-console.log(resultString);

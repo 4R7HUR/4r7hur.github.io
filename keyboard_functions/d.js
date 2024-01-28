@@ -11,7 +11,6 @@ function _d(key, coords_array, xy) {
     let groupSize = 3; // Define the size of each group based on x-value ranges
     let groupedArrays = groupAndSortArrays(coords_array, groupSize, xy);
     
-    console.log(groupedArrays);
     pathString = '';
 
     groupedArrays.forEach((group, index) => {
