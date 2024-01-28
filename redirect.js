@@ -3,6 +3,9 @@ const defaultParams = {
     'imageName': 'random',
     'pathSize': '100',
     'string': 'asdfghjkl',
+    'processHistory': 0,
+    //a comma separated list of 15 random hex codes
+    'hex' : '0BFAF6,30A6DB,2D07FA,EF7717,FFCD38,C70039,F3722C,0000FF,3D9970,39CCCC,FF851B,85144b,FF4136,FFDC00,B10DC9',
 };
 
 const path_names_2 = {

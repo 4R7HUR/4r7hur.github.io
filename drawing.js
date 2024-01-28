@@ -1,5 +1,10 @@
 $("#dynamicSvg").on("mousemove", trackMouse);
 
+// Call the function with your history_data array
+
+if(parseInt(processHistory) === 1 && history_data.length > 0){
+    processHistoryDataWithDelay(history_data);
+}
 
 let mouseTrack = [];
 let counter = 0;
@@ -19,6 +24,8 @@ let ddd = [[], [], []];
 let CCC = [[], [], []];//Home for the coordinates that form the beizer curves.
 let character = '';
 let stringTemp = string;
+let hexTemp = hex.split(',');
+
 let history = [];
 
 function trackMouse(event) {
@@ -26,14 +33,10 @@ function trackMouse(event) {
     if(stringTemp.length === 0){
         stringTemp = string;
     }
-
-
-    if ($("#dynamicSvg path.active").length < 3) {
-        path = createPath('', 'active', 'description', '', '0.05vw', '#000');
-        dynamicSvg.appendChild(path);
-        dynamicSvg.appendChild(path);
-        dynamicSvg.appendChild(path);
+    if(hexTemp.length === 0){
+        hexTemp = hex.split(',');
     }
+
 
     xy = event.clientX + ',' + event.clientY;
 
@@ -55,19 +58,22 @@ function trackMouse(event) {
     
     //add coords to each of the CCC arrays
     CCC.forEach(function (element, index) {
-        max = 3;
+        max = 0;
         min = max * -1;
         //Add some random movement to the mouse.
-        xy = (event.clientX + randomInteger(min, max)) + ',' + (event.clientY + randomInteger(min, max));
-        //xy = event.clientX + ',' + event.clientY;
-        CCC[index].push(xy);
-        history.push(xy);
-        if (history.length === 1000) {
-            downloadHistory(history, 'javascript');
-            history = [];
-        }        
+        //xy = (event.clientX + randomInteger(min, max)) + ',' + (event.clientY + randomInteger(min, max));
+        xy = event.clientX + ',' + event.clientY;
+        CCC[index].push(xy);      
 
     });
+
+    history.push(xy);
+    if (history.length === 1000) {
+        downloadHistory(history, 'js');
+        history = [];
+    } 
+
+    
     
     
 
@@ -95,14 +101,17 @@ function trackMouse(event) {
             }
 
 
-            if (index === 0) {    
+            if (index === 0) {                                  
                 
                 character = stringTemp.charAt(0);
                 stringTemp = stringTemp.slice(1);
                 description = path_names_2[character].description;
+
+                thisHex = '#' + hexTemp.shift();
+                console.log(thisHex);
             
                 //create a new path [into the end of the group] and then apply a character function to it
-                newPath = createPath(character, character + ' bob', description, '', '0.05vw', '#000');
+                newPath = createPath(character, character + ' character-path', description, '', '0.4vw', thisHex);
                 groupComplete.appendChild(newPath);
                 coords_array = parseSVGPath(ddd[index]);
 
@@ -114,14 +123,11 @@ function trackMouse(event) {
                     console.log("Function not found for character:", character);
                 }   
 
-                if ($("#dynamicSvg g path.bob").length > string.length) {                    
-                    $("#dynamicSvg g path.bob").eq(0).remove();
+                if ($("#dynamicSvg g path.character-path").length > string.length) {                    
+                    $("#dynamicSvg g path.character-path").eq(0).remove();
                 }
 
             }
-
-
-
 
             //Reset the active path
             $("#dynamicSvg path.active").eq(index).attr('d', '');
@@ -161,7 +167,8 @@ function randomInteger(min, max) {
 
 function downloadHistory(data, fileType) {
     var timestamp = new Date().getTime();
-    var filename = "history_" + timestamp + "." + fileType;
+    var id = "history_" + timestamp;
+    var filename = id + "." + fileType;
     var content = JSON.stringify(data);
     var mimeType;
     
@@ -181,6 +188,8 @@ function downloadHistory(data, fileType) {
         case 'js':
         default:
             mimeType = 'text/javascript';
+            content = 'history_data = ' + content + '; console.log("history_data.length: " + history_data.length);';
+            filename = 'history.js';
     }
     
     var blob = new Blob([content], { type: mimeType });
@@ -195,4 +204,18 @@ function downloadHistory(data, fileType) {
     
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+}
+function processHistoryDataWithDelay(dataArray) {
+    let index = 0;
+    const interval = setInterval(() => {
+        if (index < dataArray.length) {
+            coords = dataArray[index].split(',');
+            
+            trackMouse({clientX: coords[0], clientY: coords[1]})
+            
+            index++;
+        } else {
+            clearInterval(interval);
+        }
+    }, 10); // 1000 milliseconds = 1 second
 }

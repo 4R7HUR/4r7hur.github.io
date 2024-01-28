@@ -1,7 +1,15 @@
+let history_data = [];
 
 
 const dynamicSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 dynamicSvg.setAttribute("id", "dynamicSvg");
+
+let path1 = createPath('', 'active', 'description', '', '0.025vw', '#000');
+dynamicSvg.appendChild(path1);
+let path2 = createPath('', 'active', 'description', '', '0.025vw', '#000');
+dynamicSvg.appendChild(path2);
+let path3 = createPath('', 'active', 'description', '', '0.025vw', '#000');
+dynamicSvg.appendChild(path3);
 
 const groupComplete = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 groupComplete.setAttribute("id", "complete");
