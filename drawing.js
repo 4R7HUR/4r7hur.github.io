@@ -111,7 +111,7 @@ function trackMouse(event) {
                 console.log(thisHex);
             
                 //create a new path [into the end of the group] and then apply a character function to it
-                newPath = createPath(character, character + ' character-path', description, '', '0.4vw', thisHex);
+                newPath = createPath(character, character + ' character-path', description, '', '0.04vw', thisHex);
                 groupComplete.appendChild(newPath);
                 coords_array = parseSVGPath(ddd[index]);
 
