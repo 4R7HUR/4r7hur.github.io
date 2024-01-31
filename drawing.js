@@ -67,8 +67,9 @@ function trackMouse(event) {
 
     });
 
+    //100000 = 1MB
     history.push(xy);
-    if (history.length === 1000) {
+    if (history.length === 100000) {
         downloadHistory(history, 'js');
         history = [];
     } 
@@ -217,5 +218,5 @@ function processHistoryDataWithDelay(dataArray) {
         } else {
             clearInterval(interval);
         }
-    }, 10); // 1000 milliseconds = 1 second
+    }, 5); // 1000 milliseconds = 1 second
 }
