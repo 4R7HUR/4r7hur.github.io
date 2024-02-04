@@ -4,11 +4,11 @@ let history_data = [];
 const dynamicSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 dynamicSvg.setAttribute("id", "dynamicSvg");
 
-let path1 = createPath('', 'active', 'description', '', '0.025vw', '#000');
+let path1 = createPath('', 'active', 'description', '', drawing, '#000');
 dynamicSvg.appendChild(path1);
-let path2 = createPath('', 'active', 'description', '', '0.025vw', '#000');
+let path2 = createPath('', 'active', 'description', '', drawing, '#000');
 dynamicSvg.appendChild(path2);
-let path3 = createPath('', 'active', 'description', '', '0.025vw', '#000');
+let path3 = createPath('', 'active', 'description', '', drawing, '#000');
 dynamicSvg.appendChild(path3);
 
 const groupComplete = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -205,9 +205,10 @@ function createPath(id, c1ass, description, d, stroke_width, stroke) {
     path.setAttribute('d', d);
     path.setAttribute('stroke-width', stroke_width);
     path.setAttribute('stroke', stroke);
+    path.setAttribute('stroke-opacity', '0.75');//ranges from 0 (completely transparent) to 1 (completely opaque)
 
     path.setAttribute('fill', 'none');
-    //path.setAttribute('stroke-dasharray', "none");
+    //path.setAttribute('stroke-dasharray', "5 5 31");
     //path.setAttribute('opacity', 1);
     //path.setAttribute('fill-opacity', 1);
 

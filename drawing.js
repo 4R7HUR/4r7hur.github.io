@@ -6,18 +6,6 @@ if(parseInt(processHistory) === 1 && history_data.length > 0){
     processHistoryDataWithDelay(history_data);
 }
 
-let mouseTrack = [];
-let counter = 0;
-let pathIndex = 0;
-let M = [];
-let C = [[], [], []];
-let x;
-let y;
-let rounding = 2;
-let block = false;
-let initialCounter = 0;
-let delay = 100;
-
 
 
 let ddd = [[], [], []];
@@ -30,9 +18,20 @@ let history = [];
 
 function trackMouse(event) {
 
+
+    if(randomInteger(0,100) > 88){        
+        pathLength = parseInt(pathLength) + 1;        
+    }     
+
+    if(event.type === 'mousemove' && parseInt(processHistory) === 1){
+        return;
+    }
+
+
     if(stringTemp.length === 0){
         stringTemp = string;
     }
+
     if(hexTemp.length === 0){
         hexTemp = hex.split(',');
     }
@@ -53,8 +52,6 @@ function trackMouse(event) {
         ddd[2] = 'M' + xy;
         return;
     }
-
-
     
     //add coords to each of the CCC arrays
     CCC.forEach(function (element, index) {
@@ -72,10 +69,7 @@ function trackMouse(event) {
     if (history.length === 100000) {
         downloadHistory(history, 'js');
         history = [];
-    } 
-
-    
-    
+    }    
     
 
     CCC.forEach(function (element, index) {
@@ -90,14 +84,13 @@ function trackMouse(event) {
 
     CCC.forEach(function (element, index) {
         //Test if its time to start a new path based on the length of this ddd index
-        if (countCommas(ddd[index]) > pathSize) {
-
+        if (countCommas(ddd[index]) > pathLength) {
             
-            newPath = createPath('', 'complete', 'drawing', '', '0.05vw', '#000');
+            newPath = createPath('', 'complete', 'drawing', '', drawing, '#000');
             newPath.setAttribute("d", ddd[index]);
             groupComplete.appendChild(newPath);
 
-            if ($("#dynamicSvg g path.complete").length > string.length * 3) {                    
+            if ($("#dynamicSvg g path.complete").length > paths * 3) {                    
                 $("#dynamicSvg g path.complete").eq(0).remove();
             }
 
@@ -112,7 +105,7 @@ function trackMouse(event) {
                 console.log(thisHex);
             
                 //create a new path [into the end of the group] and then apply a character function to it
-                newPath = createPath(character, character + ' character-path', description, '', '0.04vw', thisHex);
+                newPath = createPath(character, character + ' character-path', description, '', extras, thisHex);
                 groupComplete.appendChild(newPath);
                 coords_array = parseSVGPath(ddd[index]);
 
@@ -124,7 +117,7 @@ function trackMouse(event) {
                     console.log("Function not found for character:", character);
                 }   
 
-                if ($("#dynamicSvg g path.character-path").length > string.length) {                    
+                if ($("#dynamicSvg g path.character-path").length > paths) {                    
                     $("#dynamicSvg g path.character-path").eq(0).remove();
                 }
 
@@ -218,5 +211,5 @@ function processHistoryDataWithDelay(dataArray) {
         } else {
             clearInterval(interval);
         }
-    }, 5); // 1000 milliseconds = 1 second
+    }, 10); // 1000 milliseconds = 1 second
 }

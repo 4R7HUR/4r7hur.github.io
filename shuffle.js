@@ -9,11 +9,12 @@ function chunkArray(array, n) {
     return chunks;
 }
 
-// Splitting the original data into 10 chunks
-var chunks = chunkArray(history_data, 10);
+// Splitting the original data into chunks of 100
 
-// Function to shuffle an array randomly
+var chunks = chunkArray(history_data, 100);
+
 function shuffleArray(array) {
+
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var temp = array[i];
@@ -25,6 +26,22 @@ function shuffleArray(array) {
 
 // Shuffle the order of the chunks
 var shuffledChunks = shuffleArray(chunks);
+
+shuffledChunks.forEach((chunk, index) => {
+    this_chunk_x = chunk[chunk.length-1].split(',')[0];
+    
+    // Check if next chunk exists before accessing it
+    if (index < shuffledChunks.length - 1) {
+        next_chunk_y = shuffledChunks[index+1][0].split(',')[1];
+        shuffledChunks[index].push(this_chunk_x + ',' + next_chunk_y);
+        shuffledChunks[index].push(this_chunk_x + ',' + next_chunk_y);
+        shuffledChunks[index].push(this_chunk_x + ',' + next_chunk_y);
+    }
+});
+
+
+
+
 
 // Joining the chunks back together randomly
 history_data = shuffledChunks.flat();
