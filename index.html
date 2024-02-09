@@ -8,33 +8,30 @@
 
 <body>
 
-  <!--
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
--->
+
+
 
   <script src="jquery.js"></script>
-  <script src="redirect.js"></script>
-  <script src="script.js"></script>
   <script src="history/history.js"></script>
+  <script src="redirect.js"></script>
   <script src="shuffle.js"></script>
-   
-  <script src="drawing.js"></script>
-  <script>
+  <script src="script.js"></script>   
 
-    Object.keys(path_names_2).forEach((character) => {
-      const description = path_names_2[character].description.replace(/\s/g, '-');
-      if (description !== 'TBC') {
-        const scriptTag = document.createElement('script');
-        scriptTag.src = 'keyboard_functions/' + character + '.js?' + description;
-        scriptTag.type = 'text/javascript';
-        document.body.appendChild(scriptTag);
-      }
-    });
+  <script src="keyboard_functions/a.js?small-circles" type="text/javascript"></script>
+  <script src="keyboard_functions/d.js?horizontal-outside" type="text/javascript"></script>
+  <script src="keyboard_functions/f.js?vertcial-rough-colouring" type="text/javascript"></script>
+  <script src="keyboard_functions/g.js?horizontal-rough-colouring" type="text/javascript"></script>
+  <script src="keyboard_functions/h.js?frantic-curves" type="text/javascript"></script>
+  <script src="keyboard_functions/j.js?vertical-outside" type="text/javascript"></script>
+  <script src="keyboard_functions/k.js?squares" type="text/javascript"></script>
+  <script src="keyboard_functions/l.js?spirals" type="text/javascript"></script>
+  <script src="keyboard_functions/s.js?medium-circles" type="text/javascript"></script>
 
 
+<script src="drawing.js"></script>
 
-  </script>
+
+
 
 </body>
 

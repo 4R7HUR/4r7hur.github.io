@@ -1,10 +1,3 @@
-$("#dynamicSvg").on("mousemove", trackMouse);
-
-// Call the function with your history_data array
-
-if(parseInt(processHistory) === 1 && history_data.length > 0){
-    processHistoryDataWithDelay(history_data);
-}
 
 
 
@@ -13,8 +6,22 @@ let CCC = [[], [], []];//Home for the coordinates that form the beizer curves.
 let character = '';
 let stringTemp = string;
 let hexTemp = hex.split(',');
-
 let history = [];
+
+$("#dynamicSvg").on("mousemove", trackMouse);
+
+// Call the function with your history_data array
+
+//jquery ensure dom is laoded before running the code
+$(function () {
+        
+
+    if((processHistory === "fast" || processHistory === "animate") && history_data.length > 0){
+        
+        processHistoryData(history_data, processHistory);
+    }
+
+});
 
 function trackMouse(event) {
 
@@ -23,7 +30,7 @@ function trackMouse(event) {
         pathLength = parseInt(pathLength) + 1;        
     }     
 
-    if(event.type === 'mousemove' && parseInt(processHistory) === 1){
+    if(event.type === 'mousemove' && parseInt(processHistory) !== "no"){
         return;
     }
 
@@ -65,7 +72,7 @@ function trackMouse(event) {
     });
 
     //100000 = 1MB
-    history.push(xy);
+    //history.push(xy);
     if (history.length === 100000) {
         downloadHistory(history, 'js');
         history = [];
@@ -99,10 +106,9 @@ function trackMouse(event) {
                 
                 character = stringTemp.charAt(0);
                 stringTemp = stringTemp.slice(1);
-                description = path_names_2[character].description;
+                description = 'bob';
 
                 thisHex = '#' + hexTemp.shift();
-                console.log(thisHex);
             
                 //create a new path [into the end of the group] and then apply a character function to it
                 newPath = createPath(character, character + ' character-path', description, '', extras, thisHex);
@@ -199,17 +205,33 @@ function downloadHistory(data, fileType) {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
-function processHistoryDataWithDelay(dataArray) {
+function processHistoryData(dataArray, processHistory = 'animate') {
     let index = 0;
-    const interval = setInterval(() => {
-        if (index < dataArray.length) {
-            coords = dataArray[index].split(',');
-            
+
+    if(processHistory === 'animate' ){
+        const interval = setInterval(() => {
+            if (index < dataArray.length) {
+                coords = dataArray[index].split(',');
+                
+                trackMouse({clientX: coords[0], clientY: coords[1]})
+                
+                index++;
+            } else {
+                clearInterval(interval);
+            }
+        }, 10); // 1000 milliseconds = 1 second
+    }else {
+ 
+        //hide the svg so that the user does not see the drawing process and so that the paths are not added to the DOM
+        $("#dynamicSvg").hide();
+        console.log('processHistory',processHistory);
+        //return;
+        dataArray.forEach(function (element, index) {
+            coords = element.split(',');
             trackMouse({clientX: coords[0], clientY: coords[1]})
-            
-            index++;
-        } else {
-            clearInterval(interval);
-        }
-    }, 10); // 1000 milliseconds = 1 second
+        });
+        //show the svg again
+        $("#dynamicSvg").show();
+    }
+
 }

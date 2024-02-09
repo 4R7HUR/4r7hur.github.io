@@ -15,14 +15,7 @@ A gallery page seems like a good idea :-)
 
 aeiou, white shapes
 
+So much todo its overwheling
 
-all keyboard functions should have the following variables avaialble to them
-
-thirds //comment here
-coordinate_arrays //comment here
-    console.log(key);
-    console.log(svgContainer);
-    console.log(coordinate_arrays);
-    console.log(thirds);
-    console.log(svg_width);
-    console.log(svg_height);
+I need to decide how to limit the data in teh drawing, just how to cintrol the length and number of paths..
+How to by pass the show drawing method if I just want to print the thing to screen...

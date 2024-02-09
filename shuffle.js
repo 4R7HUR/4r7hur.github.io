@@ -1,5 +1,3 @@
-
-// Function to split the array into chunks of size n
 function chunkArray(array, n) {
     var chunks = [];
     var chunkSize = Math.ceil(array.length / n);
@@ -9,42 +7,40 @@ function chunkArray(array, n) {
     return chunks;
 }
 
-// Splitting the original data into chunks of 100
+function joinArrayWithKeys(array, keys) {
+    var joinedArray = [];
+    for (var i = 0; i < keys.length; i++) {
+        var keyIndex = keys[i];
+        if (array[keyIndex]) {
+            joinAtRightAngle = true;
+            if(joinAtRightAngle){
+                if (i > 1 && i < keys.length - 1) {               
+                    last_x = joinedArray[joinedArray.length-1].split(",")[0];
+                    next_y = array[keyIndex][0].split(",")[1];
+                    joinedArray.push(last_x + ',' + next_y);
+                }
+            }         
 
-var chunks = chunkArray(history_data, 100);
+            joinedArray = joinedArray.concat(array[keyIndex]);
 
-function shuffleArray(array) {
 
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+        }
     }
-    return array;
+    return joinedArray;
 }
 
-// Shuffle the order of the chunks
-var shuffledChunks = shuffleArray(chunks);
-
-shuffledChunks.forEach((chunk, index) => {
-    this_chunk_x = chunk[chunk.length-1].split(',')[0];
-    
-    // Check if next chunk exists before accessing it
-    if (index < shuffledChunks.length - 1) {
-        next_chunk_y = shuffledChunks[index+1][0].split(',')[1];
-        shuffledChunks[index].push(this_chunk_x + ',' + next_chunk_y);
-        shuffledChunks[index].push(this_chunk_x + ',' + next_chunk_y);
-        shuffledChunks[index].push(this_chunk_x + ',' + next_chunk_y);
-    }
-});
 
 
+historyConfig = historyConfig.split("-");
+
+var chunks = parseInt(historyConfig[0]); // Extracting the first item as an integer
+var keys = historyConfig.slice(1).map(Number); // Extracting everything except the first item and converting to numbers
+
+// Splitting the original data into chunks of 100
+var chunkedArray = chunkArray(history_data, chunks);
+
+// Joining the chunks back together with keys
+var joinedArray = joinArrayWithKeys(chunkedArray, keys);
 
 
-
-// Joining the chunks back together randomly
-history_data = shuffledChunks.flat();
-
-// Outputting the shuffled data
-
+history_data = joinedArray;
