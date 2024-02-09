@@ -4,11 +4,13 @@
 const dynamicSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 dynamicSvg.setAttribute("id", "dynamicSvg");
 
-let path1 = createPath('', 'active', 'description', '', drawing, '#000');
+let drawingVw = '0.05vw';
+
+let path1 = createPath('', 'active', 'description', '', drawingVw, '#000');
 dynamicSvg.appendChild(path1);
-let path2 = createPath('', 'active', 'description', '', drawing, '#000');
+let path2 = createPath('', 'active', 'description', '', drawingVw, '#000');
 dynamicSvg.appendChild(path2);
-let path3 = createPath('', 'active', 'description', '', drawing, '#000');
+let path3 = createPath('', 'active', 'description', '', drawingVw, '#000');
 dynamicSvg.appendChild(path3);
 
 const groupComplete = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -72,24 +74,24 @@ orderedPathNames.forEach((element, index) => {
     const character = element.character;
     const description = element.description;
 
-    if(description !== 'TBC'){
+    if (description !== 'TBC') {
         /**/
         const path1 = createPath('drawing_' + (index + id_counter), 'drawing', 'description', '', '0.05vw', '#000');
         //dynamicSvg.appendChild(path1);
         id_counter++;
-    
+
         const path2 = createPath('drawing_' + (index + id_counter), 'drawing', 'description', '', '0.05vw', '#000');
         //dynamicSvg.appendChild(path2);
         id_counter++;
-        
+
         const path3 = createPath('drawing_' + (index + id_counter), 'drawing', 'description', '', '0.05vw', '#000');
         //dynamicSvg.appendChild(path3);
         id_counter++;
-        
+
         const path4 = createPath(character, character, description, '', 1, '#000');
         //dynamicSvg.appendChild(path4);        
 
-    }   
+    }
 
 
 });
@@ -262,9 +264,6 @@ function getRandomItem(array) {
 }
 
 $(document).ready(function () {
-    var imageName = urlParams.get('imageName');
-    let imageNames = ['3994', '3995', '3996', '3997', '3998', '3999', '4001'];
-    imageName = (imageName && imageNames.indexOf(imageName) !== -1) ? imageName : getRandomItem(imageNames);
     let imageURL = 'images/sketch-book/IMG_' + imageName + '_crop.jpg';
     $('body').css('background-image', 'url(' + imageURL + ')');
 });

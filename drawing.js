@@ -6,6 +6,7 @@ let CCC = [[], [], []];//Home for the coordinates that form the beizer curves.
 let character = '';
 let stringTemp = string;
 let hexTemp = hex.split(',');
+let vwTemp = vw;
 let history = [];
 
 $("#dynamicSvg").on("mousemove", trackMouse);
@@ -41,6 +42,10 @@ function trackMouse(event) {
 
     if(hexTemp.length === 0){
         hexTemp = hex.split(',');
+    }
+
+    if(vwTemp.length === 0){
+        vwTemp = vw;
     }
 
 
@@ -93,7 +98,7 @@ function trackMouse(event) {
         //Test if its time to start a new path based on the length of this ddd index
         if (countCommas(ddd[index]) > pathLength) {
             
-            newPath = createPath('', 'complete', 'drawing', '', drawing, '#000');
+            newPath = createPath('', 'complete', 'drawing', '', drawingVw, '#000');
             newPath.setAttribute("d", ddd[index]);
             groupComplete.appendChild(newPath);
 
@@ -106,12 +111,19 @@ function trackMouse(event) {
                 
                 character = stringTemp.charAt(0);
                 stringTemp = stringTemp.slice(1);
-                description = 'bob';
+
+                let temp = parseFloat(vwTemp.charAt(0));
+                temp = temp * temp;
+                let strokeWidth = (temp * 0.01) + 'vw'
+                vwTemp = vwTemp.slice(1);
+
+                description = 'character path';
 
                 thisHex = '#' + hexTemp.shift();
+                
             
                 //create a new path [into the end of the group] and then apply a character function to it
-                newPath = createPath(character, character + ' character-path', description, '', extras, thisHex);
+                newPath = createPath(character, character + ' character-path', description, '', strokeWidth, thisHex);
                 groupComplete.appendChild(newPath);
                 coords_array = parseSVGPath(ddd[index]);
 
@@ -231,7 +243,7 @@ function processHistoryData(dataArray, processHistory = 'animate') {
             trackMouse({clientX: coords[0], clientY: coords[1]})
         });
         //show the svg again
-        $("#dynamicSvg").show();
+        $("#dynamicSvg").fadeIn(1000);
     }
 
 }
