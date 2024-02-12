@@ -5,31 +5,23 @@ let ddd = [[], [], []];
 let CCC = [[], [], []];//Home for the coordinates that form the beizer curves.
 let character = '';
 let stringTemp = string;
-let hexTemp = hex.split(',');
+let coloursTemp = colours.split('.');
 let vwTemp = vw;
 let history = [];
 
 $("#dynamicSvg").on("mousemove", trackMouse);
 
-// Call the function with your history_data array
-
-//jquery ensure dom is laoded before running the code
 $(function () {
         
 
-    if((processHistory === "fast" || processHistory === "animate") && history_data.length > 0){
+    if((processHistory === "fast" || processHistory === "animate") && history_selection_data.length > 0){
         
-        processHistoryData(history_data, processHistory);
+        processHistoryData(history_selection_data, processHistory);
     }
 
 });
 
-function trackMouse(event) {
-
-
-    if(randomInteger(0,100) > 88){        
-        pathLength = parseInt(pathLength) + 1;        
-    }     
+function trackMouse(event) {    
 
     if(event.type === 'mousemove' && parseInt(processHistory) !== "no"){
         return;
@@ -40,8 +32,8 @@ function trackMouse(event) {
         stringTemp = string;
     }
 
-    if(hexTemp.length === 0){
-        hexTemp = hex.split(',');
+    if(coloursTemp.length === 0){
+        coloursTemp = colours.split('.');
     }
 
     if(vwTemp.length === 0){
@@ -102,9 +94,9 @@ function trackMouse(event) {
             newPath.setAttribute("d", ddd[index]);
             groupComplete.appendChild(newPath);
 
-            if ($("#dynamicSvg g path.complete").length > paths * 3) {                    
-                $("#dynamicSvg g path.complete").eq(0).remove();
-            }
+            //if ($("#dynamicSvg g path.complete").length > paths * 3) {                    
+                //$("#dynamicSvg g path.complete").eq(0).remove();
+            //}
 
 
             if (index === 0) {                                  
@@ -119,11 +111,11 @@ function trackMouse(event) {
 
                 description = 'character path';
 
-                thisHex = '#' + hexTemp.shift();
-                
+                thisColour = coloursTemp.shift();
+                thisColour = svgNamedColors[thisColour]
             
                 //create a new path [into the end of the group] and then apply a character function to it
-                newPath = createPath(character, character + ' character-path', description, '', strokeWidth, thisHex);
+                newPath = createPath(character, character + ' character-path', description, '', strokeWidth, thisColour);
                 groupComplete.appendChild(newPath);
                 coords_array = parseSVGPath(ddd[index]);
 
@@ -135,9 +127,9 @@ function trackMouse(event) {
                     console.log("Function not found for character:", character);
                 }   
 
-                if ($("#dynamicSvg g path.character-path").length > paths) {                    
-                    $("#dynamicSvg g path.character-path").eq(0).remove();
-                }
+                //if ($("#dynamicSvg g path.character-path").length > paths) {                    
+                    //$("#dynamicSvg g path.character-path").eq(0).remove();
+                //}
 
             }
 
@@ -169,10 +161,6 @@ function parseSVGPath(svgPath) {
     }
 
     return result;
-}
-function randomInteger(min, max) {
-    let integer = Math.floor(Math.random() * (max - min + 1)) + min;
-    return integer;
 }
 
 
@@ -235,7 +223,7 @@ function processHistoryData(dataArray, processHistory = 'animate') {
     }else {
  
         //hide the svg so that the user does not see the drawing process and so that the paths are not added to the DOM
-        $("#dynamicSvg").hide();
+        $("#dynamicSvg p").hide();
         console.log('processHistory',processHistory);
         //return;
         dataArray.forEach(function (element, index) {
@@ -243,7 +231,7 @@ function processHistoryData(dataArray, processHistory = 'animate') {
             trackMouse({clientX: coords[0], clientY: coords[1]})
         });
         //show the svg again
-        $("#dynamicSvg").fadeIn(1000);
+        $("#dynamicSvg p").fadeIn(1000);
     }
 
 }

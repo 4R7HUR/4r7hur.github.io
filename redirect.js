@@ -1,15 +1,78 @@
 const urlParams = new URLSearchParams(window.location.search);
 const defaultParams = {
+    'backgroundHistory': '1',
     'imageName': getBackgroundImage(),
-    'pathLength': 10,
-    'paths': 100,
+    'pathLength': getPathLength(),
+    //'paths': 100,
     'string': getCharacters(),
     'vw': getVw(),
     'processHistory': ["fast", "animate", "no"][0],
     'historyConfig': getHistoryConfig(),
-    //a comma separated list of 15 random hex codes
-    'hex': '0BFAF6,30A6DB,2D07FA,EF7717,FFCD38,C70039,F3722C,0000FF,3D9970,39CCCC,FF851B,85144b,FF4136,FFDC00,B10DC9',
+    //'colours': getSvgNamedColours('64.33.121.11.28.115.44'),
+    'colours': getSvgNamedColours(),
 };
+
+function randomInteger(min, max) {
+    let integer = Math.floor(Math.random() * (max - min + 1)) + min;
+    return integer;
+}
+
+function getPathLength(default_pathLength) {
+    if (default_pathLength) {
+        return default_pathLength;
+    } else {
+        //return a random number between 1 and 1000
+        let pathLength = randomInteger(10, 100);
+        return pathLength;
+    }
+}
+
+
+
+function getSvgNamedColours(default_colours) {
+
+
+    if (default_colours) {
+        return default_colours;
+    }
+
+    numOfNamedColours = svgNamedColors.length;
+    //i need to get 15 random indexes from the array
+
+    let colours = "";
+    //random number of colours between 1 and 10;
+    let numberOfColours = randomInteger(1, 10);
+    for (let i = 0; i < numberOfColours; i++) {
+        let randomIndex = randomInteger(0, numOfNamedColours - 1);
+        colours += randomIndex;
+        if (i < numberOfColours-1) {
+            colours += ".";
+        }
+    }
+
+    let bob = [
+        "121.68.44",
+        "21.142.120.134.8.130.123.131.74.77",
+        "146.58.102.99.40.77.19.46.118.74",
+        "38.138.91.140.102",
+        "97.90.140.143.46",
+        "93.11.97.139.100.79.67",
+        "120.44.98.34",
+        "128.40.9.142.112.114",
+        "59.46.35.147.116.53.51.41.122",
+        "21.142.120.134.8.130.123.131.74.77",
+        "114.52.121.37.88.106.101",
+        "128.91.64.88.85.9",
+        "88.106.139.26.34.126.43",
+        "38.99.146.56.62.93.43.132.11.70",
+        "116.89.123.122.81.19.76",
+        "7.6.111.49.43.66.63",
+        "91.39.138.23.94.72.123.113.36.92"
+    ];
+    
+
+    return colours;
+}
 
 
 
@@ -22,7 +85,7 @@ function getCharacters(default_characters) {
 
         let charceters = "";
         for (let i = 0; i < 10; i++) {
-            let randomIndex = Math.floor(Math.random() * options.length);
+            let randomIndex = randomInteger(0, options.length - 1);
             charceters += options[randomIndex];
         }
         
@@ -37,11 +100,11 @@ function getVw(default_vw) {
         return default_vw;
     } else {
         //return a string of 6 random numbers between 0 and 9 plucked from this string;
-        let options = "1111122223334456789";
+        let options = "1111111122222233333444556";
 
         let vw = "";
         for (let i = 0; i < 6; i++) {
-            let randomIndex = Math.floor(Math.random() * options.length);
+            let randomIndex = randomInteger(0, options.length - 1);
             vw += options[randomIndex];
         }
         
@@ -57,7 +120,7 @@ function getBackgroundImage(default_image) {
 
         //return a random image from this array
         let images = ['3995', '3996', '3997', '3998', '3999', '4001'];//'3994'
-        let randomIndex = Math.floor(Math.random() * images.length);
+        let randomIndex = randomInteger(0, images.length - 1);
         let image = images[randomIndex];
 
         return image;
@@ -74,13 +137,11 @@ function getHistoryConfig(default_config) {
     } else {
         // I need to start the string with a random number between 1 and 100
         let config = "";
-        let indexes = 1;
-        let chunk = 10;
-
-        //generate a random number between 1 and 100
-        chunk = Math.floor(Math.random() * 100) + 1;
-        //generate a random number between 1 and a fith of chunk
-        indexes = Math.floor(Math.random() * chunk / 5) + 1;
+        let chunk = randomInteger(21, 91);
+        //random number between 1 and chunk/5
+        //use randomInteger function
+        //let indexes = randomInteger(1, chunk / 5);
+        let indexes = randomInteger(2, 12);
 
 
         if (indexes > chunk) {
@@ -90,7 +151,8 @@ function getHistoryConfig(default_config) {
         config = chunk + "-";
 
         for (let i = 0; i < indexes; i++) {
-            config += Math.floor(Math.random() * chunk);
+            //use randomInteger function
+            config += randomInteger(0, chunk - 1);
             if (i < indexes - 1) {
                 config += "-";
             }

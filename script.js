@@ -1,10 +1,12 @@
-
-
+let maxXmaxY = getMaxXmaxY(history_data);
+let drawingVw = '0.05vw';
+let historyVw = '0.05vw';
+let historyPathCount = 10;
 
 const dynamicSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 dynamicSvg.setAttribute("id", "dynamicSvg");
-
-let drawingVw = '0.05vw';
+dynamicSvg.setAttribute("width", maxXmaxY[0] + "px");
+dynamicSvg.setAttribute("height", maxXmaxY[1] + "px");
 
 let path1 = createPath('', 'active', 'description', '', drawingVw, '#000');
 dynamicSvg.appendChild(path1);
@@ -17,92 +19,105 @@ const groupComplete = document.createElementNS('http://www.w3.org/2000/svg', 'g'
 groupComplete.setAttribute("id", "complete");
 dynamicSvg.prepend(groupComplete);
 
-document.body.prepend(dynamicSvg);
+//Background paths
+
+for (let i = 1; i <= historyPathCount; i++) {
+
+    hex = ['rgb(138, 159, 176)', 'rgb(98, 119, 146)'][i % 2];
+    let background = createPath('background_' + i, 'background', 'background', '', historyVw, hex);
+    dynamicSvg.prepend(background);
+}
 
 
-const path_names = [
-    { 'character': 'a', 'description': 'small circles' },
-    { 'character': 'b', 'description': 'TBC' },
-    { 'character': 'c', 'description': 'TBC' },
-    { 'character': 'd', 'description': 'horizontal outside' },
-    { 'character': 'e', 'description': 'TBC' },
-    { 'character': 'f', 'description': 'vertcial rough colouring' },
-    { 'character': 'g', 'description': 'horizontal rough colouring' },
-    { 'character': 'h', 'description': 'frantic curves' },
-    { 'character': 'i', 'description': 'TBC' },
-    { 'character': 'j', 'description': 'vertical outside' },
-    { 'character': 'k', 'description': 'squares' },//last one on the middle row :-)
-    { 'character': 'l', 'description': 'spirals' },
-    { 'character': 'm', 'description': 'TBC' },
-    { 'character': 'n', 'description': 'TBC' },
-    { 'character': 'o', 'description': 'TBC' },
-    { 'character': 'p', 'description': 'TBC' },
-    { 'character': 'q', 'description': 'TBC' },
-    { 'character': 'r', 'description': 'TBC' },
-    { 'character': 's', 'description': 'medium circles' },
-    { 'character': 't', 'description': 'TBC' },
-    { 'character': 'u', 'description': 'TBC' },
-    { 'character': 'v', 'description': 'TBC' },
-    { 'character': 'w', 'description': 'TBC' },
-    { 'character': 'x', 'description': 'TBC' },
-    { 'character': 'y', 'description': 'TBC' },
-    { 'character': 'z', 'description': 'TBC' },
-    { 'character': '1', 'description': 'TBC' },
-    { 'character': '2', 'description': 'TBC' },
-    { 'character': '3', 'description': 'TBC' },
-    { 'character': '4', 'description': 'TBC' },
-    { 'character': '5', 'description': 'TBC' },
-    { 'character': '6', 'description': 'TBC' },
-    { 'character': '7', 'description': 'TBC' },
-    { 'character': '8', 'description': 'TBC' },
-    { 'character': '9', 'description': 'TBC' }
-    // Add or modify descriptions as needed for each character
-];
-
-// Create a new array based on the characters in the input string
-const orderedPathNames = Array.from(new Set(string)).map(char => {
-    const foundItem = path_names.find(item => item.character === char);
-    return foundItem ? { ...foundItem } : null;
-}).filter(item => item !== null);
-
-//console.log(orderedPathNames);
+let paper = createRectangle('papper', '', 0, 0, maxXmaxY[0], maxXmaxY[1], 'rgb(118, 139, 156)')
+dynamicSvg.prepend(paper);
 
 
-let id_counter = 1;
-orderedPathNames.forEach((element, index) => {
+////////////////////
 
-    const character = element.character;
-    const description = element.description;
+document.body.appendChild(dynamicSvg);
 
-    if (description !== 'TBC') {
-        /**/
-        const path1 = createPath('drawing_' + (index + id_counter), 'drawing', 'description', '', '0.05vw', '#000');
-        //dynamicSvg.appendChild(path1);
-        id_counter++;
 
-        const path2 = createPath('drawing_' + (index + id_counter), 'drawing', 'description', '', '0.05vw', '#000');
-        //dynamicSvg.appendChild(path2);
-        id_counter++;
 
-        const path3 = createPath('drawing_' + (index + id_counter), 'drawing', 'description', '', '0.05vw', '#000');
-        //dynamicSvg.appendChild(path3);
-        id_counter++;
+///////////set d attributes for the background paths
 
-        const path4 = createPath(character, character, description, '', 1, '#000');
-        //dynamicSvg.appendChild(path4);        
+let pathData = [];
 
+for (let i = 0; i < historyPathCount; i++) {
+    pathData[i] = [];
+}
+
+for (let i = 0; i < history_data.length; i++) {
+    let index = i % historyPathCount;
+    pathData[index].push(history_data[i]);
+}
+
+for (let i = 0; i < historyPathCount; i++) {
+    //console.log();
+    setDAttribute(pathData[i], 1, 'background_' + (i + 1));
+}
+
+function getMaxXmaxY(history_data) {
+    // Initialize max values for x and y
+    let history_data_maxX = -Infinity;
+    let history_data_maxY = -Infinity;
+
+    // Iterate through the coordinates array
+    history_data.forEach(coord => {
+        let [x, y] = coord.split(',').map(Number);
+
+        // Update max values
+        history_data_maxX = Math.max(history_data_maxX, x);
+        history_data_maxY = Math.max(history_data_maxY, y);
+    });
+
+    return [history_data_maxX,history_data_maxY];
+}
+
+
+function setDAttribute(data, step, pathId) {
+    let d = "M"; // Initialize the path with the 'M' command for starting a new path
+
+    // Loop through the data array with the specified step size
+    for (let i = 0; i < data.length; i += step) {
+        let coords = data[i].split(","); // Split the coordinate pair
+        let x = coords[0]; // Extract the x-coordinate
+        let y = coords[1]; // Extract the y-coordinate
+
+        // Append the coordinates to the path using the 'C' command for cubic Bezier curves
+        d += `${x},${y} `;
     }
 
+    // Set the 'd' attribute of the SVG path with the specified ID
+    document.getElementById(pathId).setAttribute('d', d.trim());
+}
 
-});
+////////////
+
+function generateRandomColor(hex, variance) {
+    // Convert hex to RGB
+    let r = parseInt(hex.substring(1, 3), 16);
+    let g = parseInt(hex.substring(3, 5), 16);
+    let b = parseInt(hex.substring(5, 7), 16);
+
+    // Generate random values within the specified variance
+    let randomR = r + Math.floor(Math.random() * (variance + 1)) - Math.floor(variance / 2);
+    let randomG = g + Math.floor(Math.random() * (variance + 1)) - Math.floor(variance / 2);
+    let randomB = b + Math.floor(Math.random() * (variance + 1)) - Math.floor(variance / 2);
+
+    // Clamp the values to the valid range (0-255)
+    randomR = Math.min(Math.max(randomR, 0), 255);
+    randomG = Math.min(Math.max(randomG, 0), 255);
+    randomB = Math.min(Math.max(randomB, 0), 255);
+
+    // Convert RGB back to hex
+    let randomHex = '#' + ((1 << 24) + (randomR << 16) + (randomG << 8) + randomB).toString(16).slice(1);
+
+    return randomHex;
+}
 
 
 
-
-
-
-let dynamicSvgWidth = $("#dynamicSvg").width();
-let dynamicSvgHeight = $("#dynamicSvg").height();
 
 //variables
 
@@ -194,9 +209,6 @@ const sketch_book = {
 };
 
 //FUNCTIONS
-function getRandom(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 function createPath(id, c1ass, description, d, stroke_width, stroke) {
 
@@ -217,6 +229,22 @@ function createPath(id, c1ass, description, d, stroke_width, stroke) {
     return path;
 
 }
+
+function createRectangle(id, c1ass, x, y, width, height, fill) {
+
+    let rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('id', id);
+    rect.setAttribute('class', c1ass);
+    rect.setAttribute('x', x);
+    rect.setAttribute('y', y);
+    rect.setAttribute('width', width);
+    rect.setAttribute('height', height);
+    rect.setAttribute('fill', fill);
+    // Additional attributes can be added as needed
+
+    return rect;
+}
+
 
 
 
@@ -264,8 +292,8 @@ function getRandomItem(array) {
 }
 
 $(document).ready(function () {
-    let imageURL = 'images/sketch-book/IMG_' + imageName + '_crop.jpg';
-    $('body').css('background-image', 'url(' + imageURL + ')');
+    //let imageURL = 'images/sketch-book/IMG_' + imageName + '_crop.jpg';
+    //$('body').css('background-image', 'url(' + imageURL + ')');
 });
 
 

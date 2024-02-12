@@ -43,4 +43,4 @@ var chunkedArray = chunkArray(history_data, chunks);
 var joinedArray = joinArrayWithKeys(chunkedArray, keys);
 
 
-history_data = joinedArray;
+history_selection_data = joinedArray;
