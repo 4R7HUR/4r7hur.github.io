@@ -1,20 +1,46 @@
 const urlParams = new URLSearchParams(window.location.search);
 const defaultParams = {
-    'backgroundHistory': '1',
+    'historyVw':0.05,
+    'drawingVw':getDrawingVw(),
+    'charcterVw': getcharcterVw(),
+    'historyPaths':getHistoryPaths(),
     'imageName': getBackgroundImage(),
     'pathLength': getPathLength(),
-    //'paths': 100,
     'string': getCharacters(),
-    'vw': getVw(),
     'processHistory': ["fast", "animate", "no"][0],
     'historyConfig': getHistoryConfig(),
     //'colours': getSvgNamedColours('64.33.121.11.28.115.44'),
+    'bgcolours': getSvgNamedColours(),
     'colours': getSvgNamedColours(),
 };
+
+
 
 function randomInteger(min, max) {
     let integer = Math.floor(Math.random() * (max - min + 1)) + min;
     return integer;
+}
+
+function getDrawingVw(default_drawingVw) {
+    if (default_drawingVw) {
+        return default_drawingVw;
+    } else {
+
+        let min = 0.05;
+        let max = 0.15;
+        let drawingVw = (Math.random() * (max - min) + min).toFixed(2);
+        
+        return drawingVw;
+    }
+}
+
+function getHistoryPaths(defaultNumberOfPaths) {
+    if (defaultNumberOfPaths || defaultNumberOfPaths === 0) {
+        return defaultNumberOfPaths;
+    } else {
+        let defaultNumberOfPaths = randomInteger(2, 10);
+        return defaultNumberOfPaths;
+    }
 }
 
 function getPathLength(default_pathLength) {
@@ -95,12 +121,12 @@ function getCharacters(default_characters) {
 }
 
 
-function getVw(default_vw) {
+function getcharcterVw(default_vw) {
     if (default_vw) {
         return default_vw;
     } else {
         //return a string of 6 random numbers between 0 and 9 plucked from this string;
-        let options = "1111111122222233333444556";
+        let options = "111111111222222223333333444444555556666777889";
 
         let vw = "";
         for (let i = 0; i < 6; i++) {

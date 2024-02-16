@@ -148,6 +148,4 @@ const svgNamedColors = [
     "yellow",
     "yellowgreen"
   ];
-  
-  console.log(svgNamedColors);
-  
+    

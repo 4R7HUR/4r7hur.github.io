@@ -1,9 +1,19 @@
 let maxXmaxY = getMaxXmaxY(history_data);
-let drawingVw = '0.05vw';
-let historyVw = '0.05vw';
-let historyPathCount = 10;
+drawingVw = drawingVw + 'vw';
+historyVw = historyVw + 'vw';
+let pathData = Array.from({ length: historyPaths }, () => []);
 
 const dynamicSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+// Set author metadata
+dynamicSvg.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:dc', 'http://purl.org/dc/elements/1.1/');
+dynamicSvg.setAttributeNS('http://purl.org/dc/elements/1.1/', 'dc:creator', 'Arthur Saunders');
+
+const currentEpochTime = Math.floor(Date.now() / 1000);
+dynamicSvg.setAttributeNS('http://purl.org/dc/elements/1.1/', 'dc:date', currentEpochTime);
+
+
+
 dynamicSvg.setAttribute("id", "dynamicSvg");
 dynamicSvg.setAttribute("width", maxXmaxY[0] + "px");
 dynamicSvg.setAttribute("height", maxXmaxY[1] + "px");
@@ -18,44 +28,43 @@ dynamicSvg.appendChild(path3);
 const groupComplete = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 groupComplete.setAttribute("id", "complete");
 dynamicSvg.prepend(groupComplete);
-
-//Background paths
-
-for (let i = 1; i <= historyPathCount; i++) {
-
-    hex = ['rgb(138, 159, 176)', 'rgb(98, 119, 146)'][i % 2];
-    let background = createPath('background_' + i, 'background', 'background', '', historyVw, hex);
-    dynamicSvg.prepend(background);
-}
-
-
-let paper = createRectangle('papper', '', 0, 0, maxXmaxY[0], maxXmaxY[1], 'rgb(118, 139, 156)')
-dynamicSvg.prepend(paper);
-
-
 ////////////////////
 
 document.body.appendChild(dynamicSvg);
 
+//Set Background paths
+let svgNamedColorsIndex
 
+if(parseInt(historyPaths)){
+    for (let i = 1; i <= historyPaths; i++) {
+    
+        let parts = bgcolours.split(".");
+        svgNamedColorsIndex = parseInt(parts.shift());
+        parts.push(svgNamedColorsIndex);
+        bgcolours = parts.join(".");
+    
+        let background = createPath('background_' + i, 'background', 'background', '', historyVw, svgNamedColors[svgNamedColorsIndex]);
+        dynamicSvg.prepend(background);
+    }
+    
+    for (let i = 0; i < history_data.length; i++) {
+        let index = i % historyPaths;
+        pathData[index].push(history_data[i]);
+    }
+    
+    for (let i = 0; i < historyPaths; i++) {
+        setDAttribute(pathData[i], 1, 'background_' + (i + 1));
+    }
 
-///////////set d attributes for the background paths
-
-let pathData = [];
-
-for (let i = 0; i < historyPathCount; i++) {
-    pathData[i] = [];
 }
 
-for (let i = 0; i < history_data.length; i++) {
-    let index = i % historyPathCount;
-    pathData[index].push(history_data[i]);
-}
 
-for (let i = 0; i < historyPathCount; i++) {
-    //console.log();
-    setDAttribute(pathData[i], 1, 'background_' + (i + 1));
-}
+//set paper
+svgNamedColorsIndex = bgcolours.split(".")[0];
+let paper = createRectangle('papper', '', 0, 0, maxXmaxY[0], maxXmaxY[1], svgNamedColors[svgNamedColorsIndex]);
+dynamicSvg.prepend(paper);
+
+
 
 function getMaxXmaxY(history_data) {
     // Initialize max values for x and y
