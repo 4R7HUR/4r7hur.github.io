@@ -9,13 +9,16 @@ html, body {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    background-attachment: fixed;
-    
+    background-attachment: fixed;    
 }
 svg {
+    position: relative;
+    
+    display: block;
+    /*
+    margin: 20px auto 0 auto;
     width: 100%;
-    height: 100%;
-    margin: 0%;
+    height: 100%;*/
     /*cursor:wait;*/
     /*background-color:#93907d;*/    
     

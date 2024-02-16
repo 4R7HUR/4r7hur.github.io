@@ -1,148 +1,243 @@
+
+
+
+let ddd = [[], [], []];
+let CCC = [[], [], []];//Home for the coordinates that form the beizer curves.
+let character = '';
+let history = [];
+
+colours = colours.split('.');
+
+
 $("#dynamicSvg").on("mousemove", trackMouse);
 
+$(function () {
 
-let mouseTrack = [];
-let counter = 0;
-let pathIndex = 0;
-let M = [];
-let C = [[], [], []];
-let x;
-let y;
-let rounding = 2;
-let block = false;
-let initialCounter = 0;
-let delay = 100
-// Function to track mouse movement
-function trackMouseOld(event) {
 
-    if($("#dynamicSvg path.drawing").length === 0){
-        //loop again?
-        //$("#dynamicSvg path.set").addClass('drawing');
-        $("svg").css('cursor', 'auto');
+    if ((processHistory === "fast" || processHistory === "animate") && history_selection_data.length > 0) {
+
+        processHistoryData(history_selection_data, processHistory);
+
+        //the redirect the user to
+        //file:///home/arthur/VisualStudioProjects/drawing-and-word/index.html
+        //so that the user can see the drawing process
+        //wait one second before redirecting
+
+        //get current url
+        //console.log(window.location.href);
+        //split it on '?' and take the first part as the redirect url
+
+        let redirect_url = window.location.href.split('?')[0];
+
+        setTimeout(function () {
+
+            window.location.href = redirect_url;
+
+        }, 5000);
+
+
+    }
+
+});
+
+function trackMouse(event) {
+
+    if (event.type === 'mousemove' && processHistory !== "no") {
         return;
     }
 
-    if (initialCounter < delay) {
 
-        if (initialCounter === delay - 20) {
-            $("svg").css('cursor', 'crosshair');
-        }
+    xy = event.clientX + ',' + event.clientY;
 
-
-        initialCounter++;
-        return; // Do nothing until initialCounter reaches 10
+    if (ddd[0].length === 0) {
+        ddd[0] = 'M' + xy;
+        return;
+    } else if (ddd[1].length === 0) {
+        CCC[0].push(xy);
+        ddd[1] = 'M' + xy;
+        return;
+    } else if (ddd[2].length === 0) {
+        CCC[0].push(xy);
+        CCC[1].push(xy);
+        ddd[2] = 'M' + xy;
+        return;
     }
 
-    x = event.clientX;
-    y = event.clientY;
-    
-    x = Math.round(x / rounding) * rounding;
-    y = Math.round(y / rounding) * rounding;
+    //add coords to each of the CCC arrays
+    CCC.forEach(function (element, index) {
+        max = 0;
+        min = max * -1;
+        //Add some random movement to the mouse.
+        //xy = (event.clientX + randomInteger(min, max)) + ',' + (event.clientY + randomInteger(min, max));
+        xy = event.clientX + ',' + event.clientY;
+        CCC[index].push(xy);
 
-    xy = x + ',' + y + ' ';
-    pathIndex = counter % 3;
+    });
 
-    if (counter <= 2) {
-        M[pathIndex] = 'M' + xy;
+    //100000 = 1MB
+    //history.push(xy);
+    if (history.length === 100000) {
+        downloadHistory(history, 'js');
+        history = [];
     }
 
-    C[pathIndex] += xy;
 
-    if (nCommas(C[pathIndex], 3)) {
-        myPath = $("#dynamicSvg path.drawing").eq(pathIndex);
-        
-        if(myPath.hasClass('set')){
-            myPath.removeClass('set');
-            myPath.attr('d', '');
+    CCC.forEach(function (element, index) {
+
+        if (CCC[index].length / 3 === 1) {
+            ddd[index] += ' C' + CCC[index].join(' ');
+            CCC[index] = [];
+            $("#dynamicSvg path.active").eq(index).attr('d', ddd[index]);
         }
 
-        newC = 'C' + C[pathIndex];
-        oldD = myPath.attr('d');
-        newD = oldD ? oldD + ' ' + newC : M[pathIndex] + newC;
-        myPath.attr('d', newD.trim());
-        C[pathIndex] = '';
+    });
 
-        if (counter > pathSize) {
-            counter = 3;
-            M.fill('M' + xy);
-            C = [[], [], []];
+    CCC.forEach(function (element, index) {
+        //Test if its time to start a new path based on the length of this ddd index
+        if (countCommas(ddd[index]) > pathLength) {
 
-            $("#dynamicSvg path.drawing:lt(3)").removeClass('drawing').addClass('set');
+            newPath = createPath('', 'complete', 'drawing', '', drawingVw, '#000');
+            newPath.setAttribute("d", ddd[index]);
+            groupComplete.appendChild(newPath);
 
-            let letterPath = $("#dynamicSvg path.drawing:lt(3)").eq(2).next('path');
-            let className = letterPath.attr('class');
-            letterPath.attr('d','');             
+            //if ($("#dynamicSvg g path.complete").length > paths * 3) {                    
+            //$("#dynamicSvg g path.complete").eq(0).remove();
+            //}
 
-            if (typeof window['_' + className] === 'function') {
-                window['_' + className](className);
-            } else {
-                console.log('_' + className + " Function does not exist or is not callable");
+
+            if (index === 0) {
+
+                let character = string.charAt(0);
+                string = string.slice(1) + character;
+
+                let strokeWidth = parseInt(charcterVw.charAt(0));
+                charcterVw = charcterVw.slice(1) + strokeWidth;
+                strokeWidth = (strokeWidth * 0.01) + 'vw';
+
+                description = 'character path';
+
+                svgNamedColorsIndex = colours.shift();
+                colours.push(svgNamedColorsIndex);
+                thisColour = svgNamedColors[svgNamedColorsIndex]
+
+                //create a new path [into the end of the group] and then apply a character function to it
+                newPath = createPath(character, character + ' character-path', description, '', strokeWidth, thisColour);
+                groupComplete.appendChild(newPath);
+                coords_array = parseSVGPath(ddd[index]);
+
+
+                if (typeof window['_' + character] === 'function') {
+                    window['_' + character](character, coords_array);
+                } else {
+                    // Handle the case where the function is not defined
+                    console.log("Function not found for character:", character);
+                }
+
+                //if ($("#dynamicSvg g path.character-path").length > paths) {                    
+                //$("#dynamicSvg g path.character-path").eq(0).remove();
+                //}
+
             }
 
-            mouseTrack = [];       
+            //Reset the active path
+            $("#dynamicSvg path.active").eq(index).attr('d', '');
+            //provide the last coordiate as the move to position
+            ddd[index] = 'M' + xy;
+            CCC[index] = [];
 
-            
         }
-    }
 
-    counter++;
-    mouseTrack.push([x, y]);
+    });
+
+
+
+
 }
 
-let countMovment = 0;
-let xy = '';
-let C_array = [];
-let bezier = '';
-let snakes = 3;//needs to be odd
-let store = [];
-let eq = 0;
-function trackMouse(event){
-
-    xy = event.clientX + ',' + event.clientY + ' ';
-
-    //add the 3 empty paths if they dont exist
-    if($("#dynamicSvg path.active").length < snakes){
-        //mature createPath function so it can take the svg as a parameter, then this can be one line :-)
-        path = createPath('', 'active', 'description', '', '0.05vw', '#000');
-        dynamicSvg.appendChild(path);
-    }
-
-    if(countMovment < 100){
-        eq = countMovment % snakes;        
-        myPath = $("#dynamicSvg path.active").eq(eq);       
-
-        if( ! myPath.attr('d')){     
-            xy = store[eq] ? store[eq] : xy;                         
-            myPath.attr('d', 'M' + xy + ''); 
-        }else{
-            if(C_array.length === 3){                
-                bezier = "C" + C_array.join('');  
-                myPath.attr('d', myPath.attr('d') + bezier);                             
-                C_array = [];          
-                                
-            }else{
-                C_array.push(xy);
-            }            
-        }
-        countMovment++;
-        store[eq] = xy; 
-    }else{
-        countMovment = 0;
-        C_array = [];
-
-
-        //TBC!!!
-        pathString = $("#dynamicSvg path.active").eq(0).attr('d');
-        console.log(parseSVGPathData(pathString));
-        ////
-
-        $("#dynamicSvg path.active").removeClass('active');
-    }
-
+function countCommas(inputString) {
+    const commaMatches = inputString.match(/,/g);
+    return commaMatches ? commaMatches.length : 0;
 }
-function parseSVGPathData(pathString) {
-    const regex = /(\d+(\.\d+)?),(\d+(\.\d+)?)/g;
-    const matches = pathString.matchAll(regex);
-    const coordinates = Array.from(matches, match => [parseFloat(match[1]), parseFloat(match[3])]);
-    return coordinates;
+function parseSVGPath(svgPath) {
+    const values = svgPath.match(/[+-]?\d+(\.\d+)?/g).map(Number);
+    const result = [];
+
+    for (let i = 0; i < values.length; i += 2) {
+        result.push([values[i], values[i + 1]]);
+    }
+
+    return result;
+}
+
+
+
+function downloadHistory(data, fileType) {
+    var timestamp = new Date().getTime();
+    var id = "history_" + timestamp;
+    var filename = id + "." + fileType;
+    var content = JSON.stringify(data);
+    var mimeType;
+
+    switch (fileType.toLowerCase()) {
+        case 'css':
+            mimeType = 'text/css';
+            break;
+        case 'csv':
+            mimeType = 'text/csv';
+            break;
+        case 'xml':
+            mimeType = 'text/xml';
+            break;
+        case 'svg':
+            mimeType = 'image/svg+xml';
+            break;
+        case 'js':
+        default:
+            mimeType = 'text/javascript';
+            content = 'history_data = ' + content + '; console.log("history_data.length: " + history_data.length);';
+            filename = 'history.js';
+    }
+
+    var blob = new Blob([content], { type: mimeType });
+    var url = URL.createObjectURL(blob);
+
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+
+    document.body.appendChild(a);
+    a.click();
+
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+function processHistoryData(dataArray, processHistory = 'animate') {
+    let index = 0;
+
+    if (processHistory === 'animate') {
+        const interval = setInterval(() => {
+            if (index < dataArray.length) {
+                coords = dataArray[index].split(',');
+
+                trackMouse({ clientX: coords[0], clientY: coords[1] })
+
+                index++;
+            } else {
+                clearInterval(interval);
+            }
+        }, 10); // 1000 milliseconds = 1 second
+    } else {
+
+        //hide the svg so that the user does not see the drawing process and so that the paths are not added to the DOM
+        $("#dynamicSvg p").hide();
+        console.log('processHistory', processHistory);
+        //return;
+        dataArray.forEach(function (element, index) {
+            coords = element.split(',');
+            trackMouse({ clientX: coords[0], clientY: coords[1] })
+        });
+        //show the svg again
+        $("#dynamicSvg p").fadeIn(1000);
+    }
+
 }

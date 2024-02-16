@@ -8,65 +8,31 @@
 
 <body>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+  <script src="jquery.js"></script>
+  <script src="svgNamedColours.js"></script>
+  <script src="history/history.js"></script>
   <script src="redirect.js"></script>
-  <script src="script.js"></script>
-  <script src="drawing.js"></script>
-  <script>
+  <script src="shuffle.js"></script>
+  <script src="script.js"></script>   
 
-const path_names_2 = {
-    'a': { 'description': 'small circles' },
-    'b': { 'description': 'TBC' },
-    'c': { 'description': 'TBC' },
-    'd': { 'description': 'horizontal outside' },
-    'e': { 'description': 'TBC' },
-    'f': { 'description': 'vertcial rough colouring' },
-    'g': { 'description': 'horizontal rough colouring' },
-    'h': { 'description': 'frantic curves' },
-    'i': { 'description': 'TBC' },
-    'j': { 'description': 'vertical outside' },
-    'k': { 'description': 'squares' }, // last one on the middle row :-)
-    'l': { 'description': 'spirals' },
-    'm': { 'description': 'TBC' },
-    'n': { 'description': 'TBC' },
-    'o': { 'description': 'TBC' },
-    'p': { 'description': 'TBC' },
-    'q': { 'description': 'TBC' },
-    'r': { 'description': 'TBC' },
-    's': { 'description': 'medium circles' },
-    't': { 'description': 'TBC' },
-    'u': { 'description': 'TBC' },
-    'v': { 'description': 'TBC' },
-    'w': { 'description': 'TBC' },
-    'x': { 'description': 'TBC' },
-    'y': { 'description': 'TBC' },
-    'z': { 'description': 'TBC' },
-    '1': { 'description': 'TBC' },
-    '2': { 'description': 'TBC' },
-    '3': { 'description': 'TBC' },
-    '4': { 'description': 'TBC' },
-    '5': { 'description': 'TBC' },
-    '6': { 'description': 'TBC' },
-    '7': { 'description': 'TBC' },
-    '8': { 'description': 'TBC' },
-    '9': { 'description': 'TBC', 'bob': 'red' }
-    // Add or modify descriptions as needed for each character
-};
+  <script src="keyboard_functions/a.js?small-circles" type="text/javascript"></script>
+  <script src="keyboard_functions/d.js?horizontal-outside" type="text/javascript"></script>
+  <script src="keyboard_functions/f.js?vertcial-rough-colouring" type="text/javascript"></script>
+  <script src="keyboard_functions/g.js?horizontal-rough-colouring" type="text/javascript"></script>
+  <script src="keyboard_functions/h.js?frantic-curves" type="text/javascript"></script>
+  <script src="keyboard_functions/j.js?vertical-outside" type="text/javascript"></script>
+  <script src="keyboard_functions/k.js?squares" type="text/javascript"></script>
+  <script src="keyboard_functions/l.js?spirals" type="text/javascript"></script>
+  <script src="keyboard_functions/s.js?medium-circles" type="text/javascript"></script>
 
-Object.keys(path_names_2).forEach((character) => {
-    const description = path_names_2[character].description.replace(/\s/g, '-');
-    console.log('character',character);
-    if (description !== 'TBC') {
-        const scriptTag = document.createElement('script');
-        scriptTag.src = 'keyboard_functions/' + character + '.js?' + description;
-        scriptTag.type = 'text/javascript';
-        document.body.appendChild(scriptTag);
-    }
-});
+
+<script src="drawing.js"></script>
 
 
 
-  </script>
 
 </body>
 

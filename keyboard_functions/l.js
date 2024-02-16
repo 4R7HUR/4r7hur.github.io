@@ -1,14 +1,12 @@
-function _l(key) {
-    // Get the data from the 'mouseTrack' and copy it into 'array'
-    var array = copyArray(mouseTrack); // This assumes 'mouseTrack' contains the coordinate data
+function _l(key, coords_array) {
     
     var path = $("#" + key); // Assuming 'key' is the ID of the existing path element within an SVG
     var join = true; // Set to true if you want to join the spirals, false otherwise
-    var dashArray = "4,3"; // Define the dash array (e.g., "4,2" means dash of length 4 followed by a gap of length 2)
+    var dashArray = "40,3"; // Define the dash array (e.g., "4,2" means dash of length 4 followed by a gap of length 2)
 
-    array.forEach(function(coord, index) {
+    coords_array.forEach(function(coord, index) {
         if (index % 10 === 0) { // Draw a spiral only when the index is divisible by 10
-            var spiralDiameter = 210; // Adjusted the diameter of the spiral to 210
+            var spiralDiameter = 410; // Adjusted the diameter of the spiral to 210
             var spiralRotations = 4; // You can adjust the number of rotations
             
             var spiral = createSpiral(coord[0], coord[1], spiralRotations, spiralDiameter, join && index !== 0);
@@ -18,6 +16,10 @@ function _l(key) {
             path.attr("d", pathD + spiral); // Append the spiral to the existing path
         }
     });
+
+    path.attr('id', '');    
+
+
 }
 
 function createSpiral(cx, cy, rotations, diameter, join) {
