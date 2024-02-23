@@ -21,6 +21,14 @@ function randomInteger(min, max) {
     return integer;
 }
 
+function getRandomItem(array) {
+    // Generate a random index
+    let randomIndex = Math.floor(Math.random() * array.length);
+
+    // Return the random item
+    return array[randomIndex];
+}
+
 function getDrawingVw(default_drawingVw) {
     if (default_drawingVw) {
         return default_drawingVw;
@@ -157,29 +165,29 @@ function getBackgroundImage(default_image) {
 
 function getHistoryConfig(default_config) {
 
-    //if there is a value for default_config return it, else we have soem code to write
+    //66-9-45-65-0   
+
+
     if (default_config) {
         return default_config;
     } else {
-        // I need to start the string with a random number between 1 and 100
         let config = "";
-        let chunk = randomInteger(21, 91);
-        //random number between 1 and chunk/5
-        //use randomInteger function
-        //let indexes = randomInteger(1, chunk / 5);
-        let indexes = randomInteger(2, 12);
+        let chunks = getRandomItem([5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100]);//the number of chunks we split the history into
+        let chunksDenominator = getRandomItem([2,4,6,8,10,12,14,16,18,20]);//the number we divide the chunks by to get the chunksUsed
+
+        //setCookie('chunks', JSON.E,1);
+        //setCookie('chunksDenominator', 3,1);
+        
 
 
-        if (indexes > chunk) {
-            alert('The number of indexes must be less than the chunk size');
-        }
+        let chunksUsed = parseInt(chunks / chunksDenominator);
 
-        config = chunk + "-";
+        config = chunks + "-";
 
-        for (let i = 0; i < indexes; i++) {
+        for (let i = 0; i < chunksUsed; i++) {
             //use randomInteger function
-            config += randomInteger(0, chunk - 1);
-            if (i < indexes - 1) {
+            config += randomInteger(0, chunks - 1);
+            if (i < chunksUsed - 1) {
                 config += "-";
             }
         }
@@ -235,3 +243,90 @@ function updateURLParameters(defaultParams) {
         console.log(`${key}: ${value}`);
     });
 }
+
+
+// Function to read a cookie by name
+function getCookie(name) {
+    const cookieString = decodeURIComponent(document.cookie);
+    const cookies = cookieString.split('; ');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName === name) {
+            try {
+                return JSON.parse(cookieValue);
+            } catch (error) {
+                return cookieValue;
+            }
+        }
+    }
+    return null;
+}
+
+// Function to set a cookie with a name, value, and optional expiration date
+function setCookie(name, value, daysToExpire) {
+    let cookieValue = (typeof value === 'object') ? JSON.stringify(value) : value;
+    let cookieString = `${encodeURIComponent(name)}=${encodeURIComponent(cookieValue)}`;
+    if (daysToExpire) {
+        const expirationDate = new Date();
+        expirationDate.setTime(expirationDate.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
+        cookieString += `; expires=${expirationDate.toUTCString()}`;
+    }
+    
+    // Set the entire cookie string
+    document.cookie = cookieString;
+}
+
+// Function to delete a cookie by name
+function deleteCookie(name) {
+    document.cookie = `${encodeURIComponent(name)}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
+
+function deleteAllCookies() {
+    const cookies = document.cookie.split("; ");
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const [cookieName] = cookie.split("=");
+        deleteCookie(cookieName);
+    }
+}
+
+// AI!
+$(document).ready(function(){
+    $("#like").click(function(){
+        // Trigger the like function
+        likeFunction();
+    });
+
+    $("#dislike").click(function(){
+        // Trigger the dislike function
+        dislikeFunction();
+    });
+});
+
+function likeFunction() {
+    // Add your like functionality here
+    console.log(urlParams);
+    //for each key in urlParams, create a cookie [if neeed] with the key and value. Push the value into any existing array, or create a new array if it doesn't exist.
+    //save the list as JSON
+    for (const [key, value] of urlParams) {
+        let cookie = getCookie(key);
+        //console.log(cookie);
+        if (cookie) {
+            cookie.push(value);
+            setCookie(key, cookie, 1);
+        } else {
+            setCookie(key, [value], 1);
+        }
+    }
+
+    window.location.href = window.location.href.split('?')[0];
+}
+
+function dislikeFunction() {
+    // Add your dislike functionality here
+    window.location.href = window.location.href.split('?')[0];
+}
+
+deleteAllCookies();
+

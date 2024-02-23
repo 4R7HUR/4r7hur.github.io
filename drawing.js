@@ -31,7 +31,7 @@ $(function () {
 
         setTimeout(function () {
 
-            window.location.href = redirect_url;
+            //window.location.href = redirect_url;
 
         }, 5000);
 
