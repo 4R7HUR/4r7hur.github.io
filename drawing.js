@@ -31,7 +31,7 @@ $(function () {
 
         setTimeout(function () {
 
-            //window.location.href = redirect_url;
+            window.location.href = redirect_url;
 
         }, 5000);
 
@@ -75,7 +75,7 @@ function trackMouse(event) {
     });
 
     //100000 = 1MB
-    //history.push(xy);
+    history.push(xy);
     if (history.length === 100000) {
         downloadHistory(history, 'js');
         history = [];
@@ -96,7 +96,7 @@ function trackMouse(event) {
         //Test if its time to start a new path based on the length of this ddd index
         if (countCommas(ddd[index]) > pathLength) {
 
-            newPath = createPath('', 'complete', 'drawing', '', drawingVw, '#000');
+            newPath = createPath('', 'complete', 'drawing', '', drawingPx, '#000', 1);
             newPath.setAttribute("d", ddd[index]);
             groupComplete.appendChild(newPath);
 
@@ -110,9 +110,9 @@ function trackMouse(event) {
                 let character = string.charAt(0);
                 string = string.slice(1) + character;
 
-                let strokeWidth = parseInt(charcterVw.charAt(0));
-                charcterVw = charcterVw.slice(1) + strokeWidth;
-                strokeWidth = (strokeWidth * 0.01) + 'vw';
+                let strokeWidth = parseInt(charcterPx.charAt(0));
+                charcterPx = charcterPx.slice(1) + strokeWidth;
+                strokeWidth = (strokeWidth * 1) + 'px';
 
                 description = 'character path';
 
@@ -120,13 +120,17 @@ function trackMouse(event) {
                 colours.push(svgNamedColorsIndex);
                 thisColour = svgNamedColors[svgNamedColorsIndex]
 
+                let opacity = parseInt(characterStrokeOpacity.charAt(0));
+                characterStrokeOpacity = characterStrokeOpacity.slice(1) + opacity;
+                opacity = (opacity + 1)/10;                
+
                 //create a new path [into the end of the group] and then apply a character function to it
-                newPath = createPath(character, character + ' character-path', description, '', strokeWidth, thisColour);
+                newPath = createPath(character, character + ' character-path', description, '', strokeWidth, thisColour, opacity);
                 groupComplete.appendChild(newPath);
                 coords_array = parseSVGPath(ddd[index]);
 
 
-                if (typeof window['_' + character] === 'function') {
+                if (typeof ['_' + character] === 'function') {
                     window['_' + character](character, coords_array);
                 } else {
                     // Handle the case where the function is not defined
@@ -173,9 +177,11 @@ function parseSVGPath(svgPath) {
 
 function downloadHistory(data, fileType) {
     var timestamp = new Date().getTime();
-    var id = "history_" + timestamp;
+    var id = timestamp;
     var filename = id + "." + fileType;
     var content = JSON.stringify(data);
+    content = content.replace(/\\(.)/g, "$1");
+
     var mimeType;
 
     switch (fileType.toLowerCase()) {
@@ -190,6 +196,9 @@ function downloadHistory(data, fileType) {
             break;
         case 'svg':
             mimeType = 'image/svg+xml';
+            // Remove first and last characters
+            content = content.substring(1, content.length - 1);
+
             break;
         case 'js':
         default:
@@ -197,6 +206,8 @@ function downloadHistory(data, fileType) {
             content = 'history_data = ' + content + '; console.log("history_data.length: " + history_data.length);';
             filename = 'history.js';
     }
+
+
 
     var blob = new Blob([content], { type: mimeType });
     var url = URL.createObjectURL(blob);
@@ -238,6 +249,31 @@ function processHistoryData(dataArray, processHistory = 'animate') {
         });
         //show the svg again
         $("#dynamicSvg p").fadeIn(1000);
+
+        let downloadSvg = 1;
+        if(downloadSvg){
+                    
+            // Get the SVG element by its ID or any other suitable selector
+            var svgElement = document.getElementById("dynamicSvg");
+
+            // Serialize the SVG element into a string
+            var svgString = new XMLSerializer().serializeToString(svgElement);
+            
+            // Parse the SVG string as XML
+            var parser = new DOMParser();
+            var xmlDoc = parser.parseFromString(svgString, "text/xml");
+
+            // Serialize the XML document back to a string without escaping
+            var svgContent = new XMLSerializer().serializeToString(xmlDoc);
+
+            // Now svgContent contains your SVG content without escaping characters
+            console.log(svgContent);
+
+
+            downloadHistory(svgString, 'svg');
+
+        }
+        
     }
 
 }

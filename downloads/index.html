@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+    <style>
+        /* Override Bootstrap button styles to display links as underlined */
+        .gallery-link {
+            text-decoration: underline;
+            margin: 0 5px;
+            transition: none; /* Remove transition to prevent underline animation */
+        }
+
+        /* Remove underline on hover */
+        .gallery-link:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Centered h1 -->
+    <h1 class="text-center">Image Sets</h1>
+    <div class="text-center mb-3">
+        <!-- Links for each letter -->
+        <a href="#" class="btn btn-link gallery-link active" data-letter="A">A</a> |
+        <a href="#" class="btn btn-link gallery-link" data-letter="B">B</a> |
+        <a href="#" class="btn btn-link disabled" data-letter="C">C</a> |
+        <a href="#" class="btn btn-link disabled" data-letter="D">D</a> | 
+        <a href="#" class="btn btn-link disabled" data-letter="D">E</a>
+    </div>
+    <div id="image-gallery" class="row"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+<script src="png.js"></script>
+<script>
+    // Number of columns for the grid layout
+    const columns = 4;
+
+    // Get the container div
+    const container = document.getElementById('image-gallery');
+
+    // Function to update the image gallery based on the selected letter
+    function updateImageGallery(letter) {
+        const imagesArray = file_names[letter.toUpperCase()]; // Accessing arrays based on selected letter
+
+        // Clear the existing gallery
+        container.innerHTML = '';
+
+        // Calculate the number of images per column
+        const imagesPerColumn = Math.ceil(imagesArray.length / columns);
+
+        // Loop through the images array and build the grid layout
+        for (let i = 0; i < columns; i++) {
+            const column = document.createElement('div');
+            column.classList.add('col-md-' + (12 / columns));
+
+            const startIndex = i * imagesPerColumn;
+            const endIndex = (i + 1) * imagesPerColumn;
+
+            for (let j = startIndex; j < endIndex && j < imagesArray.length; j++) {
+                const img = document.createElement('a');
+                img.href = letter + '/' + imagesArray[j].split('.')[0] + '.svg'; // Link to SVG file
+                img.setAttribute('data-fancybox', 'images'); // Add data attribute for Fancybox
+                img.classList.add('img-fluid');
+
+                const imgElem = document.createElement('img');
+                imgElem.src = letter + '/' + imagesArray[j]; // Image source
+                imgElem.classList.add('img-fluid');
+
+                img.appendChild(imgElem);
+
+                const fileName = imagesArray[j].split('.')[0]; // Get the file name without extension
+                const fileNameDiv = document.createElement('div');
+                fileNameDiv.textContent = fileName; // Set the file name as text content
+                fileNameDiv.classList.add('text-center'); // Add class for styling
+
+                const div = document.createElement('div');
+                div.classList.add('mb-4');
+                div.appendChild(img);
+                div.appendChild(fileNameDiv); // Append file name div
+
+                column.appendChild(div);
+            }
+
+            container.appendChild(column);
+        }
+    }
+
+    // Event listener for gallery links
+    document.querySelectorAll('.gallery-link').forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default action of following the link
+            const selectedLetter = this.getAttribute('data-letter');
+            // Remove active class from all links
+            document.querySelectorAll('.gallery-link').forEach(function(link) {
+                link.classList.remove('active');
+            });
+            // Add active class to the clicked link
+            this.classList.add('active');
+            // Update the gallery based on the selected letter
+            updateImageGallery(selectedLetter);
+        });
+    });
+
+    // Call the updateImageGallery function initially with the default letter
+    updateImageGallery('A');
+</script>
+
+</body>
+</html>

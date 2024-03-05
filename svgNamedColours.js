@@ -50,7 +50,7 @@ const svgNamedColors = [
     "fuchsia",
     "gainsboro",
     "ghostwhite",
-    "gold",
+    "gold",//51
     "goldenrod",
     "gray",
     "green",

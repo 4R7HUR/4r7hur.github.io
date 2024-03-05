@@ -1,0 +1,28 @@
+Welcome to TinyScheme
+Copyright (c) Dimitrios Souflis
+Script-Fu Console - Interactive Scheme Development
+
+> (file-svg-load-thumb 'bob.png' 87)
+Error: Invalid type for argument 1 to file-svg-load-thumb 
+
+> (file-svg-load-thumb "bob.png" 87)
+Error: Procedure execution of file-svg-load-thumb failed: Could not open 'bob.png' for reading: Error opening file /home/arthur/bob.png: No such file or directory 
+
+> (file-svg-load-thumb "/home/arthur/bob.png" 87)
+Error: Procedure execution of file-svg-load-thumb failed: Could not open '/home/arthur/bob.png' for reading: Error opening file /home/arthur/bob.png: No such file or directory 
+
+> (file-svg-load-thumb "/home/arthur/VisualStudioProjects/drawing-and-word/downloads//home/arthur/VisualStudioProjects/drawing-and-word/downloads/A/1709335229886.svg" 87)
+Error: Procedure execution of file-svg-load-thumb failed: Could not open '/home/arthur/VisualStudioProjects/drawing-and-word/downloads//home/arthur/VisualStudioProjects/drawing-and-word/downloads/A/1709335229886.svg' for reading: Error opening file /home/arthur/VisualStudioProjects/drawing-and-word/downloads/home/arthur/VisualStudioProjects/drawing-and-word/downloads/A/1709335229886.svg: No such file or directory 
+
+> (file-svg-load-thumb "/home/arthur/VisualStudioProjects/drawing-and-word/downloads/home/arthur/VisualStudioProjects/drawing-and-word/downloads/A/1709335229886.svg" 87)
+Error: Procedure execution of file-svg-load-thumb failed: Could not open '/home/arthur/VisualStudioProjects/drawing-and-word/downloads/home/arthur/VisualStudioProjects/drawing-and-word/downloads/A/1709335229886.svg' for reading: Error opening file /home/arthur/VisualStudioProjects/drawing-and-word/downloads/home/arthur/VisualStudioProjects/drawing-and-word/downloads/A/1709335229886.svg: No such file or directory 
+
+> (file-svg-load-thumb "/home/arthur/VisualStudioProjects/drawing-and-word/downloads/A" 87)
+Error: Procedure execution of file-svg-load-thumb failed: Could not open '/home/arthur/VisualStudioProjects/drawing-and-word/downloads/A' for reading: Error opening file /home/arthur/VisualStudioProjects/drawing-and-word/downloads/A: Is a directory 
+
+> (file-svg-load-thumb "/home/arthur/VisualStudioProjects/drawing-and-word/downloads/A/1709335229886.svg" 87)
+(1 1366 846)
+> (file-svg-load-thumb "/home/arthur/VisualStudioProjects/drawing-and-word/downloads/A/1709335229886.svg" 87)
+(2 1366 846)
+> (file-svg-load-thumb "/home/arthur/VisualStudioProjects/drawing-and-word/downloads/A/1709335229886.svg" 87)
+(3 1366 846)

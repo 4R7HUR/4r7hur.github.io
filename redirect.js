@@ -1,18 +1,21 @@
 const urlParams = new URLSearchParams(window.location.search);
 const defaultParams = {
-    'historyVw':0.05,
-    'drawingVw':getDrawingVw(),
-    'charcterVw': getcharcterVw(),
-    'historyPaths':getHistoryPaths(),
-    'imageName': getBackgroundImage(),
+    'historyConfig': getHistoryConfig(),
+    'historyPx': randomInteger(2, 8)/10,
+    'drawingPx': getDrawingPx(),
+    'charcterPx': getCharcterPx(),
+    'historyPaths': getHistoryPaths(5),
+    //'imageName': getBackgroundImage(),
     'pathLength': getPathLength(),
     'string': getCharacters(),
     'processHistory': ["fast", "animate", "no"][0],
-    'historyConfig': getHistoryConfig(),
-    //'colours': getSvgNamedColours('64.33.121.11.28.115.44'),
-    'bgcolours': getSvgNamedColours(),
-    'colours': getSvgNamedColours(),
+    'paperColour': getPaperColour(getRandomItem(['darkslategray','lightslategray','slategray', 'gray', 'aliceblue','gainsboro','lightsteelblue','honeydew'])),
+    'historyColours': gethistoryColours(getRandomItem(['77.52.131.25.13','0.6.41.88.85.142.131','57.137.57.87.88.19.117.85','63.78.86.72.79.23.127.109.11.77'])),
+    'colours': getColours(getRandomItem(['22.50.58.61.36.66.56','30.96.46.37.139.109.145','120.135.17.16.63.95.5','34.126.73.86.61.127.52','105.57.51.64.38.32.37.136','130.45.66.2.120.18.52','70.105.61.110.88.99.136','5.100.27.6.113.119.107'])),
+    'characterStrokeOpacity': getCharacterStrokeOpacity(),
 };
+
+
 
 
 
@@ -29,16 +32,13 @@ function getRandomItem(array) {
     return array[randomIndex];
 }
 
-function getDrawingVw(default_drawingVw) {
-    if (default_drawingVw) {
-        return default_drawingVw;
+function getDrawingPx(default_drawingPx) {
+    if (default_drawingPx) {
+        return default_drawingPx;
     } else {
 
-        let min = 0.05;
-        let max = 0.15;
-        let drawingVw = (Math.random() * (max - min) + min).toFixed(2);
-        
-        return drawingVw;
+        let drawingPx = randomInteger(2, 4);
+        return drawingPx;
     }
 }
 
@@ -46,7 +46,7 @@ function getHistoryPaths(defaultNumberOfPaths) {
     if (defaultNumberOfPaths || defaultNumberOfPaths === 0) {
         return defaultNumberOfPaths;
     } else {
-        let defaultNumberOfPaths = randomInteger(2, 10);
+        let defaultNumberOfPaths = randomInteger(5, 10);
         return defaultNumberOfPaths;
     }
 }
@@ -61,52 +61,89 @@ function getPathLength(default_pathLength) {
     }
 }
 
+function getPaperColour(default_paperColour) {
 
-
-function getSvgNamedColours(default_colours) {
-
-
-    if (default_colours) {
-        return default_colours;
+    if (default_paperColour) {
+        return default_paperColour;
     }
 
-    numOfNamedColours = svgNamedColors.length;
-    //i need to get 15 random indexes from the array
-
-    let colours = "";
-    //random number of colours between 1 and 10;
-    let numberOfColours = randomInteger(1, 10);
-    for (let i = 0; i < numberOfColours; i++) {
-        let randomIndex = randomInteger(0, numOfNamedColours - 1);
-        colours += randomIndex;
-        if (i < numberOfColours-1) {
-            colours += ".";
-        }
+    if (getCookie('paperColour') && getCookie('paperColour').length > 10) {
+        return getRandomItem(getCookie('paperColour'));
+    } else {
+        return getRandomItem(svgNamedColors);
     }
 
-    let bob = [
-        "121.68.44",
-        "21.142.120.134.8.130.123.131.74.77",
-        "146.58.102.99.40.77.19.46.118.74",
-        "38.138.91.140.102",
-        "97.90.140.143.46",
-        "93.11.97.139.100.79.67",
-        "120.44.98.34",
-        "128.40.9.142.112.114",
-        "59.46.35.147.116.53.51.41.122",
-        "21.142.120.134.8.130.123.131.74.77",
-        "114.52.121.37.88.106.101",
-        "128.91.64.88.85.9",
-        "88.106.139.26.34.126.43",
-        "38.99.146.56.62.93.43.132.11.70",
-        "116.89.123.122.81.19.76",
-        "7.6.111.49.43.66.63",
-        "91.39.138.23.94.72.123.113.36.92"
-    ];
-    
-
-    return colours;
 }
+
+
+
+
+function gethistoryColours(defaultNamedColours) {
+
+    if (defaultNamedColours) {
+        return defaultNamedColours;
+    }
+
+
+
+    if (getCookie('historyColours') && getCookie('historyColours').length > 20) {
+        return getRandomItem(getCookie('historyColours'));
+    } else {
+
+        if (defaultNamedColours) {
+            return defaultNamedColours;
+        }
+    
+        let numberOfColours = randomInteger(3, 10);
+        let numOfNamedColours = svgNamedColors.length;
+
+        let colours = "";
+
+        for (let i = 0; i < numberOfColours; i++) {
+            let randomIndex = randomInteger(0, numOfNamedColours - 1);
+            colours += randomIndex;
+            if (i < numberOfColours - 1) {
+                colours += ".";
+            }
+        }
+
+
+        return colours;
+    }
+
+
+}
+function getColours(defaultColours) {
+
+    if (getCookie('colours') && getCookie('colours').length > 20) {
+        return getRandomItem(getCookie('colours'));
+    } else {
+
+        if (defaultColours) {
+            return defaultColours;
+        }
+    
+        let numberOfColours = randomInteger(6, 7);
+        let numOfNamedColours = svgNamedColors.length;
+
+        let colours = "";
+
+        for (let i = 0; i < numberOfColours; i++) {
+            let randomIndex = randomInteger(0, numOfNamedColours - 1);
+            colours += randomIndex;
+            if (i < numberOfColours - 1) {
+                colours += ".";
+            }
+        }
+
+
+        return colours;
+    }
+
+
+}
+
+
 
 
 
@@ -122,27 +159,46 @@ function getCharacters(default_characters) {
             let randomIndex = randomInteger(0, options.length - 1);
             charceters += options[randomIndex];
         }
-        
+
         return charceters;
 
     }
 }
 
 
-function getcharcterVw(default_vw) {
-    if (default_vw) {
-        return default_vw;
+function getCharcterPx(charcterPx) {
+    if (charcterPx) {
+        return charcterPx;
     } else {
         //return a string of 6 random numbers between 0 and 9 plucked from this string;
         let options = "111111111222222223333333444444555556666777889";
+        //options = "159";
 
-        let vw = "";
+        let px = "";
         for (let i = 0; i < 6; i++) {
             let randomIndex = randomInteger(0, options.length - 1);
-            vw += options[randomIndex];
+            px += options[randomIndex];
         }
-        
-        return vw;
+
+        return px;
+
+    }
+}
+
+
+function getCharacterStrokeOpacity(defaultCharacterStrokeOpacity) {
+    if (defaultCharacterStrokeOpacity) {
+        return default_vw;
+    } else {
+        let options = "9999999999999999999654321";
+
+        let strokeOpacity = "";
+        for (let i = 0; i < 6; i++) {
+            let randomIndex = randomInteger(0, options.length - 1);
+            strokeOpacity += options[randomIndex];
+        }
+
+        return strokeOpacity;
 
     }
 }
@@ -172,13 +228,10 @@ function getHistoryConfig(default_config) {
         return default_config;
     } else {
         let config = "";
-        let chunks = getRandomItem([5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100]);//the number of chunks we split the history into
-        let chunksDenominator = getRandomItem([2,4,6,8,10,12,14,16,18,20]);//the number we divide the chunks by to get the chunksUsed
-
-        //setCookie('chunks', JSON.E,1);
-        //setCookie('chunksDenominator', 3,1);
-        
-
+        let chunks = getRandomItem([80,160,320]);//the number of chunks we split the history into
+        //chunks = getRandomItem([60, 65, 70]);//the number of chunks we split the history into
+        let chunksDenominator = getRandomItem([4,8,16,32,64]);//the number we divide the chunks by to get the chunksUsed
+        //chunksDenominator = getRandomItem([6]);//the number we divide the chunks by to get the chunksUsed
 
         let chunksUsed = parseInt(chunks / chunksDenominator);
 
@@ -272,61 +325,59 @@ function setCookie(name, value, daysToExpire) {
         expirationDate.setTime(expirationDate.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
         cookieString += `; expires=${expirationDate.toUTCString()}`;
     }
-    
+
     // Set the entire cookie string
     document.cookie = cookieString;
 }
 
-// Function to delete a cookie by name
-function deleteCookie(name) {
-    document.cookie = `${encodeURIComponent(name)}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-}
 
-function deleteAllCookies() {
-    const cookies = document.cookie.split("; ");
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i];
-        const [cookieName] = cookie.split("=");
-        deleteCookie(cookieName);
-    }
-}
 
 // AI!
-$(document).ready(function(){
-    $("#like").click(function(){
+$(document).ready(function () {
+    $("#like").click(function () {
         // Trigger the like function
         likeFunction();
     });
 
-    $("#dislike").click(function(){
+    $("#dislike").click(function () {
         // Trigger the dislike function
         dislikeFunction();
     });
+
+
+
 });
 
 function likeFunction() {
-    // Add your like functionality here
-    console.log(urlParams);
-    //for each key in urlParams, create a cookie [if neeed] with the key and value. Push the value into any existing array, or create a new array if it doesn't exist.
-    //save the list as JSON
-    for (const [key, value] of urlParams) {
-        let cookie = getCookie(key);
-        //console.log(cookie);
-        if (cookie) {
-            cookie.push(value);
-            setCookie(key, cookie, 1);
-        } else {
-            setCookie(key, [value], 1);
-        }
-    }
 
+    // Loop through each key-value pair in urlParams
+    for (const [key, value] of urlParams) {
+        // Retrieve existing cookie value for the key
+        let cookie = getCookie(key);
+        let updatedCookie = [];
+        // If the cookie value exists and is an array, assign it to updatedCookie
+        if (Array.isArray(cookie)) {
+            updatedCookie = cookie;
+        }
+        // If the cookie value exists but is not an array, convert it into an array
+        else if (cookie) {
+            updatedCookie = [cookie];
+        }
+        // Push the new value into updatedCookie array
+        updatedCookie.push(value);
+        // Set the updated cookie value
+        setCookie(key, updatedCookie, 1);
+    }
+    // Redirect to the current page without query parameters
     window.location.href = window.location.href.split('?')[0];
 }
+
+
+
+
 
 function dislikeFunction() {
     // Add your dislike functionality here
     window.location.href = window.location.href.split('?')[0];
 }
-
-deleteAllCookies();
 

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <!--centerd h1-->
+        <h1 class="text-center">Image Sets</h1>
+        <div class="form-group">
+
+            <select class="form-control" id="select-letter">
+                <option value="" selected>Please Select</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+            </select>
+        </div>
+        <div id="image-gallery" class="row"></div>
+    </div>
+
+    <script src="png.js"></script>
+
+    <script>
+
+        // Number of columns for the grid layout
+        const columns = 4;
+
+        // Get the container div
+        const container = document.getElementById('image-gallery');
+
+        // Function to update the image gallery based on the selected letter
+        function updateImageGallery() {
+            const selectedLetter = document.getElementById('select-letter').value;
+
+            const imagesArray = file_names[selectedLetter.toUpperCase()]; // Accessing arrays based on selected letter
+
+            // Clear the existing gallery
+            container.innerHTML = '';
+
+            // Calculate the number of images per column
+            const imagesPerColumn = Math.ceil(imagesArray.length / columns);
+
+            // Loop through the images array and build the grid layout
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.classList.add('col-md-' + (12 / columns));
+
+                const startIndex = i * imagesPerColumn;
+                const endIndex = (i + 1) * imagesPerColumn;
+
+                for (let j = startIndex; j < endIndex && j < imagesArray.length; j++) {
+                    const img = document.createElement('a');
+                    img.href = selectedLetter + '/' + imagesArray[j].split('.')[0] + '.svg'; // Link to SVG file
+                    img.target = '_blank'; // Open in new tab
+                    img.classList.add('img-fluid');
+
+                    const imgElem = document.createElement('img');
+                    imgElem.src = selectedLetter + '/' + imagesArray[j]; // Image source
+                    imgElem.classList.add('img-fluid');
+
+                    img.appendChild(imgElem);
+
+                    const fileName = imagesArray[j].split('.')[0]; // Get the file name without extension
+                    const fileNameDiv = document.createElement('div');
+                    fileNameDiv.textContent = fileName; // Set the file name as text content
+                    fileNameDiv.classList.add('text-center'); // Add class for styling
+
+                    const div = document.createElement('div');
+                    div.classList.add('mb-4');
+                    div.appendChild(img);
+                    div.appendChild(fileNameDiv); // Append file name div
+
+                    column.appendChild(div);
+                }
+
+                container.appendChild(column);
+            }
+        }
+
+        // Call the updateImageGallery function when the page loads and when the select menu changes
+        if(document.getElementById('select-letter').value){
+            window.onload = updateImageGallery;
+        }
+        
+        document.getElementById('select-letter').addEventListener('change', updateImageGallery);
+    </script>
+
+</body>
+
+</html>

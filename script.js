@@ -1,6 +1,6 @@
 let maxXmaxY = getMaxXmaxY(history_data);
-drawingVw = drawingVw + 'vw';
-historyVw = historyVw + 'vw';
+drawingPx = drawingPx + 'px';
+historyPx = historyPx + 'px';
 let pathData = Array.from({ length: historyPaths }, () => []);
 
 const dynamicSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -11,18 +11,18 @@ dynamicSvg.setAttributeNS('http://purl.org/dc/elements/1.1/', 'dc:creator', 'Art
 
 const currentEpochTime = Math.floor(Date.now() / 1000);
 dynamicSvg.setAttributeNS('http://purl.org/dc/elements/1.1/', 'dc:date', currentEpochTime);
-
+dynamicSvg.setAttributeNS('http://purl.org/dc/elements/1.1/', 'dc:url', window.location.href);
 
 
 dynamicSvg.setAttribute("id", "dynamicSvg");
 dynamicSvg.setAttribute("width", maxXmaxY[0] + "px");
 dynamicSvg.setAttribute("height", maxXmaxY[1] + "px");
 
-let path1 = createPath('', 'active', 'description', '', drawingVw, '#000');
+let path1 = createPath('', 'active', 'description', '', drawingPx, '#222',1);
 dynamicSvg.appendChild(path1);
-let path2 = createPath('', 'active', 'description', '', drawingVw, '#000');
+let path2 = createPath('', 'active', 'description', '', drawingPx, '#111',0.9);
 dynamicSvg.appendChild(path2);
-let path3 = createPath('', 'active', 'description', '', drawingVw, '#000');
+let path3 = createPath('', 'active', 'description', '', drawingPx, '#000',0.8);
 dynamicSvg.appendChild(path3);
 
 const groupComplete = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -36,14 +36,15 @@ document.body.appendChild(dynamicSvg);
 let svgNamedColorsIndex
 
 if(parseInt(historyPaths)){
+    
     for (let i = 1; i <= historyPaths; i++) {
     
-        let parts = bgcolours.split(".");
+        let parts = historyColours.split(".");
         svgNamedColorsIndex = parseInt(parts.shift());
         parts.push(svgNamedColorsIndex);
-        bgcolours = parts.join(".");
+        historyColours = parts.join(".");
     
-        let background = createPath('background_' + i, 'background', 'background', '', historyVw, svgNamedColors[svgNamedColorsIndex]);
+        let background = createPath('background_' + i, 'background', 'background', '', historyPx, svgNamedColors[svgNamedColorsIndex], 1);
         dynamicSvg.prepend(background);
     }
     
@@ -60,8 +61,7 @@ if(parseInt(historyPaths)){
 
 
 //set paper
-svgNamedColorsIndex = bgcolours.split(".")[0];
-let paper = createRectangle('papper', '', 0, 0, maxXmaxY[0], maxXmaxY[1], svgNamedColors[svgNamedColorsIndex]);
+let paper = createRectangle('papper', '', 0, 0, maxXmaxY[0], maxXmaxY[1], paperColour);
 dynamicSvg.prepend(paper);
 
 
@@ -219,7 +219,7 @@ const sketch_book = {
 
 //FUNCTIONS
 
-function createPath(id, c1ass, description, d, stroke_width, stroke) {
+function createPath(id, c1ass, description, d, stroke_width, stroke, strokeOpacity) {
 
     let path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('id', id);
@@ -228,7 +228,8 @@ function createPath(id, c1ass, description, d, stroke_width, stroke) {
     path.setAttribute('d', d);
     path.setAttribute('stroke-width', stroke_width);
     path.setAttribute('stroke', stroke);
-    path.setAttribute('stroke-opacity', '0.75');//ranges from 0 (completely transparent) to 1 (completely opaque)
+    //todo add opacity to config
+    path.setAttribute('stroke-opacity', '0.44');//ranges from 0 (completely transparent) to 1 (completely opaque)
 
     path.setAttribute('fill', 'none');
     //path.setAttribute('stroke-dasharray', "5 5 31");
@@ -260,7 +261,7 @@ function createRectangle(id, c1ass, x, y, width, height, fill) {
 // Event Listeners
 document.addEventListener('keydown', function (event) {
     const keyPressed = event.key.toLowerCase(); // Convert the typed key to lowercase for case-insensitive comparison
-    console.log("The " + keyPressed + " key was pressed..");
+    //console.log("The " + keyPressed + " key was pressed..");
     handleKeyPress(keyPressed);
 });
 
@@ -273,7 +274,7 @@ function handleKeyPress(key) {
         window[functionName](key);
 
     } else {
-        console.log(`No '${functionName}' function found for the '${key}'. key`);
+        //console.log(`No '${functionName}' function found for the '${key}'. key`);
     }
 }
 
