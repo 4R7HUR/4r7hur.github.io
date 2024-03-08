@@ -31,7 +31,7 @@ $(function () {
 
         setTimeout(function () {
 
-            window.location.href = redirect_url;
+            //window.location.href = redirect_url;
 
         }, 5000);
 
@@ -129,11 +129,40 @@ function trackMouse(event) {
                 groupComplete.appendChild(newPath);
                 coords_array = parseSVGPath(ddd[index]);
 
+                var characterFunctions = {
+                    'a': _a,//
+                    //'b': _b,
+                    //'c': _c,
+                    'd': _d,//
+                    //'e': _e,
+                    'f': _f,//
+                    'g': _g,//
+                    'h': _h,//
+                    //'i': _i,
+                    'j': _j,//
+                    'k': _k,//
+                    'l': _l,//
+                    //'m': _m,
+                    //'n': _n,
+                    //'o': _o,
+                    //'p': _p,
+                    //'q': _q,
+                    //'r': _r,
+                    's': _s,//
+                    //'t': _t,
+                    //'u': _u,
+                    //'v': _v,
+                    //'w': _w,
+                    //'x': _x,
+                    //'y': _y,
+                    //'z': _z
+                };
 
-                if (typeof ['_' + character] === 'function') {
-                    window['_' + character](character, coords_array);
+                
+
+                if (typeof characterFunctions[character] === 'function') {
+                    characterFunctions[character](character, coords_array);
                 } else {
-                    // Handle the case where the function is not defined
                     console.log("Function not found for character:", character);
                 }
 
@@ -250,7 +279,7 @@ function processHistoryData(dataArray, processHistory = 'animate') {
         //show the svg again
         $("#dynamicSvg p").fadeIn(1000);
 
-        let downloadSvg = 1;
+        let downloadSvg = 0;
         if(downloadSvg){
                     
             // Get the SVG element by its ID or any other suitable selector

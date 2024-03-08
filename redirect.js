@@ -15,6 +15,21 @@ const defaultParams = {
     'characterStrokeOpacity': getCharacterStrokeOpacity(),
 };
 
+const defaultParamsB = {
+    'historyConfig': getHistoryConfig(),
+    'historyPx': randomInteger(2, 8)/10,
+    'drawingPx': getDrawingPx(),
+    'charcterPx': getCharcterPx(),
+    'historyPaths': getHistoryPaths(5),
+    //'imageName': getBackgroundImage(),
+    'pathLength': getPathLength(),
+    'string': getCharacters(),
+    'processHistory': ["fast", "animate", "no"][0],
+    'paperColour': getPaperColour(getRandomItem(['darkslategray','lightslategray','slategray', 'gray', 'aliceblue','gainsboro','lightsteelblue','honeydew'])),
+    'historyColours': gethistoryColours(getRandomItem(['77.52.131.25.13','0.6.41.88.85.142.131','57.137.57.87.88.19.117.85','63.78.86.72.79.23.127.109.11.77'])),
+    'colours': getColours(getRandomItem(['22.50.58.61.36.66.56','30.96.46.37.139.109.145','120.135.17.16.63.95.5','34.126.73.86.61.127.52','105.57.51.64.38.32.37.136','130.45.66.2.120.18.52','70.105.61.110.88.99.136','5.100.27.6.113.119.107'])),
+    'characterStrokeOpacity': getCharacterStrokeOpacity(),
+};
 
 
 
