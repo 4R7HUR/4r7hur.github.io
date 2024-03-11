@@ -27,6 +27,8 @@
 ;file names
 ;ls /home/arthur/VisualStudioProjects/drawing-and-word/downloads/B/* | xargs -n1 basename
 ;ls /home/arthur/VisualStudioProjects/drawing-and-word/downloads/B/*.png | xargs -n1 basename | sed "s/^/'/" | sed "s/$/'/" | tr '\n' ',' | sed 's/,$//'
+;ls -v /home/arthur/VisualStudioProjects/drawing-and-word/downloads/05/*.png | xargs -n1 basename | sed "s/^/'/" | sed "s/$/'/" | tr '\n' ',' | sed 's/,$//'
+
 
 
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +12,13 @@
         .links a {
             text-decoration: underline;
             margin: 0 5px;
-            transition: none; /* Remove transition to prevent underline animation */
+            transition: none;
+            /* Remove transition to prevent underline animation */
         }
 
         .links a.active {
-            text-decoration: none; /* Remove underline for active link */
+            text-decoration: none;
+            /* Remove underline for active link */
             color: #000;
         }
 
@@ -33,201 +36,314 @@
             background-color: #ccc !important;
         }
 
-        .fancybox-image{
-            border:1px solid #ddd;
+        .fancybox-image {
+            border: 1px solid #ddd;
             background-color: #fff;
         }
     </style>
 </head>
+
 <body>
 
-<div class="container mt-4">    
-    <h1 class="text-center">Digital Monoprinting</h1><hr />
-    <h2 class="text-center d-none">Image Sets</h2>
-    <div class="text-center mb-3 links">
-        <!-- Links for each letter -->
-        <a href="#" class="btn btn-link statement-link active">About</a> |
-        <a href="#" class="btn btn-link gallery-link" data-letter="05">05</a> |
-        <a href="#" class="btn btn-link gallery-link" data-letter="A">A</a> |
-        <a href="#" class="btn btn-link gallery-link" data-letter="B">B</a> | 
-        <a href="../index.html" class="btn btn-link" data-letter="B">Create</a>  
+    <div class="container mt-4">
 
-    </div>
-    <div class="container">
-        <div class="row">
-            <div id="statement" class="col-md-8 mx-auto" style="display: none;">
-                <p>I make web-based tools that generate images. Currently, I am working on a tool that:</p>
-                <ol>
-                    <li>Allows me to record a doodle.</li>
-                    <li>The drawing automatically becomes a background layer.</li>
-                    <li>Random sections of the drawing are automatically redrawn and added to the image.</li>
-                    <li>Based on a random selection of color functions, parts of the drawing are emphasized or augmented.</li>
-                </ol>
-                
-                <p>I'm programmatically doodling over a doodle of a doodle.</p>
-                <p>The extent of the randomness can be refined with settings that give me more or less control. I can set things up so new images are constantly generated. I see them arriving and delete them if they don’t seem to work.</p>            
-                <p>In practice, what I do is strangely reminiscent of making monoprints because it's not clear quite what the image will look like until peeling back the paper.</p>
-                <p>Recently, I generated an image with something at the bottom of the page. I am struggling to know why I am drawn to it and what it's saying to me. I like working in this kind of space. Sometimes it's like someone else made the image.</p>
-                <p><strong>Collaboration:</strong> I'd like other people to be able to create their own gallery on my website using the tool I outline above. It could get complicated, but the main thing would be that they would provide a drawing on screen then pick settings and make sections as images are generated.</p>             
-                <p>I find I tinker with the code rather than use it to create. I think it's time to stop coding and focus on using the tool I have built to create substantial sets of images. I think it's reached that point of maturity. I am also interested in getting back to making physical artwork, probably with the plotter, maybe with paint.</p>
-                <hr />
-                <p class="d-inline">
-                    <span class="h2" style="">Digital Monoprinting</span> - 
-                    <span class="h4">iterative</span> -
-                    <span class="h2">system</span> -
-                    <span class="h5">playful</span> -
-                    <span class="h4">game</span> -
-                    <span class="h6">random</span> -
-                    <span class="h4">chance</span> -
-                    <span class="h3">settings</span> -
-                    <span class="h1">parameters</span> -
-                    <span class="h2">constraints</span> -
-                    <span class="h3">colour</span> -
-                    <span class="h1">layers</span> -
-                    <span class="h2">offset</span> -
-                    <span class="h5">plotter</span> -
-                    <span class="h3">acrylics</span> -
-                    <span class="h1">printmaker</span> -
-                    <span class="h3">artist</span> -
-                    <span class="h6">code</span>
-                    <span class="h4">generative</span>
-                    <span class="h6">JavaScript</span>
-                </p>
-                
-                
-                
-                
-            
-            
-            
-            </div>
+        <h2 class="text-center d-none">Image Sets</h2>
+        <div class="text-center mb-3 links">
+            <!-- Links for each letter -->
+            <a href="#" class="btn btn-link statement-link active">About</a> |
+            <a href="#" class="btn btn-link gallery-link" data-letter="02">02*</a> |
+            <a href="#" class="btn btn-link gallery-link" data-letter="03">03*</a> |
+            <a href="#" class="btn btn-link gallery-link" data-letter="05">05*</a> |
+            <a href="#" class="btn btn-link gallery-link" data-letter="A">A**</a> |
+            <a href="#" class="btn btn-link gallery-link" data-letter="B">B**</a> |
+            <a href="../index.html" class="btn btn-link" target="_blank" tooltip="New Window">Create</a>
+
         </div>
-    </div>
-    <div id="image-gallery" class="row"></div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-<script src="png.js"></script>
-<script>
-    // Number of columns for the grid layout
-    const columns = 4;
+        <hr />
 
-    // Get the container div
-    const container = document.getElementById('image-gallery');
+        <div class="container">
+            <div class="row">
+                <div id="statement" class="col-md-6 mx-auto pt-3" style="display: none;">
+                    <h2 class="text-center mb-4">Digital Monoprinting</h2>
+                    <p>I make web-based tools that generate images. Currently**, I am working on a tool that:</p>
+                    <ol>
+                        <li>Allows me to record a doodle.</li>
+                        <li>Creates an image that uses the drawing as a background layer.</li>
+                        <li>Plucks random sections of the drawing to be redrawn</li>
+                        <li>A random selection of color functions are used to work over areas of the drawing</li>
+                    </ol>
+                    <p>The tool doodles over a doodle of a doodle.</p>
+                    <h5>Randomness</h5>
+                    <p>The extent of the randomness used can be refined with settings that give me more control. I can
+                        set things up so new images are constantly generated, I see them arriving and delete them if
+                        they don’t seem to work.</p>
 
-    // Function to update the image gallery based on the selected letter
-    function updateImageGallery(letter) {
-        const imagesArray = file_names[letter.toUpperCase()]; // Accessing arrays based on selected letter
+                    <p><strong>Digital Monoprinting:</strong> In practice, what I do is reminds be a lot of making
+                        monoprints because it's not clear quite what
+                        the image will look like until peeling back the paper.</p>
+                    <p>I struggle to understand why some of my generated images appear to be more successful, but I like
+                        working in this kind of space. Sometimes it's like someone else made the image.</p>
+                    <p><strong>Collaboration:</strong> I'd like other people to be able to create their own gallery on
+                        my website using my tools. It could get complicated, but the main thing would be that they would
+                        provide a drawing on screen then pick settings and make sections as images are generated. I have
+                        tried to create programms that generate images without a drawing as a starting place*, but at
+                        them moment I am more interested in feeding a drawing in at the start</p>
+                    <p class="d-none">I find I tinker with the code rather than use it to create. I think it's time to
+                        stop coding and focus on using the tools I have built to create substantial sets of images. I
+                        think it's reached that point of maturity. I am also interested in getting back to making
+                        physical artwork, probably with the plotter, maybe with paint.</p>
+                    <hr />
+                    <p class="d-inline">
+                        <span class="h2" style="">Digital Monoprinting</span> -
+                        <span class="h4">iterative</span> -
+                        <span class="h2">system</span> -
+                        <span class="h5">playful</span> -
+                        <span class="h4">game</span> -
+                        <span class="h6">random</span> -
+                        <span class="h4">chance</span> -
+                        <span class="h3">settings</span> -
+                        <span class="h1">parameters</span> -
+                        <span class="h2">constraints</span> -
+                        <span class="h3">colour</span> -
+                        <span class="h1">layers</span> -
+                        <span class="h2">offset</span> -
+                        <span class="h5">plotter</span> -
+                        <span class="h3">acrylics</span> -
+                        <span class="h1">printmaker</span> -
+                        <span class="h3">artist</span> -
+                        <span class="h6">code</span>
+                        <span class="h4">generative</span>
+                        <span class="h6">JavaScript</span>
+                    </p>
 
-        // Clear the existing gallery
-        container.innerHTML = '';
+                    <hr>
 
-        // Create a row to contain the columns
-        let row = document.createElement('div');
-        row.classList.add('row');
+                    <h4>Slowing things down</h4>
+                    <p>Slowing things down means I can record the activity of the tool.</p>
 
-        // Loop through the images array and build the grid layout
-        for (let i = 0; i < imagesArray.length; i++) {
-            // Create a column for each image
-            const column = document.createElement('div');
-            column.classList.add('col-md-' + (12 / columns));
+                    <div class="row mb-4 mt-4">
+                        <div class="col-md-4">
+                            <a href="../images/gifs/Peek 2024-02-03 18-41.gif" data-fancybox="gallery">
+                                <img src="../images/gifs/Peek 2024-02-03 18-41.gif" class="img-fluid w-100">
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="../images/gifs/Peek 2024-02-03 18-42.gif" data-fancybox="gallery">
+                                <img src="../images/gifs/Peek 2024-02-03 18-42.gif" class="img-fluid w-100">
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="../images/gifs/Peek 2024-02-03 18-46.gif" data-fancybox="gallery">
+                                <img src="../images/gifs/Peek 2024-02-03 18-46.gif" class="img-fluid w-100">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <a href="../images/gifs/Peek 2024-02-03 18-49.gif" data-fancybox="gallery">
+                                <img src="../images/gifs/Peek 2024-02-03 18-49.gif" class="img-fluid w-100">
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="../images/gifs/Peek 2024-02-03 18-51.gif" data-fancybox="gallery">
+                                <img src="../images/gifs/Peek 2024-02-03 18-51.gif" class="img-fluid w-100">
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="../images/gifs/Peek 2024-02-03 18-53.gif" data-fancybox="gallery">
+                                <img src="../images/gifs/Peek 2024-02-03 18-53.gif" class="img-fluid w-100">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <a href="../images/gifs/Peek 2024-02-03 18-59.gif" data-fancybox="gallery">
+                                <img src="../images/gifs/Peek 2024-02-03 18-59.gif" class="img-fluid w-100">
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="../images/gifs/Peek 2024-02-03 19-00.gif" data-fancybox="gallery">
+                                <img src="../images/gifs/Peek 2024-02-03 19-00.gif" class="img-fluid w-100">
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="../images/gifs/Peek 2024-02-03 19-22.gif" data-fancybox="gallery">
+                                <img src="../images/gifs/Peek 2024-02-03 19-22.gif" class="img-fluid w-100">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <a href="../images/gifs/Peek 2024-02-03 19-23.gif" data-fancybox="gallery">
+                                <img src="../images/gifs/Peek 2024-02-03 19-23.gif" class="img-fluid w-100">
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="../images/gifs/Peek 2024-02-03 19-24.gif" data-fancybox="gallery">
+                                <img src="../images/gifs/Peek 2024-02-03 19-24.gif" class="img-fluid w-100">
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="../images/gifs/Peek 2024-02-03 19-25.gif" data-fancybox="gallery">
+                                <img src="../images/gifs/Peek 2024-02-03 19-25.gif" class="img-fluid w-100">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <a href="../images/gifs/Peek 2024-02-03 19-44.gif" data-fancybox="gallery">
+                                <img src="../images/gifs/Peek 2024-02-03 19-44.gif" class="img-fluid w-100">
+                            </a>
+                        </div>
+                    </div>
 
-            const img = document.createElement('a');
-            img.href = letter + '/' + imagesArray[i].split('.')[0] + '.svg'; // Link to SVG file
-            img.setAttribute('data-fancybox', 'images'); // Add data attribute for Fancybox
-            img.classList.add('img-fluid');
+                    <hr>
+                    <h4>Selecting Six</h4>
+                    <p>Deleting images I don't want to keep as they come in..</p>
 
-            const imgElem = document.createElement('img');
-            imgElem.src = letter + '/' + imagesArray[i]; // Image source
-            imgElem.classList.add('img-fluid');
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <a href="../images/gifs/selections.gif" data-fancybox="gallery">                    
+                                <img src="../images/gifs/selections.gif" class="img-fluid w-100">
+                            </a>
+                        </div>
+                    </div>
 
-            img.appendChild(imgElem);
+                    
 
-            const fileName = imagesArray[i].split('.')[0]; // Get the file name without extension
-            const fileNameDiv = document.createElement('div');
-            fileNameDiv.textContent = fileName; // Set the file name as text content
-            fileNameDiv.classList.add('text-center'); // Add class for styling
 
-            const div = document.createElement('div');
-            div.classList.add('mb-4');
-            div.appendChild(img);
-            div.appendChild(fileNameDiv); // Append file name div
 
-            column.appendChild(div);
-            row.appendChild(column);
 
-            // If the number of images in the row reaches the desired number of columns or it's the last image, append the row and create a new one
-            if ((i + 1) % columns === 0 || i === imagesArray.length - 1) {
-                container.appendChild(row);
-                // Create a new row
-                row = document.createElement('div');
+
+                </div>
+            </div>
+            <div id="image-gallery" class="row"></div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+        <script src="png.js"></script>
+        <script>
+            // Number of columns for the grid layout
+            const columns = 4;
+
+            // Get the container div
+            const container = document.getElementById('image-gallery');
+
+            // Function to update the image gallery based on the selected letter
+            function updateImageGallery(letter) {
+                const imagesArray = file_names[letter.toUpperCase()]; // Accessing arrays based on selected letter
+
+                // Clear the existing gallery
+                container.innerHTML = '';
+
+                // Create a row to contain the columns
+                let row = document.createElement('div');
                 row.classList.add('row');
+
+                // Loop through the images array and build the grid layout
+                for (let i = 0; i < imagesArray.length; i++) {
+                    // Create a column for each image
+                    const column = document.createElement('div');
+                    column.classList.add('col-md-' + (12 / columns));
+
+                    const img = document.createElement('a');
+                    img.href = letter + '/' + imagesArray[i].split('.')[0] + '.jpg'; // Link to SVG file
+                    img.setAttribute('data-fancybox', 'images'); // Add data attribute for Fancybox
+                    img.classList.add('img-fluid');
+
+                    const imgElem = document.createElement('img');
+                    imgElem.src = letter + '/' + imagesArray[i]; // Image source
+                    imgElem.classList.add('img-fluid');
+
+                    img.appendChild(imgElem);
+
+                    const fileName = imagesArray[i].split('.')[0]; // Get the file name without extension
+                    const fileNameDiv = document.createElement('div');
+                    fileNameDiv.textContent = fileName; // Set the file name as text content
+                    fileNameDiv.classList.add('text-center'); // Add class for styling
+
+                    const div = document.createElement('div');
+                    div.classList.add('mb-4');
+                    div.appendChild(img);
+                    div.appendChild(fileNameDiv); // Append file name div
+
+                    column.appendChild(div);
+                    row.appendChild(column);
+
+                    // If the number of images in the row reaches the desired number of columns or it's the last image, append the row and create a new one
+                    if ((i + 1) % columns === 0 || i === imagesArray.length - 1) {
+                        container.appendChild(row);
+                        // Create a new row
+                        row = document.createElement('div');
+                        row.classList.add('row');
+                    }
+                }
             }
-        }
-    }
 
-    // Function to show the statement div and hide the gallery
-    function showStatement() {
-        document.getElementById('statement').style.display = 'block';
-        document.getElementById('image-gallery').style.display = 'none';
-        
-        // Add active class to the statement link
-        document.querySelector('.statement-link').classList.add('active');
-        
-        // Remove active class from all gallery links
-        document.querySelectorAll('.gallery-link').forEach(function(link) {
-            link.classList.remove('active');
-        });
-    }
+            // Function to show the statement div and hide the gallery
+            function showStatement() {
+                document.getElementById('statement').style.display = 'block';
+                document.getElementById('image-gallery').style.display = 'none';
 
-    // Function to hide the statement div and show the gallery
-    function hideStatement() {
-        document.getElementById('statement').style.display = 'none';
-        document.getElementById('image-gallery').style.display = 'block';
-        
-        
-        // Add active class to the first gallery link by default
-        //document.querySelector('.gallery-link').classList.add('active');
-        
-        // Remove active class from the statement link
-        document.querySelector('.statement-link').classList.remove('active');
-    }
+                // Add active class to the statement link
+                document.querySelector('.statement-link').classList.add('active');
 
-    // Event listener for gallery links
-    document.querySelectorAll('.gallery-link').forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default action of following the link
-            const selectedLetter = this.getAttribute('data-letter');
-            
-            // Remove active class from all links
-            document.querySelectorAll('.gallery-link').forEach(function(link) {
-                link.classList.remove('active');
+                // Remove active class from all gallery links
+                document.querySelectorAll('.gallery-link').forEach(function (link) {
+                    link.classList.remove('active');
+                });
+            }
+
+            // Function to hide the statement div and show the gallery
+            function hideStatement() {
+                document.getElementById('statement').style.display = 'none';
+                document.getElementById('image-gallery').style.display = 'block';
+
+
+                // Add active class to the first gallery link by default
+                //document.querySelector('.gallery-link').classList.add('active');
+
+                // Remove active class from the statement link
+                document.querySelector('.statement-link').classList.remove('active');
+            }
+
+            // Event listener for gallery links
+            document.querySelectorAll('.gallery-link').forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault(); // Prevent the default action of following the link
+                    const selectedLetter = this.getAttribute('data-letter');
+
+                    // Remove active class from all links
+                    document.querySelectorAll('.gallery-link').forEach(function (link) {
+                        link.classList.remove('active');
+                    });
+
+                    // Add active class to the clicked link
+                    this.classList.add('active');
+
+                    // Update the gallery based on the selected letter
+                    updateImageGallery(selectedLetter);
+
+                    // Hide the statement div
+                    hideStatement();
+                });
             });
-            
-            // Add active class to the clicked link
-            this.classList.add('active');
-            
-            // Update the gallery based on the selected letter
-            updateImageGallery(selectedLetter);
-            
-            // Hide the statement div
-            hideStatement();
-        });
-    });
 
-    // Event listener for statement link
-    document.querySelector('.statement-link').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default action of following the link
-        // Show the statement div
-        showStatement();
-    });
+            // Event listener for statement link
+            document.querySelector('.statement-link').addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent the default action of following the link
+                // Show the statement div
+                showStatement();
+            });
 
-    // Call the updateImageGallery function initially with the default letter
-    //updateImageGallery('A');
-    showStatement();
-</script>
+            // Call the updateImageGallery function initially with the default letter
+            //updateImageGallery('A');
+            showStatement();
+        </script>
 
 </body>
+
 </html>
