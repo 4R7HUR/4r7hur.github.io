@@ -279,7 +279,7 @@ function processHistoryData(dataArray, processHistory = 'animate') {
         //show the svg again
         $("#dynamicSvg p").fadeIn(1000);
 
-        let downloadSvg = 1;
+        let downloadSvg = 0;
         if(downloadSvg){
                     
             // Get the SVG element by its ID or any other suitable selector
