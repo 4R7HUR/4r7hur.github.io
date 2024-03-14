@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
     <style>
         /* Override Bootstrap button styles to display links as underlined */
-        body{
+        body {
             font-size: 18px;
         }
-        
+
         .links a {
             text-decoration: underline;
             margin: 0 5px;
@@ -32,7 +32,7 @@
         }
 
         .img-fluid {
-            border: 1px solid #ddd;
+            border: 1px solid #999;
         }
 
         /* Set white background for Fancybox */
@@ -44,7 +44,8 @@
             border: 1px solid #ddd;
             background-color: #fff;
         }
-        strong{
+
+        strong {
             font-size: 1.2rem;
         }
     </style>
@@ -68,6 +69,16 @@
 
         </div>
 
+        <div id="thumbnailSizeWrapper" class="d-none text-center"> <!-- Hide on all screens except xl -->
+            thumbnail size:
+            <select id="thumbnailSize">
+                <option value="col-xl-1">Small</option>
+                <option value="col-xl-2">Medium</option>
+                <option value="col-xl-3">Large</option>
+            </select>
+        </div>
+
+
         <hr />
 
         <div class="container">
@@ -78,30 +89,37 @@
                     <ol>
                         <li>Allows me to record a line drawing.</li>
                         <li>Plucks random sections of the drawing and redraws them</li>
-                        <li>Makes a random selection of color functions, these are used to re-work areas of the drawing</li>
+                        <li>Makes a random selection of color functions, these are used to re-work areas of the drawing
+                        </li>
                     </ol>
 
-                    <p><strong>Randomness:</strong> The extent of the randomness can be refined with settings that give me more control. There are lots of settings,
-                        it becomes an itterative process of refing the possible range of outcomes. I can set things up so new images are constantly 
+                    <p><strong>Randomness:</strong> The extent of the randomness can be refined with settings that give
+                        me more control. There are lots of settings,
+                        it becomes an itterative process of refing the possible range of outcomes. I can set things up
+                        so new images are constantly
                         generated, I see them arriving and delete them if they don’t seem to work.</p>
 
                     <p><strong>Digital Monoprinting:</strong> In practice, what I do is reminds be a lot of making
                         monoprints because it's not clear quite what
-                        the image will look like until peeling back the paper. I struggle to understand why some of my generated images appear to be more successful, but I like
+                        the image will look like until peeling back the paper. I struggle to understand why some of my
+                        generated images appear to be more successful, but I like
                         working in this kind of space. Sometimes it's like someone else made the image.</p>
 
-                    <p><strong>Collaboration:</strong> I'd like other people to be able to create*** their own gallery on
+                    <p><strong>Collaboration:</strong> I'd like other people to be able to create*** their own gallery
+                        on
                         my website using my tools. It could get complicated, but the main thing would be that they would
-                        provide a drawing on screen then pick settings and make selections as images are generated. In the past I have
+                        provide a drawing on screen then pick settings and make selections as images are generated. In
+                        the past I have
                         tried creating programs that generate images without a drawing as a starting place*, however at
                         the moment I am more interested in feeding a drawing in at the start.</p>
-                        
-                    <p><strong>Physical Images:</strong> It would be interesting to get back to making some physical artwork. But I want to be careful not to pull focus from my current
+
+                    <p><strong>Physical Images:</strong> It would be interesting to get back to making some physical
+                        artwork. But I want to be careful not to pull focus from my current
                         process which seems to be important to what I am doing.</p>
-                    
-                    
-                    
-                        <hr />
+
+
+
+                    <hr />
                     <p class="d-inline">
                         <span class="h2" style="">Digital Monoprinting</span> -
                         <span class="h4">iterative</span> -
@@ -127,63 +145,77 @@
 
                     <hr>
 
-                    <p><strong>Slowing things down:</strong> I'm interested in slowing the time it takes for my code to run so I can record and then watch the activity.</p>
+                    <p><strong>Slowing things down:</strong> I'm interested in slowing the time it takes for my code to
+                        run so I can record and then watch the activity.</p>
 
                     <div class="row mb-4 mt-4">
-                            <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-41.gif" data-fancybox="gallery">
-                                <img src="images/gifs/Peek 2024-02-03 18-41.gif" class="img-fluid w-100">
-                            </a>
-                            <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-42.gif" data-fancybox="gallery">
-                                <img src="images/gifs/Peek 2024-02-03 18-42.gif" class="img-fluid w-100">
-                            </a>
-                            <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-46.gif" data-fancybox="gallery">
-                                <img src="images/gifs/Peek 2024-02-03 18-46.gif" class="img-fluid w-100">
-                            </a>
-                            <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-49.gif" data-fancybox="gallery">
-                                <img src="images/gifs/Peek 2024-02-03 18-49.gif" class="img-fluid w-100">
-                            </a>
-                            <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-51.gif" data-fancybox="gallery">
-                                <img src="images/gifs/Peek 2024-02-03 18-51.gif" class="img-fluid w-100">
-                            </a>
-                            <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-53.gif" data-fancybox="gallery">
-                                <img src="images/gifs/Peek 2024-02-03 18-53.gif" class="img-fluid w-100">
-                            </a>
-                            <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-59.gif" data-fancybox="gallery">
-                                <img src="images/gifs/Peek 2024-02-03 18-59.gif" class="img-fluid w-100">
-                            </a>
-                            <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-00.gif" data-fancybox="gallery">
-                                <img src="images/gifs/Peek 2024-02-03 19-00.gif" class="img-fluid w-100">
-                            </a>
-                            <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-22.gif" data-fancybox="gallery">
-                                <img src="images/gifs/Peek 2024-02-03 19-22.gif" class="img-fluid w-100">
-                            </a>
-                            <a class="col-12 col-lg-6 mb-4 d-none d-none" href="images/gifs/Peek 2024-02-03 19-23.gif" data-fancybox="gallery">
-                                <img src="images/gifs/Peek 2024-02-03 19-23.gif" class="img-fluid w-100">
-                            </a>
-                            <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-24.gif" data-fancybox="gallery">
-                                <img src="images/gifs/Peek 2024-02-03 19-24.gif" class="img-fluid w-100">
-                            </a>
-                            <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-25.gif" data-fancybox="gallery">
-                                <img src="images/gifs/Peek 2024-02-03 19-25.gif" class="img-fluid w-100">
-                            </a>
-                            <a class="col-12" href="images/gifs/Peek 2024-02-03 19-44.gif" data-fancybox="gallery">
-                                <img src="images/gifs/Peek 2024-02-03 19-44.gif" class="img-fluid w-100">
-                            </a>
+                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-41.gif"
+                            data-fancybox="gallery">
+                            <img src="images/gifs/Peek 2024-02-03 18-41.gif" class="img-fluid w-100">
+                        </a>
+                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-42.gif"
+                            data-fancybox="gallery">
+                            <img src="images/gifs/Peek 2024-02-03 18-42.gif" class="img-fluid w-100">
+                        </a>
+                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-46.gif"
+                            data-fancybox="gallery">
+                            <img src="images/gifs/Peek 2024-02-03 18-46.gif" class="img-fluid w-100">
+                        </a>
+                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-49.gif"
+                            data-fancybox="gallery">
+                            <img src="images/gifs/Peek 2024-02-03 18-49.gif" class="img-fluid w-100">
+                        </a>
+                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-51.gif"
+                            data-fancybox="gallery">
+                            <img src="images/gifs/Peek 2024-02-03 18-51.gif" class="img-fluid w-100">
+                        </a>
+                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-53.gif"
+                            data-fancybox="gallery">
+                            <img src="images/gifs/Peek 2024-02-03 18-53.gif" class="img-fluid w-100">
+                        </a>
+                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-59.gif"
+                            data-fancybox="gallery">
+                            <img src="images/gifs/Peek 2024-02-03 18-59.gif" class="img-fluid w-100">
+                        </a>
+                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-00.gif"
+                            data-fancybox="gallery">
+                            <img src="images/gifs/Peek 2024-02-03 19-00.gif" class="img-fluid w-100">
+                        </a>
+                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-22.gif"
+                            data-fancybox="gallery">
+                            <img src="images/gifs/Peek 2024-02-03 19-22.gif" class="img-fluid w-100">
+                        </a>
+                        <a class="col-12 col-lg-6 mb-4 d-none d-none" href="images/gifs/Peek 2024-02-03 19-23.gif"
+                            data-fancybox="gallery">
+                            <img src="images/gifs/Peek 2024-02-03 19-23.gif" class="img-fluid w-100">
+                        </a>
+                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-24.gif"
+                            data-fancybox="gallery">
+                            <img src="images/gifs/Peek 2024-02-03 19-24.gif" class="img-fluid w-100">
+                        </a>
+                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-25.gif"
+                            data-fancybox="gallery">
+                            <img src="images/gifs/Peek 2024-02-03 19-25.gif" class="img-fluid w-100">
+                        </a>
+                        <a class="col-12" href="images/gifs/Peek 2024-02-03 19-44.gif" data-fancybox="gallery">
+                            <img src="images/gifs/Peek 2024-02-03 19-44.gif" class="img-fluid w-100">
+                        </a>
                     </div>
 
                     <hr>
                     <h4>Selecting Six</h4>
-                    <p>I can set my tool up so it creates images automatically, I then have the role of choosing which to keep</p>
+                    <p>I can set my tool up so it creates images automatically, I then have the role of choosing which
+                        to keep</p>
 
                     <div class="row mb-4">
                         <div class="col-md-12">
-                            <a href="images/gifs/selections.gif" data-fancybox="gallery">                    
+                            <a href="images/gifs/selections.gif" data-fancybox="gallery">
                                 <img src="images/gifs/selections.gif" class="img-fluid w-100">
                             </a>
                         </div>
                     </div>
 
-                    
+
                     <h4>Detail</h4>
                     <p>My images use the SVG format, it means they are scalable</p>
                     <img src="images/details/1709487185175.gif" class="img-fluid w-100">
@@ -200,62 +232,67 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
         <script src="downloads/png.js"></script>
+        
+        
+        
         <script>
             // Number of columns for the grid layout
             const columns = 4;
+            var selectedThumbnailSize = 'col-xl-1'; // Default size
+            var timeSize = ''; // Default size
 
             // Get the container div
             const container = document.getElementById('image-gallery');
 
-            // Function to update the image gallery based on the selected letter
             function updateImageGallery(letter) {
                 const imagesArray = file_names[letter.toUpperCase()]; // Accessing arrays based on selected letter
 
                 // Clear the existing gallery
                 container.innerHTML = '';
 
-                // Create a row to contain the columns
+                // Instead of creating new rows per every few images, we'll just work within a single row.
                 let row = document.createElement('div');
                 row.classList.add('row');
 
-                // Loop through the images array and build the grid layout
-                for (let i = 0; i < imagesArray.length; i++) {
-                    // Create a column for each image
+                // Loop through the images array and assign `col-3` to each to ensure they take up 1/4th the width.
+                imagesArray.forEach((image) => {
+                    // Create a column for each image with a fixed size of 3 units.
                     const column = document.createElement('div');
-                    column.classList.add('col-md-' + (12 / columns));
+
+                    
+
+                    column.classList.add('thumbnail-wrapper', 'col-12', 'col-md-6', 'col-lg-4', selectedThumbnailSize, 'mb-4'); // Added 'mb-4' for some margin below each image
 
                     const img = document.createElement('a');
-                    img.href = 'downloads/' + letter + '/' + imagesArray[i].split('.')[0] + '.jpg'; // Link to SVG file
+                    img.href = 'downloads/' + letter + '/' + image.split('.')[0] + '.jpg'; // Link to SVG file
                     img.setAttribute('data-fancybox', 'images'); // Add data attribute for Fancybox
-                    img.classList.add('img-fluid');
+                    img.classList.add('d-block'); // Ensure the link is block-level to contain the image correctly
 
                     const imgElem = document.createElement('img');
-                    imgElem.src = 'downloads/' + letter + '/' + imagesArray[i]; // Image source
-                    imgElem.classList.add('img-fluid');
+                    imgElem.src = 'downloads/' + letter + '/' + image; // Image source
+                    imgElem.classList.add('img-fluid', 'w-100'); // Ensure the image is responsive
 
                     img.appendChild(imgElem);
 
-                    const fileName = imagesArray[i].split('.')[0]; // Get the file name without extension
+                    // Optional: Add the file name as a caption or label
+                    const fileName = image.split('.')[0]; // Getting the file name without extension
                     const fileNameDiv = document.createElement('div');
-                    fileNameDiv.textContent = fileName; // Set the file name as text content
-                    fileNameDiv.classList.add('text-center'); // Add class for styling
+                    fileNameDiv.textContent = fileName;
+                    fileNameDiv.classList.add('text-center','fileNameDiv','d-none'); // Center-align the file name
 
-                    const div = document.createElement('div');
-                    div.classList.add('mb-4');
-                    div.appendChild(img);
-                    div.appendChild(fileNameDiv); // Append file name div
-
-                    column.appendChild(div);
+                    // Append elements together
+                    column.appendChild(img);
+                    column.appendChild(fileNameDiv); // Append file name div if needed
                     row.appendChild(column);
+                });
 
-                    // If the number of images in the row reaches the desired number of columns or it's the last image, append the row and create a new one
-                    if ((i + 1) % columns === 0 || i === imagesArray.length - 1) {
-                        container.appendChild(row);
-                        // Create a new row
-                        row = document.createElement('div');
-                        row.classList.add('row');
-                    }
-                }
+                // Append the row to the container
+                container.appendChild(row);
+
+                //show #thumbnailSizeWrapper using the bootstap class for xl screens, d-xl-block
+                document.getElementById('thumbnailSizeWrapper').classList.add('d-xl-block');
+                
+
             }
 
             // Function to show the statement div and hide the gallery
@@ -270,6 +307,9 @@
                 document.querySelectorAll('.gallery-link').forEach(function (link) {
                     link.classList.remove('active');
                 });
+
+                //hide #thumbnailSizeWrapper by removing the bootstap class for xl screens, d-xl-block
+                document.getElementById('thumbnailSizeWrapper').classList.remove('d-xl-block');
             }
 
             // Function to hide the statement div and show the gallery
@@ -302,7 +342,7 @@
                     // Update the gallery based on the selected letter
                     updateImageGallery(selectedLetter);
 
-                    // Hide the statement div
+                    // Hide the statement divselectedThumbnailSize
                     hideStatement();
                 });
             });
@@ -318,6 +358,27 @@
             //updateImageGallery('A');
             showStatement();
         </script>
+
+        <script>
+            $(document).ready(function () {
+                $('#thumbnailSize').change(function () {
+                    selectedThumbnailSize = $(this).val(); // Get the selected value from the dropdown
+                    $('.thumbnail-wrapper').removeClass('col-xl-1 col-xl-2 col-xl-3'); // Remove existing xl classes
+                    $('.thumbnail-wrapper').addClass(selectedThumbnailSize); // Add the selected xl class
+
+
+                    if(selectedThumbnailSize === 'col-xl-1'){
+                        $('.fileNameDiv').addClass('d-none');
+                    } else if(selectedThumbnailSize === 'col-xl-2'){
+                        $('.fileNameDiv').removeClass('d-none');
+                    } else if(selectedThumbnailSize === 'col-xl-3'){
+                        $('.fileNameDiv').removeClass('d-none');
+                    }
+                    
+                });
+            });
+        </script>
+
 
 </body>
 
