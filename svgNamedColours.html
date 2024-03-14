@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Named Colors</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .color-box {
+      width: 108px;
+      height: 50px;
+      text-align: center;
+      border: 1px solid #000;
+      margin-right: -29px;
+      margin-bottom: -15px;
+      cursor: pointer; /* Add cursor pointer to indicate clickable */
+    }
+    .color-box span {
+      font-size: 12px; /* Adjust font size for color name */
+      background-color:#000;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5" id="colorGrid">
+  <div class="row justify-content-start"> <!-- Changed justify-content to 'start' -->
+  </div>
+</div>
+
+<!-- Input field to display selected color indexes -->
+<div class="container mt-3">
+  <input type="text" id="selectedColorsInput" class="form-control" readonly>
+</div>
+
+<!-- JavaScript to dynamically create color grid -->
+<script src="svgNamedColours.js"></script>
+<script>
+  // Function to create color grid
+  function createColorGrid() {
+    const colorGrid = document.getElementById('colorGrid');
+    const selectedColorsInput = document.getElementById('selectedColorsInput');
+    let selectedIndexes = [];
+
+    svgNamedColors.forEach((color, index) => {
+      const colorBox = document.createElement('div');
+      colorBox.className = 'col-md-auto mb-3'; // Changed column class to 'auto'
+      
+      const colorBoxInner = document.createElement('div');
+      colorBoxInner.className = 'color-box';
+      colorBoxInner.style.backgroundColor = color;
+
+      const colorName = document.createElement('span');
+      colorName.className = 'text-white p-1';
+      colorName.textContent = `${color} [${index}]`;
+
+      colorBoxInner.appendChild(colorName);
+      colorBox.appendChild(colorBoxInner);
+      colorGrid.querySelector('.row').appendChild(colorBox);
+
+      // Add click event listener to color box
+      colorBox.addEventListener('click', () => {
+        // Toggle selection
+        if (selectedIndexes.includes(index)) {
+          selectedIndexes = selectedIndexes.filter(i => i !== index);
+        } else {
+          selectedIndexes.push(index);
+        }
+
+        // Update input field
+        selectedColorsInput.value = selectedIndexes.join('-');
+      });
+    });
+  }
+
+  // Call the function to create the color grid
+  createColorGrid();
+</script>
+</body>
+</html>

@@ -31,9 +31,9 @@ $(function () {
 
         setTimeout(function () {
 
-            //window.location.href = redirect_url;
+            window.location.href = redirect_url;
 
-        }, 10000);
+        }, 5000);
 
 
     }
@@ -75,7 +75,7 @@ function trackMouse(event) {
     });
 
     //100000 = 1MB
-    history.push(xy);
+    //history.push(xy);
     if (history.length === 100000) {
         downloadHistory(history, 'js');
         history = [];
@@ -279,7 +279,7 @@ function processHistoryData(dataArray, processHistory = 'animate') {
         //show the svg again
         $("#dynamicSvg p").fadeIn(1000);
 
-        let downloadSvg = 0;
+        let downloadSvg = 1;
         if(downloadSvg){
                     
             // Get the SVG element by its ID or any other suitable selector

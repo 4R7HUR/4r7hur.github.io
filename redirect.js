@@ -1,19 +1,19 @@
 const urlParams = new URLSearchParams(window.location.search);
 const defaultParams = {
     'historyConfig': getHistoryConfig(),
-    'historyPx': randomInteger(2, 8)/10,
-    'drawingPx': getDrawingPx(),
+    'historyPx': 0.3,
+    'drawingPx': getDrawingPx('3'),
     'charcterPx': getCharcterPx(),
-    'historyPaths': getHistoryPaths(5),
+    'historyPaths': getHistoryPaths(7),
     //'imageName': getBackgroundImage(),
     'pathLength': getPathLength(),
-    'string': getCharacters(),
+    'string': getCharacters('aads'),
     'processHistory': ["fast", "animate", "no"][0],
-    'paperColour': getPaperColour(getRandomItem(['darkslategray','lightslategray','slategray', 'gray', 'aliceblue','gainsboro','lightsteelblue','honeydew'])),
-    'historyColours': gethistoryColours(getRandomItem(['77.52.131.25.13','0.6.41.88.85.142.131','57.137.57.87.88.19.117.85','63.78.86.72.79.23.127.109.11.77'])),
-    'colours': getColours(getRandomItem(['22.50.58.61.36.66.56','30.96.46.37.139.109.145','120.135.17.16.63.95.5','34.126.73.86.61.127.52','105.57.51.64.38.32.37.136','130.45.66.2.120.18.52','70.105.61.110.88.99.136','5.100.27.6.113.119.107'])),
-    'characterStrokeOpacity': getCharacterStrokeOpacity(),
-};
+    'paperColour': getPaperColour('lightgrey'),
+    'historyColours': gethistoryColours('133'),
+    'colours': getColours('7.45.69.79.78.97.146.96'),
+    'characterStrokeOpacity': getCharacterStrokeOpacity('999999'),
+}
 
 const defaultParamsB = {
     'historyConfig': getHistoryConfig(),
@@ -203,7 +203,7 @@ function getCharcterPx(charcterPx) {
 
 function getCharacterStrokeOpacity(defaultCharacterStrokeOpacity) {
     if (defaultCharacterStrokeOpacity) {
-        return default_vw;
+        return defaultCharacterStrokeOpacity;
     } else {
         let options = "9999999999999999999654321";
 
