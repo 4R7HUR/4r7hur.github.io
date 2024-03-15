@@ -1,0 +1,77 @@
+/* Base styles */
+body {
+    font-size: 18px;
+    color: #333;
+    background-color: #fff;
+    margin: 0;
+
+}
+
+.container {
+    background-color: #fff;
+}
+
+strong {
+    font-size: 1.2rem;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 0;
+}
+
+.btn.focus,
+.btn:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+/* Links */
+.links a {
+    color: #444;    
+    text-decoration: underline;
+    margin: 0 0;
+    transition: none;
+}
+
+.links a:hover,
+.links a.active {
+    color: #000;
+    text-decoration: none;
+    border-radius: none;
+    color: #000;
+    
+}
+
+a:focus {
+    outline: none;
+}
+
+/* Images */
+.img-fluid {
+    border: 1px solid #999;
+}
+
+.fancybox-image {
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.fancybox-slideee {
+    background-color: #ccc !important;
+}
+
+/* Thumbnail Size Wrapper */
+#thumbnailSizeWrapper {
+    font-size: 14px;
+}
+
+#thumbnailSizeWrapper select {
+    border: 1px solid #ddd;
+    padding: 0 10px;
+}
+
+#statement .words{
+    background-color:#eee;
+    border:1px solid #ddd;
+}

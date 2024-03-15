@@ -7,231 +7,210 @@
     <title>Statement & Image Sets</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
-    <style>
-        /* Override Bootstrap button styles to display links as underlined */
-        body {
-            font-size: 18px;
-        }
-
-        .links a {
-            text-decoration: underline;
-            margin: 0 5px;
-            transition: none;
-            /* Remove transition to prevent underline animation */
-        }
-
-        .links a.active {
-            text-decoration: none;
-            /* Remove underline for active link */
-            color: #000;
-        }
-
-        /* Remove underline on hover */
-        .links a:hover {
-            text-decoration: none;
-        }
-
-        .img-fluid {
-            border: 1px solid #999;
-        }
-
-        /* Set white background for Fancybox */
-        .fancybox-slideee {
-            background-color: #ccc !important;
-        }
-
-        .fancybox-image {
-            border: 1px solid #ddd;
-            background-color: #fff;
-        }
-
-        strong {
-            font-size: 1.2rem;
-        }
-    </style>
+    <link rel="stylesheet" href="site-styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <script src="downloads/png.js"></script>
 </head>
 
 <body>
+    <div class="container pt-2">
 
-    <div class="container mt-4">
-
-        <h2 class="text-center d-none">Image Sets</h2>
-        <div class="text-center mb-3 links">
-            <!-- Links for each letter -->
-            <a href="#" class="btn btn-link statement-link active">About</a> |
-            <a href="#" class="btn btn-link gallery-link" data-letter="02">02</a> |
-            <a href="#" class="btn btn-link gallery-link" data-letter="03">03</a> |
-            <a href="#" class="btn btn-link gallery-link" data-letter="05">05</a> |
-            <a href="#" class="btn btn-link gallery-link" data-letter="A">A</a> |
-            <a href="#" class="btn btn-link gallery-link" data-letter="B">B</a> |
-            <a href="#" class="btn btn-link gallery-link" data-letter="C">C</a> |
-            <a href="create_05.html" class="btn btn-link" target="_blank" tooltip="Opens in a new window">Create</a>
-
-        </div>
-
-        <div id="thumbnailSizeWrapper" class="d-none text-center"> <!-- Hide on all screens except xl -->
-            thumbnail size:
-            <select id="thumbnailSize">
-                
-                <option value="col-xl-1" selected>Small</option>
-                <option value="col-xl-2">Medium</option>
-                <option value="col-xl-3">Large</option>
-            </select>
-        </div>
-
-
-        <hr />
-
-        <div class="container">
-            <div class="row">
-                <div id="statement" class="col-md-8 mx-auto pt-3" style="display: none;">
-                    <h2 class="text-center mb-4">Digital Monoprinting</h2>
-                    <p>I make web-based tools that generate images. Currently, I am working on a tool that:</p>
-                    <ol>
-                        <li>Allows me to record a line drawing.</li>
-                        <li>Plucks random sections of the drawing and redraws them.</li>
-                        <li>Makes a random selection of colour functions, these are used to re-work areas of the drawing.</li>
-                    </ol>
-                    
-                    <p><strong>Randomness:</strong> The extent of the randomness can be refined with settings that give
-                        me more control. There are lots of settings,
-                        it becomes an itterative process of refing the possible range of outcomes. I can set things up
-                        so new images are constantly
-                        generated, I see them arriving and delete them if they don’t seem to work.</p>
-
-                    <p><strong>Digital Monoprinting:</strong> In practice, what I do is reminds be a lot of making
-                        monoprints because it's not clear quite what
-                        the image will look like until peeling back the paper. I struggle to understand why some of my
-                        generated images appear to be more successful, but I like
-                        working in this kind of space and sometimes it feels like someone else made the image.</p>
-
-                    <p><strong>Collaboration:</strong> I'd like other people to be able to create their own gallery
-                        on
-                        my website using my tools. It could get complicated, but the main thing would be that they would
-                        provide a drawing on screen then pick settings and make selections as images are generated. In
-                        the past I have tried creating programs that generate images without a drawing as a starting place, however at
-                        the moment I am more interested in feeding a drawing in at the start.</p>
-
-                    <p><strong>Physical Images:</strong> It would be interesting to get back to making some physical
-                        artwork, that said I want to be careful not to pull focus from my current
-                        process which seems to be important to what I am doing.</p>
-                    <hr />
-                    <p class="d-inline">
-                        <span class="h2" style="">digital monoprinting</span> -
-                        <span class="h4">iterative</span> -
-                        <span class="h2">system</span> -
-                        <span class="h5">playful</span> -
-                        <span class="h4">game</span> -
-                        <span class="h6">random</span> -
-                        <span class="h4">chance</span> -
-                        <span class="h3">settings</span> -
-                        <span class="h1">parameters</span> -
-                        <span class="h2">constraints</span> -
-                        <span class="h3">colour</span> -
-                        <span class="h1">layers</span> -
-                        <span class="h2">offset</span> -
-                        <span class="h5">plotter</span> -
-                        <span class="h3">acrylics</span> -
-                        <span class="h1">printmaker</span> -
-                        <span class="h3">artist</span> -
-                        <span class="h6">code</span>
-                        <span class="h4">generative</span>
-                        <span class="h6">JavaScript</span>
-                        <span class="h2">coded images</span>
-                    </p>
-
-                    <hr>
-
-                    <p><strong>Slowing things down:</strong> I'm interested in slowing the time it takes for my code to
-                        run so I can record and then watch the activity.</p>
-
-                    <div class="row mb-4 mt-4">
-                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-41.gif"
-                            data-fancybox="gallery">
-                            <img src="images/gifs/Peek 2024-02-03 18-41.gif" class="img-fluid w-100">
-                        </a>
-                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-42.gif"
-                            data-fancybox="gallery">
-                            <img src="images/gifs/Peek 2024-02-03 18-42.gif" class="img-fluid w-100">
-                        </a>
-                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-46.gif"
-                            data-fancybox="gallery">
-                            <img src="images/gifs/Peek 2024-02-03 18-46.gif" class="img-fluid w-100">
-                        </a>
-                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-49.gif"
-                            data-fancybox="gallery">
-                            <img src="images/gifs/Peek 2024-02-03 18-49.gif" class="img-fluid w-100">
-                        </a>
-                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-51.gif"
-                            data-fancybox="gallery">
-                            <img src="images/gifs/Peek 2024-02-03 18-51.gif" class="img-fluid w-100">
-                        </a>
-                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-53.gif"
-                            data-fancybox="gallery">
-                            <img src="images/gifs/Peek 2024-02-03 18-53.gif" class="img-fluid w-100">
-                        </a>
-                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-59.gif"
-                            data-fancybox="gallery">
-                            <img src="images/gifs/Peek 2024-02-03 18-59.gif" class="img-fluid w-100">
-                        </a>
-                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-00.gif"
-                            data-fancybox="gallery">
-                            <img src="images/gifs/Peek 2024-02-03 19-00.gif" class="img-fluid w-100">
-                        </a>
-                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-22.gif"
-                            data-fancybox="gallery">
-                            <img src="images/gifs/Peek 2024-02-03 19-22.gif" class="img-fluid w-100">
-                        </a>
-                        <a class="col-12 col-lg-6 mb-4 d-none d-none" href="images/gifs/Peek 2024-02-03 19-23.gif"
-                            data-fancybox="gallery">
-                            <img src="images/gifs/Peek 2024-02-03 19-23.gif" class="img-fluid w-100">
-                        </a>
-                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-24.gif"
-                            data-fancybox="gallery">
-                            <img src="images/gifs/Peek 2024-02-03 19-24.gif" class="img-fluid w-100">
-                        </a>
-                        <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-25.gif"
-                            data-fancybox="gallery">
-                            <img src="images/gifs/Peek 2024-02-03 19-25.gif" class="img-fluid w-100">
-                        </a>
-                        <a class="col-12" href="images/gifs/Peek 2024-02-03 19-44.gif" data-fancybox="gallery">
-                            <img src="images/gifs/Peek 2024-02-03 19-44.gif" class="img-fluid w-100">
-                        </a>
-                    </div>
-
-                    <hr>
-                    <h4>Selecting Six</h4>
-                    <p>My tools are built using JavaScript and run in the browser. I can set them up so they generate
-                        images continuously, I can then have the role of choosing which to keep.</p>
-
-                    <div class="row mb-4">
-                        <div class="col-md-12">
-                            <a href="images/gifs/selections.gif" data-fancybox="gallery">
-                                <img src="images/gifs/selections.gif" class="img-fluid w-100">
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <h4>Close up</h4>
-                    <p>My images use the SVG format, this means they are scalable.</p>
-                    <img src="images/details/1709487185175.gif" class="img-fluid w-100">
-
-
-
-
-                </div>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="   index.html">
+                    <h4 class="text-left font-weight-bold">Arthur Saunders</h4>
+                </a>
             </div>
-            <div id="image-gallery" class="row"></div>
+
+            <div class="col-md-6">
+                <p class="text-right"><a href="#" class="btn btn-link statement-link active">About</a> | Contact | CV |
+                    <a href="create_05.html" class="btn btn-link" target="_blank"
+                        tooltip="Opens in a new window">Create</a></p>
+            </div>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-        <script src="downloads/png.js"></script>
-        
-        
-        
+        <div class="row mb-4">
+
+            <div class="col-12 text-center mb-0 links">
+                <!-- Links for each letter -->
+
+                <a href="?sphere-01" class="btn btn-link gallery-link" data-letter="02">Sphere 01</a>
+                <a href="#" class="btn btn-link gallery-link" data-letter="03">Sphere 02</a>
+                <a href="#" class="btn btn-link gallery-link" data-letter="05">Spirals</a>
+                <a href="#" class="btn btn-link gallery-link" data-letter="A">Monoprint 1</a>
+                <a href="#" class="btn btn-link gallery-link" data-letter="B">Monoprint 2</a>
+                <a href="#" class="btn btn-link gallery-link" data-letter="C">Monoprint 3</a>
+
+            </div>
+
+        </div>
+
+        <div id="thumbnailSizeWrapper" class="row mb-1 d-none text-center mb-2"> <!-- Hide on all screens except xl -->
+            <div class="col-12 text-right">
+                <select id="thumbnailSize" class="mb-2">
+                    <option value="col-xl-1" selected>Small</option>
+                    <option value="col-xl-2">Medium</option>
+                    <option value="col-xl-3">Large</option>
+                </select>
+                <div id="image-gallery"></div>
+            </div>
+        </div>
+
+
+
+
+
+        <div id="statement" class="row">
+            <div class="col-8 mx-auto p-5 words">
+                <h2 class="text-center mb-4">Digital Monoprinting</h2>
+                <p>I make web-based tools that generate images. Currently, I am working on a tool that:</p>
+                <ol>
+                    <li>Allows me to record a line drawing.</li>
+                    <li>Plucks random sections of the drawing and redraws them.</li>
+                    <li>Makes a random selection of colour functions, these are used to re-work areas of the
+                        drawing.</li>
+                </ol>
+
+                <p><strong>Randomness:</strong> The extent of the randomness can be refined with settings that give
+                    me more control. There are lots of settings,
+                    it becomes an itterative process of refing the possible range of outcomes. I can set things up
+                    so new images are constantly
+                    generated, I see them arriving and delete them if they don’t seem to work.</p>
+
+                <p><strong>Digital Monoprinting:</strong> In practice, what I do is reminds be a lot of making
+                    monoprints because it's not clear quite what
+                    the image will look like until peeling back the paper. I struggle to understand why some of my
+                    generated images appear to be more successful, but I like
+                    working in this kind of space and sometimes it feels like someone else made the image.</p>
+
+                <p><strong>Collaboration:</strong> I'd like other people to be able to create their own gallery
+                    on
+                    my website using my tools. It could get complicated, but the main thing would be that they would
+                    provide a drawing on screen then pick settings and make selections as images are generated. In
+                    the past I have tried creating programs that generate images without a drawing as a starting
+                    place, however at
+                    the moment I am more interested in feeding a drawing in at the start.</p>
+
+                <p><strong>Physical Images:</strong> It would be interesting to get back to making some physical
+                    artwork, that said I want to be careful not to pull focus from my current
+                    process which seems to be important to what I am doing.</p>
+                <hr />
+                <p class="d-inline">
+                    <span class="h2" style="">digital monoprinting</span> -
+                    <span class="h4">iterative</span> -
+                    <span class="h2">system</span> -
+                    <span class="h5">playful</span> -
+                    <span class="h4">game</span> -
+                    <span class="h6">random</span> -
+                    <span class="h4">chance</span> -
+                    <span class="h3">settings</span> -
+                    <span class="h1">parameters</span> -
+                    <span class="h2">constraints</span> -
+                    <span class="h3">colour</span> -
+                    <span class="h1">layers</span> -
+                    <span class="h2">offset</span> -
+                    <span class="h5">plotter</span> -
+                    <span class="h3">acrylics</span> -
+                    <span class="h1">printmaker</span> -
+                    <span class="h3">artist</span> -
+                    <span class="h6">code</span>
+                    <span class="h4">generative</span>
+                    <span class="h6">JavaScript</span>
+                    <span class="h2">coded images</span>
+                </p>
+
+                <hr>
+            </div>
+            <div class="col-8 mx-auto">
+
+                <p><strong>Slowing things down:</strong> I'm interested in slowing the time it takes for my code to
+                    run so I can record and then watch the activity.</p>
+
+                <div class="row mb-4 mt-4">
+                    <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-41.gif"
+                        data-fancybox="gallery">
+                        <img src="images/gifs/Peek 2024-02-03 18-41.gif" class="img-fluid w-100">
+                    </a>
+                    <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-42.gif"
+                        data-fancybox="gallery">
+                        <img src="images/gifs/Peek 2024-02-03 18-42.gif" class="img-fluid w-100">
+                    </a>
+                    <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-46.gif"
+                        data-fancybox="gallery">
+                        <img src="images/gifs/Peek 2024-02-03 18-46.gif" class="img-fluid w-100">
+                    </a>
+                    <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-49.gif"
+                        data-fancybox="gallery">
+                        <img src="images/gifs/Peek 2024-02-03 18-49.gif" class="img-fluid w-100">
+                    </a>
+                    <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-51.gif"
+                        data-fancybox="gallery">
+                        <img src="images/gifs/Peek 2024-02-03 18-51.gif" class="img-fluid w-100">
+                    </a>
+                    <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-53.gif"
+                        data-fancybox="gallery">
+                        <img src="images/gifs/Peek 2024-02-03 18-53.gif" class="img-fluid w-100">
+                    </a>
+                    <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 18-59.gif"
+                        data-fancybox="gallery">
+                        <img src="images/gifs/Peek 2024-02-03 18-59.gif" class="img-fluid w-100">
+                    </a>
+                    <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-00.gif"
+                        data-fancybox="gallery">
+                        <img src="images/gifs/Peek 2024-02-03 19-00.gif" class="img-fluid w-100">
+                    </a>
+                    <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-22.gif"
+                        data-fancybox="gallery">
+                        <img src="images/gifs/Peek 2024-02-03 19-22.gif" class="img-fluid w-100">
+                    </a>
+                    <a class="col-12 col-lg-6 mb-4 d-none d-none" href="images/gifs/Peek 2024-02-03 19-23.gif"
+                        data-fancybox="gallery">
+                        <img src="images/gifs/Peek 2024-02-03 19-23.gif" class="img-fluid w-100">
+                    </a>
+                    <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-24.gif"
+                        data-fancybox="gallery">
+                        <img src="images/gifs/Peek 2024-02-03 19-24.gif" class="img-fluid w-100">
+                    </a>
+                    <a class="col-12 col-lg-6 mb-4 d-none" href="images/gifs/Peek 2024-02-03 19-25.gif"
+                        data-fancybox="gallery">
+                        <img src="images/gifs/Peek 2024-02-03 19-25.gif" class="img-fluid w-100">
+                    </a>
+                    <a class="col-12" href="images/gifs/Peek 2024-02-03 19-44.gif" data-fancybox="gallery">
+                        <img src="images/gifs/Peek 2024-02-03 19-44.gif" class="img-fluid w-100">
+                    </a>
+                </div>
+
+                <hr>
+                <h4>Selecting Six</h4>
+                <p>My tools are built using JavaScript and run in the browser. I can set them up so they generate
+                    images continuously, I can then have the role of choosing which to keep.</p>
+
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <a href="images/gifs/selections.gif" data-fancybox="gallery">
+                            <img src="images/gifs/selections.gif" class="img-fluid w-100">
+                        </a>
+                    </div>
+                </div>
+
+
+                <h4>Close up</h4>
+                <p>My images use the SVG format, this means they are scalable.</p>
+                <img src="images/details/1709487185175.gif" class="img-fluid w-100">
+
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+
         <script>
             // Number of columns for the grid layout
             const columns = 4;
@@ -256,7 +235,7 @@
                     // Create a column for each image with a fixed size of 3 units.
                     const column = document.createElement('div');
 
-                    
+
 
                     column.classList.add('thumbnail-wrapper', 'col-12', 'col-md-6', 'col-lg-4', selectedThumbnailSize, 'mb-4'); // Added 'mb-4' for some margin below each image
 
@@ -275,7 +254,7 @@
                     const fileName = image.split('.')[0]; // Getting the file name without extension
                     const fileNameDiv = document.createElement('div');
                     fileNameDiv.textContent = fileName;
-                    fileNameDiv.classList.add('text-center','fileNameDiv','d-none'); // Center-align the file name
+                    fileNameDiv.classList.add('text-center', 'fileNameDiv', 'd-none'); // Center-align the file name
 
                     // Append elements together
                     column.appendChild(img);
@@ -288,7 +267,7 @@
 
                 //show #thumbnailSizeWrapper using the bootstap class for xl screens, d-xl-block
                 document.getElementById('thumbnailSizeWrapper').classList.add('d-xl-block');
-                
+
 
             }
 
@@ -365,17 +344,19 @@
                     $('.thumbnail-wrapper').addClass(selectedThumbnailSize); // Add the selected xl class
 
 
-                    if(selectedThumbnailSize === 'col-xl-1'){
+                    if (selectedThumbnailSize === 'col-xl-1') {
                         $('.fileNameDiv').addClass('d-none');
-                    } else if(selectedThumbnailSize === 'col-xl-2'){
+                    } else if (selectedThumbnailSize === 'col-xl-2') {
                         $('.fileNameDiv').removeClass('d-none');
-                    } else if(selectedThumbnailSize === 'col-xl-3'){
+                    } else if (selectedThumbnailSize === 'col-xl-3') {
                         $('.fileNameDiv').removeClass('d-none');
                     }
-                    
+
                 });
             });
         </script>
+
+    </div>
 
 
 </body>
