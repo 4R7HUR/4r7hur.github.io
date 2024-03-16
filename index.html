@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
     <link rel="stylesheet" href="site-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
@@ -23,7 +24,56 @@
 <body>
     <div class="container pt-2">
 
-        <div class="row">
+
+
+        <div class="row d-md-none">
+            <div class="col-12">
+            
+
+                <!--Navbar-->
+                <nav class="navbar navbar-light light-blue lighten-4">
+
+                    <!-- Navbar brand -->
+                    <h4><a class="navbar-brand" href="index.html">Arthur Saunders</a></h4>
+
+                    <!-- Collapse button -->
+                    <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1"
+                        aria-expanded="false" aria-label="Toggle navigation"><span class="dark-blue-text"><i
+                                class="fas fa-bars fa-1x"></i></span></button>
+
+                    <!-- Collapsible content -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+
+                        <!-- Links -->
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item"><a href="#" class="btn btn-link gallery-link" data-letter="02" data-query-string="sphere-1">Sphere 1</a></li>
+                            <li class="nav-item"><a href="#" class="btn btn-link gallery-link" data-letter="03" data-query-string="sphere-2">Sphere 2</a></li>
+                            <li class="nav-item"><a href="#" class="btn btn-link gallery-link" data-letter="05" data-query-string="spirals-1">Spirals 2</a></li>
+                            <li class="nav-item"><a href="#" class="btn btn-link gallery-link" data-letter="A" data-query-string="monoprint-1">Monoprint 1</a></li>
+                            <li class="nav-item"><a href="#" class="btn btn-link gallery-link" data-letter="B" data-query-string="monoprint-2">Monoprint 2</a></li>
+                            <li class="nav-item"><a href="#" class="btn btn-link gallery-link" data-letter="C" data-query-string="monoprint-3">Monoprint 3</a></li>
+                            <li class="nav-item"><a href="#" class="btn btn-link gallery-link" data-letter="D" data-query-string="monoprint-4">Monoprint 4</a></li>
+                            
+                        </ul>
+                        <!-- Links -->
+
+                    </div>
+                    <!-- Collapsible content -->
+
+                </nav>
+                <!--/.Navbar-->
+                </div>
+            
+        </div>
+
+
+
+
+
+
+
+        <div class="row d-none d-md-flex">
             <div class="col-md-6">
                 <a href="   index.html">
                     <h4 class="text-left font-weight-bold">Arthur Saunders</h4>
@@ -38,32 +88,65 @@
             </div>
         </div>
 
-        <div class="row mb-4">
+
+
+        <div class="row d-none d-md-flex mb-4">
 
             <div class="col-12 text-center mb-0 links">
                 <!-- Links for each letter -->
 
                 <a href="#" class="btn btn-link gallery-link" data-letter="02" data-query-string="sphere-1">Sphere 1</a>
                 <a href="#" class="btn btn-link gallery-link" data-letter="03" data-query-string="sphere-2">Sphere 2</a>
-                <a href="#" class="btn btn-link gallery-link" data-letter="05" data-query-string="spirals-1">Spirals
-                    2</a>
-                <a href="#" class="btn btn-link gallery-link" data-letter="A" data-query-string="monoprint-1">Monoprint
-                    1</a>
-                <a href="#" class="btn btn-link gallery-link" data-letter="B" data-query-string="monoprint-2">Monoprint
-                    2</a>
-                <a href="#" class="btn btn-link gallery-link" data-letter="C" data-query-string="monoprint-3">Monoprint
-                    3</a>
+                <a href="#" class="btn btn-link gallery-link" data-letter="05" data-query-string="spirals-1">Spirals 2</a>
+                <a href="#" class="btn btn-link gallery-link" data-letter="A" data-query-string="monoprint-1">Monoprint 1</a>
+                <a href="#" class="btn btn-link gallery-link" data-letter="B" data-query-string="monoprint-2">Monoprint 2</a>
+                <a href="#" class="btn btn-link gallery-link" data-letter="C" data-query-string="monoprint-3">Monoprint 3</a>
                 <a href="#" class="btn btn-link gallery-link" data-letter="D" data-query-string="monoprint-4">Monoprint 4</a>
-
                 <hr class="mb-0" />
 
             </div>
 
 
+
+
+
+
+
+
+
         </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="row mb-1 text-center mb-2">
-            <div class="col-12 text-right">                
+            <div class="col-12 text-right">
                 <div id="imageGalleryControllers" class="d-none d-xl-block">
                     <input type="checkbox" id="deleteMode" name="deleteMode">
                     <label for="deleteMode">Delete Mode</label>
