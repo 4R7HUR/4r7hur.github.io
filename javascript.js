@@ -24,7 +24,7 @@ $(document).ready(function () {
         // Loop through the images array and assign `col-3` to each to ensure they take up 1/4th the width.
         imagesArray.forEach((image) => {
             // Create a column for each image with a fixed size of 3 units.
-            const column = $('<div></div>').addClass('thumbnail-wrapper col-12 col-md-6 col-lg-4 ' + selectedThumbnailSize + ' mb-4'); // Added 'mb-4' for some margin below each image
+            const column = $('<div></div>').addClass('thumbnail-wrapper col-4 col-md-6 col-lg-4 ' + selectedThumbnailSize + ' mb-4'); // Added 'mb-4' for some margin below each image
 
             const img = $('<a></a>').attr('href', 'downloads/' + letter + '/' + image.split('.')[0] + '.jpg').attr('data-fancybox', 'images').addClass('d-block'); // Link to SVG file
 
@@ -45,8 +45,8 @@ $(document).ready(function () {
         // Append the row to the container
         $('#image-gallery').append(row);
 
-        // Show #thumbnailSizeWrapper using the bootstrap class for xl screens, d-xl-block
-        $('#thumbnailSizeWrapper').addClass('d-xl-block');
+        // Show #imageGalleryControllers using the bootstrap class for xl screens, d-xl-block
+        $('#imageGalleryControllers').addClass('d-xl-block');
     }
 
     // Function to show the statement div and hide the gallery
@@ -60,8 +60,8 @@ $(document).ready(function () {
         // Remove active class from all gallery links
         $('.gallery-link').removeClass('active');
 
-        // Hide #thumbnailSizeWrapper by removing the bootstrap class for xl screens, d-xl-block
-        $('#thumbnailSizeWrapper').removeClass('d-xl-block');
+        // Hide #imageGalleryControllers by removing the bootstrap class for xl screens, d-xl-block
+        $('#imageGalleryControllers').removeClass('d-xl-block');
     }
 
     // Function to hide the statement div and show the gallery content
@@ -72,8 +72,8 @@ $(document).ready(function () {
         // Remove active class from the statement link
         $('.statement-link').removeClass('active');
 
-        // Show #thumbnailSizeWrapper using the bootstrap class for xl screens, d-xl-block
-        $('#thumbnailSizeWrapper').addClass('d-xl-block');
+        // Show #imageGalleryControllers using the bootstrap class for xl screens, d-xl-block
+        $('#imageGalleryControllers').addClass('d-xl-block');
     }
 
     // Event listener for gallery links
