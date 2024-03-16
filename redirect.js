@@ -3,7 +3,7 @@ const defaultParams = {
     'historyConfig': getHistoryConfig(),
     'historyPx': 0.3,
     'drawingPx': getDrawingPx('3'),
-    'charcterPx': getCharcterPx(),
+    'charcterPx': getCharcterPx('999'),
     'historyPaths': getHistoryPaths(7),
     //'imageName': getBackgroundImage(),
     'pathLength': getPathLength(),
@@ -11,8 +11,8 @@ const defaultParams = {
     'processHistory': ["fast", "animate", "no"][0],
     'paperColour': getPaperColour('lightgrey'),
     'historyColours': gethistoryColours('133'),
-    'colours': getColours('7.45.69.79.78.97.146.96'),
-    'characterStrokeOpacity': getCharacterStrokeOpacity('999999'),
+    'colours': getColours('7.45.69.79.78.97.146.96.134.134.134.134.134.134.134.134.134.134.134.134.134'),
+    'characterStrokeOpacity': getCharacterStrokeOpacity(),
 }
 
 const defaultParamsB = {
@@ -205,7 +205,7 @@ function getCharacterStrokeOpacity(defaultCharacterStrokeOpacity) {
     if (defaultCharacterStrokeOpacity) {
         return defaultCharacterStrokeOpacity;
     } else {
-        let options = "9999999999999999999654321";
+        let options = "9887776666555554444443333333222222221111111111";
 
         let strokeOpacity = "";
         for (let i = 0; i < 6; i++) {

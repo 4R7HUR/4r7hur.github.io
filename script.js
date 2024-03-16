@@ -229,7 +229,7 @@ function createPath(id, c1ass, description, d, stroke_width, stroke, strokeOpaci
     path.setAttribute('stroke-width', stroke_width);
     path.setAttribute('stroke', stroke);
     //todo add opacity to config
-    path.setAttribute('stroke-opacity', '0.44');//ranges from 0 (completely transparent) to 1 (completely opaque)
+    path.setAttribute('stroke-opacity', strokeOpacity);//ranges from 0 (completely transparent) to 1 (completely opaque)
 
     path.setAttribute('fill', 'none');
     //path.setAttribute('stroke-dasharray', "5 5 31");
@@ -321,5 +321,8 @@ document.addEventListener('keydown', function (event) {
         window.URL.revokeObjectURL(svgURL);
     }
 });
+
+
+
 
 

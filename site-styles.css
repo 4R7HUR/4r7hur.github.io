@@ -38,9 +38,7 @@ strong {
 .links a.active {
     color: #000;
     text-decoration: none;
-    border-radius: none;
-    color: #000;
-    
+    border-radius: none;    
 }
 
 a:focus {

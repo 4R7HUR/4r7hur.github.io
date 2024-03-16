@@ -33,7 +33,7 @@ $(function () {
 
             window.location.href = redirect_url;
 
-        }, 5000);
+        }, 1000);
 
 
     }

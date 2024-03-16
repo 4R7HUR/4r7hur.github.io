@@ -1,11 +1,27 @@
   
-;(load "/home/arthur/VisualStudioProjects/drawing-and-word/downloads/batch_convert.scm")
-;(batch-convert-svg-to-thumbnail "/home/arthur/VisualStudioProjects/drawing-and-word/downloads/B")
 
-;file names
+//Sript-Fu
+(load "/home/arthur/VisualStudioProjects/drawing-and-word/downloads/batch_convert_png.scm")
+(load "/home/arthur/VisualStudioProjects/drawing-and-word/downloads/batch_convert_jpg.scm")
+(batch-convert-svg-to-thumbnail "/home/arthur/VisualStudioProjects/drawing-and-word/downloads/D" 272 272)
+
+
+Width   Height  Image
+1312    810     Original
+255     ??      PNG
+??      800     JPG
+
+Width Height Image
+1312 810 Original
+255 158 PNG
+1299 800 JPG
+
+
+//Command Line
 ;ls /home/arthur/VisualStudioProjects/drawing-and-word/downloads/B/* | xargs -n1 basename
 ;ls /home/arthur/VisualStudioProjects/drawing-and-word/downloads/B/*.png | xargs -n1 basename | sed "s/^/'/" | sed "s/$/'/" | tr '\n' ',' | sed 's/,$//'
-;ls -v /home/arthur/VisualStudioProjects/drawing-and-word/downloads/05/*.png | xargs -n1 basename | sed "s/^/'/" | sed "s/$/'/" | tr '\n' ',' | sed 's/,$//'
+
+ls -v /home/arthur/VisualStudioProjects/drawing-and-word/downloads/D/*.png | xargs -n1 basename | sed "s/^/'/" | sed "s/$/'/" | tr '\n' ',' | sed 's/,$//'
 
 
 
