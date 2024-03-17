@@ -40,4 +40,50 @@ file_names['03']  = file_names['03'].filter(function(fileName) {
     return !Hide03.includes(fileName); // Keep only elements not found in imageIds
 });
 
+let intro = [];
+intro['02'] = [];
+intro['03'] = {};
+intro['05'] = {};
+intro['A'] = {};
+intro['B'] = {};
+intro['C'] = {};
+intro['D'] = {};
+
+intro['02']['title'] = 'Sphere 1 ';
+intro['02']['index'] = 133;
+intro['02']['description'] = 'This is a description of the..';
+intro['02']['imageShape'] = 'square';
+
+intro['03']['title'] = 'Sphere 2 ';
+intro['03']['index'] = 60;
+intro['03']['description'] = 'This is a description of the..';
+intro['03']['imageShape'] = 'square';
+
+intro['05']['title'] = 'Spirals';
+intro['05']['index'] = 31;
+intro['05']['description'] = 'This is a description of the..';
+intro['05']['imageShape'] = 'square';
+
+intro['A']['title'] = 'Series: Monoprint 4 ';
+intro['A']['index'] = 4;
+intro['A']['description'] = 'This is a description of the..';
+intro['A']['imageShape'] = 'rectangle';
+
+intro['B']['title'] = 'Series: Monoprint 4 ';
+intro['B']['index'] = 4;
+intro['B']['description'] = 'This is a description of the..';
+intro['B']['imageShape'] = 'rectangle';
+
+intro['C']['title'] = 'Series: Monoprint 4 ';
+intro['C']['index'] = 4;
+intro['C']['description'] = 'This is a description of the..';
+intro['C']['imageShape'] = 'rectangle';
+
+intro['D']['title'] = 'Series: Monoprint 4 ';
+intro['D']['index'] = 4;
+intro['D']['description'] = 'This is a description of the..';
+intro['D']['imageShape'] = 'rectangle';
+
+
+
 

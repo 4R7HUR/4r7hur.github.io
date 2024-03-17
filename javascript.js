@@ -16,16 +16,37 @@ $(document).ready(function () {
         const imagesArray = file_names[letter.toUpperCase()]; // Accessing arrays based on selected letter
 
         // Clear the existing gallery
-        $('#image-gallery').empty();
+        $('.slot').empty()
 
-        // Instead of creating new rows per every few images, we'll just work within a single row.
+        //Add image and Text to intro
+
+        let introData = intro[letter];
+        if(introData){
+            let introImageFileName = imagesArray[introData['index']];
+            introImageFileName = introImageFileName.split('.')[0] + '.jpg';
+
+            let introImage = $('<img>').attr('src', 'downloads/' + letter + '/' + introImageFileName).addClass('img-fluid w-100');
+            $('#galleryIntroImage').empty().append(introImage);                    
+            $('#galleryIntroText #index').empty().append('No. ' + (introData['index'] + 1));
+            $('#galleryIntroText #title').empty().append(introData['title']);
+            $('#galleryIntroText #description').empty().append(introData['description']);
+
+            if(introData['imageShape'] === 'square'){
+                $('#galleryIntroImage').removeClass('col-8').addClass('col-6');
+            }else{
+                $('#galleryIntroImage').removeClass('col-6').addClass('col-8');
+            }
+
+
+        }    
+
         let row = $('<div class="row"></div>');
 
         // Loop through the images array and assign `col-3` to each to ensure they take up 1/4th the width.
-        imagesArray.forEach((image) => {
+        imagesArray.forEach((image,index) => {
             // Create a column for each image with a fixed size of 3 units.
             const column = $('<div></div>').addClass('thumbnail-wrapper col-4 col-md-6 col-lg-4 ' + selectedThumbnailSize + ' mb-4'); // Added 'mb-4' for some margin below each image
-
+            column.attr('data-index', index); // Store the index in the column data
             const img = $('<a></a>').attr('href', 'downloads/' + letter + '/' + image.split('.')[0] + '.jpg').attr('data-fancybox', 'images').addClass('d-block'); // Link to SVG file
 
             const imgElem = $('<img>').attr('src', 'downloads/' + letter + '/' + image).addClass('img-fluid w-100 thumbnail'); // Image source
@@ -45,8 +66,6 @@ $(document).ready(function () {
         // Append the row to the container
         $('#image-gallery').append(row);
 
-        // Show #imageGalleryControllers using the bootstrap class for xl screens, d-xl-block
-        $('#imageGalleryControllers').addClass('d-xl-block');
     }
 
     // Function to show the statement div and hide the gallery
@@ -60,8 +79,6 @@ $(document).ready(function () {
         // Remove active class from all gallery links
         $('.gallery-link').removeClass('active');
 
-        // Hide #imageGalleryControllers by removing the bootstrap class for xl screens, d-xl-block
-        $('#imageGalleryControllers').removeClass('d-xl-block');
     }
 
     // Function to hide the statement div and show the gallery content
@@ -72,8 +89,6 @@ $(document).ready(function () {
         // Remove active class from the statement link
         $('.statement-link').removeClass('active');
 
-        // Show #imageGalleryControllers using the bootstrap class for xl screens, d-xl-block
-        $('#imageGalleryControllers').addClass('d-xl-block');
     }
 
     // Event listener for gallery links
@@ -133,32 +148,5 @@ $(document).ready(function () {
 
 
 
-$(document).ready(function () {
-    // Function to handle click on thumbnail wrapper
-    function handleThumbnailWrapperClick(event) {
-
-
-        var isDeleteModeChecked = $('#deleteMode').prop('checked');
-
-        // Example usage
-        if (isDeleteModeChecked) {
-            console.log('Delete mode is checked');
-            event.preventDefault();
-            
-            $(this).parent().parent().remove();
-            // Your custom logic here
-        } else {
-            console.log('Delete mode is not checked');
-            // Your logic for when delete mode is not checked
-        }
-
-    }
-
-    // Event delegation for click on thumbnail wrapper
-    $(document).on('click', '.thumbnail-wrapper .thumbnail', handleThumbnailWrapperClick);
-
-    // Check if the checkbox is checked
-
-});
 
 
