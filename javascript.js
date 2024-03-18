@@ -26,15 +26,19 @@ $(document).ready(function () {
             introImageFileName = introImageFileName.split('.')[0] + '.jpg';
 
             let introImage = $('<img>').attr('src', 'downloads/' + letter + '/' + introImageFileName).addClass('img-fluid w-100');
-            $('#galleryIntroImage').empty().append(introImage);                    
-            $('#galleryIntroText #index').empty().append('No. ' + (introData['index'] + 1));
-            $('#galleryIntroText #title').empty().append(introData['title']);
-            $('#galleryIntroText #description').empty().append(introData['description']);
+            $('#galleryIntroImage').append(introImage); 
+            $('#galleryIntroText #index').append('No. ' + (introData['index'] + 1));
+            $('#galleryIntroText #title').append(introData['title']);
+            $('#galleryIntroText #description').append(introData['description']);
+            $('#count').append(imagesArray.length);
 
             if(introData['imageShape'] === 'square'){
-                $('#galleryIntroImage').removeClass('col-8').addClass('col-6');
+                $('#galleryIntroImage').removeClass('col-6').addClass('col-5');
+                $('.extra-col').removeClass('d-none');
+
             }else{
-                $('#galleryIntroImage').removeClass('col-6').addClass('col-8');
+                $('#galleryIntroImage').removeClass('col-5').addClass('col-6');
+                $('.extra-col').addClass('d-none');
             }
 
 

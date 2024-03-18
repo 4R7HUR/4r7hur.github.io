@@ -41,6 +41,7 @@ file_names['03']  = file_names['03'].filter(function(fileName) {
 });
 
 let intro = [];
+let lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ';
 intro['02'] = [];
 intro['03'] = {};
 intro['05'] = {};
@@ -51,37 +52,37 @@ intro['D'] = {};
 
 intro['02']['title'] = 'Sphere 1 ';
 intro['02']['index'] = 133;
-intro['02']['description'] = 'This is a description of the..';
+intro['02']['description'] = lorem;
 intro['02']['imageShape'] = 'square';
 
 intro['03']['title'] = 'Sphere 2 ';
 intro['03']['index'] = 60;
-intro['03']['description'] = 'This is a description of the..';
+intro['03']['description'] = lorem;
 intro['03']['imageShape'] = 'square';
 
 intro['05']['title'] = 'Spirals';
 intro['05']['index'] = 31;
-intro['05']['description'] = 'This is a description of the..';
+intro['05']['description'] = lorem;
 intro['05']['imageShape'] = 'square';
 
 intro['A']['title'] = 'Series: Monoprint 4 ';
 intro['A']['index'] = 4;
-intro['A']['description'] = 'This is a description of the..';
+intro['A']['description'] = lorem;
 intro['A']['imageShape'] = 'rectangle';
 
 intro['B']['title'] = 'Series: Monoprint 4 ';
-intro['B']['index'] = 4;
-intro['B']['description'] = 'This is a description of the..';
+intro['B']['index'] = 1;
+intro['B']['description'] = lorem;
 intro['B']['imageShape'] = 'rectangle';
 
 intro['C']['title'] = 'Series: Monoprint 4 ';
 intro['C']['index'] = 4;
-intro['C']['description'] = 'This is a description of the..';
+intro['C']['description'] = lorem;
 intro['C']['imageShape'] = 'rectangle';
 
 intro['D']['title'] = 'Series: Monoprint 4 ';
 intro['D']['index'] = 4;
-intro['D']['description'] = 'This is a description of the..';
+intro['D']['description'] = lorem;
 intro['D']['imageShape'] = 'rectangle';
 
 

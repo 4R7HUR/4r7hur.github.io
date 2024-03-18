@@ -102,7 +102,8 @@
             <div class="col-12 text-left mb-0 links">
                 <!-- Links for each letter -->
 
-                <a href="#" class="btn btn-link gallery-link pl-0" data-letter="02" data-query-string="sphere-1">Sphere 1</a>
+                <a href="#" class="btn btn-link gallery-link pl-0" data-letter="02" data-query-string="sphere-1">Sphere
+                    1</a>
                 <a href="#" class="btn btn-link gallery-link" data-letter="03" data-query-string="sphere-2">Sphere 2</a>
                 <a href="#" class="btn btn-link gallery-link" data-letter="05" data-query-string="spirals-1">Spirals
                     2</a>
@@ -119,16 +120,22 @@
             </div>
         </div>
 
-        <div class="row">
-
-            <div id="galleryIntroImage" class="col-8 mb-5 slot"></div>
-            <div id="galleryIntroText" class="col-4 mb-5">
-                <div id="title" class="slot"></div>
+        <div id="galleryIntro" class="row">
+            <div class="col-1 extra-col d-none"></div>
+            <div id="galleryIntroImage" class="col-5 mb-2 slot"></div>
+            <div id="galleryIntroText" class="col-6 mb-5">
+                <h1 id="title" class="slot"></h1>
                 <div id="index" class="slot"></div>
                 <div id="description" class="slot"></div>
             </div>
+        </div>
+        <div class="row">
 
-            <div id="image-gallery" class="col-12 slot"></div>
+            <div class="col-12">
+                <hr>
+                <h2>1-<span id="count" class="slot"></span></h2>
+                <div id="image-gallery" class="slot"></div>
+            </div>
         </div>
 
         <div id="statement" class="row">
