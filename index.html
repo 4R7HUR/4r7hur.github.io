@@ -28,8 +28,6 @@
 
         <div class="row d-md-none">
             <div class="col-12">
-
-
                 <!--Navbar-->
                 <nav class="navbar navbar-light light-blue lighten-4">
 
@@ -39,7 +37,7 @@
                     <!-- Collapse button -->
                     <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1"
-                        aria-expanded="false" aria-label="Toggle navigation"><span class="dark-blue-text"><i
+                        aria-expanded="false" aria-label="Toggle navigation"><span class="dark-black-text"><i
                                 class="fas fa-bars fa-1x"></i></span></button>
 
                     <!-- Collapsible content -->
@@ -63,15 +61,9 @@
                                     data-query-string="monoprint-4">Monoprint 4</a></li>
 
                         </ul>
-                        <!-- Links -->
-
                     </div>
-                    <!-- Collapsible content -->
-
                 </nav>
-                <!--/.Navbar-->
             </div>
-
         </div>
 
 
@@ -121,16 +113,17 @@
         </div>
 
         <div id="introAndGallery" class="row">
-            <div class="col-1 extra-col d-none"></div>
-            <div id="galleryIntroImage" class="col-5 mb-2 slot"></div>
-            <div id="galleryIntroText" class="col-6 mb-5">
-                <h1 id="title" class="slot"></h1>
-                <div id="index" class="slot"></div>
+            <div class="col-md-1 extra-col d-none"></div>
+            <div class="col-12 d-md-none"><h2 id="titleMobile" class="slot"></h2></div>
+            <div id="galleryIntroImage" class="col-10 col-md-5 pb-3 pb-md-0 slot"></div>
+            <div id="galleryIntroText" class="col-12 col-md-6">
+                <h2 id="title" class="d-none d-md-block slot"></h2>
+                <h5 id="index" class="slot"></h5>
                 <div id="description" class="slot"></div>
             </div>
             <div class="col-12">
                 <hr>
-                <h2>1-<span id="count" class="slot"></span></h2>
+                <h5>Numbers 1-<span id="count" class="slot"></span></h5>
                 <div id="image-gallery" class="slot"></div>
             </div>
         </div>

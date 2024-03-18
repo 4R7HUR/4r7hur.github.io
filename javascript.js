@@ -1,5 +1,4 @@
 // Variables
-var selectedThumbnailSize = 'col-xl-3'; // Default size
 
 // Ready block
 $(document).ready(function () {
@@ -27,17 +26,20 @@ $(document).ready(function () {
 
             let introImage = $('<img>').attr('src', 'downloads/' + letter + '/' + introImageFileName).addClass('img-fluid w-100');
             $('#galleryIntroImage').append(introImage); 
-            $('#galleryIntroText #index').append('No. ' + (introData['index'] + 1));
+            $('#galleryIntroText #index').append('Number ' + (introData['index'] + 1));
+            $('#titleMobile').append(introData['title']);
             $('#galleryIntroText #title').append(introData['title']);
             $('#galleryIntroText #description').append(introData['description']);
             $('#count').append(imagesArray.length);
 
             if(introData['imageShape'] === 'square'){
-                $('#galleryIntroImage').removeClass('col-6').addClass('col-5');
+                $('#galleryIntroImage').removeClass('col-md-6').addClass('col-md-5');
+                $('#galleryIntroImage').removeClass('col-12').addClass('col-10');
                 $('.extra-col').removeClass('d-none');
 
             }else{
-                $('#galleryIntroImage').removeClass('col-5').addClass('col-6');
+                $('#galleryIntroImage').removeClass('col-md-5').addClass('col-md-6');
+                $('#galleryIntroImage').removeClass('col-10').addClass('col-12');
                 $('.extra-col').addClass('d-none');
             }
 
@@ -48,8 +50,13 @@ $(document).ready(function () {
 
         // Loop through the images array and assign `col-3` to each to ensure they take up 1/4th the width.
         imagesArray.forEach((image,index) => {
-            // Create a column for each image with a fixed size of 3 units.
-            const column = $('<div></div>').addClass('thumbnail-wrapper col-4 col-md-6 col-lg-4 ' + selectedThumbnailSize + ' mb-4'); // Added 'mb-4' for some margin below each image
+            // Lets try for 4 columns per row for square images and 3 columns per row for anything else
+            if(introData['imageShape'] === 'square'){
+                colClass = 'col-3';
+            }else{
+                colClass = 'col-4';
+            }
+            const column = $('<div></div>').addClass('thumbnail-wrapper mb-4 ' + colClass);
             column.attr('data-index', index); // Store the index in the column data
             const img = $('<a></a>').attr('href', 'downloads/' + letter + '/' + image.split('.')[0] + '.jpg').attr('data-fancybox', 'images').addClass('d-block'); // Link to SVG file
 
@@ -59,7 +66,8 @@ $(document).ready(function () {
 
             // Optional: Add the file name as a caption or label
             const fileName = image.split('.')[0]; // Getting the file name without extension
-            const fileNameDiv = $('<div></div>').text(fileName).addClass('text-center fileNameDiv d-none'); // Center-align the file name
+            const number = index + 1;
+            const fileNameDiv = $('<div></div>').text(number).addClass('text-center fileNameDiv d-none d-md-block'); // Center-align the file name
 
             // Append elements together
             column.append(img);
@@ -134,18 +142,6 @@ $(document).ready(function () {
         showStatement();
     }
 
-    // Event listener for thumbnail size selection
-    $('#thumbnailSize').change(function () {
-        selectedThumbnailSize = $(this).val(); // Get the selected value from the dropdown
-        $('.thumbnail-wrapper').removeClass('col-xl-1 col-xl-2 col-xl-3'); // Remove existing xl classes
-        $('.thumbnail-wrapper').addClass(selectedThumbnailSize); // Add the selected xl class
-
-        if (selectedThumbnailSize === 'col-xl-1') {
-            $('.fileNameDiv').addClass('d-none');
-        } else if (selectedThumbnailSize === 'col-xl-2' || selectedThumbnailSize === 'col-xl-3') {
-            $('.fileNameDiv').removeClass('d-none');
-        }
-    });
 });
 
 
