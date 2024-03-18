@@ -75,7 +75,7 @@ $(document).ready(function () {
     // Function to show the statement div and hide the gallery
     function showStatement() {
         $('#statement').show();
-        $('#image-gallery').hide();
+        $('#introAndGallery').hide();
 
         // Add active class to the statement link
         $('.statement-link').addClass('active');
@@ -88,7 +88,7 @@ $(document).ready(function () {
     // Function to hide the statement div and show the gallery content
     function hideStatement() {
         $('#statement').hide();
-        $('#image-gallery').show();
+        $('#introAndGallery').show();
 
         // Remove active class from the statement link
         $('.statement-link').removeClass('active');
