@@ -1,6 +1,6 @@
 /* Base styles */
 body {
-    font-size: 18px;
+    font-size: 16px;
     color: #333;
     background-color: #fff;
     margin: 0;
@@ -88,21 +88,39 @@ a:focus {
 
 
 
+/*HEADERS*/
+
+
+.h1, h1 {
+	font-size: 2.5rem;
+}
+
+.h2, h2 {
+	font-size: 2rem;
+}
+
+.h3, h3 {
+	font-size: 1.75rem;
+}
+
+.h4, h4 {
+	font-size: 1.5rem;
+}
+
+.h5, h5 {
+	font-size: 1.25rem;
+}
+
+.h6, h6 {
+	font-size: 1rem;
+}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+.h5, h5 {
+	font-size: 1.25rem;
+}
 
 /*Burger Menu*/
 
@@ -145,6 +163,6 @@ a:focus {
 
 
 .navbar .navbar-brand {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: bold;
 }
