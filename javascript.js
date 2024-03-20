@@ -20,11 +20,16 @@ $(document).ready(function () {
         //Add image and Text to intro
 
         let introData = intro[letter];
+        console.log(introData);
         if(introData){
             let introImageFileName = imagesArray[introData['index']];
             introImageFileName = introImageFileName.split('.')[0] + '.jpg';
 
             let introImage = $('<img>').attr('src', 'downloads/' + letter + '/' + introImageFileName).addClass('img-fluid w-100');
+            introImage.attr('width',introData['width'] );
+            introImage.attr('height',introData['height'] );
+            
+
             $('#galleryIntroImage').append(introImage); 
             $('#galleryIntroText #index').append('Number ' + (introData['index'] + 1));
             $('#titleMobile').append(introData['title']);

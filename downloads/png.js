@@ -88,11 +88,16 @@ intro['C']['title'] = 'Monoprint 3 ';
 intro['C']['index'] = 4;
 intro['C']['description'] = lorem;
 intro['C']['imageShape'] = 'rectangle';
+intro['C']['width'] = '1296px';
+intro['C']['height'] = '800px'; 
 
-intro['D']['title'] = 'Monoprint 4 ';
+intro['D']['title'] = 'Monoprint';
 intro['D']['index'] = 4;
-intro['D']['description'] = lorem;
+intro['D']['description'] = lorem + ' NB: width and height attributes added';
 intro['D']['imageShape'] = 'rectangle';
+intro['D']['width'] = '272px';
+intro['D']['height'] = '168px'; 
+
 
 
 
