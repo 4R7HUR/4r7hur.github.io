@@ -2,13 +2,7 @@
 
 // Ready block
 $(document).ready(function () {
-    // List of popular sans-serif fonts
-    var sansSerifFonts = [
-        'Verdana', 'Roboto', 'Open Sans', 'Lato',
-        'Nunito', 'Montserrat', 'Source Sans Pro', 'Ubuntu'
-    ];
-    var randomFont = sansSerifFonts[Math.floor(Math.random() * sansSerifFonts.length)];
-    $('body').css('font-family', randomFont + ', sans-serif');
+
 
     // Function to update the image gallery based on the selected letter
     function updateImageGallery(letter) {
@@ -32,15 +26,15 @@ $(document).ready(function () {
 
             $('#galleryIntroImage').append(introImage); 
             $('#galleryIntroText #index').append('Number ' + (introData['index'] + 1));
-            $('#titleMobile').append(introData['title']);
             $('#galleryIntroText #title').append(introData['title']);
             $('#galleryIntroText #description').append(introData['description']);
+            $('#galleryIntroText #medium').append(introData['medium']);
             $('#count').append(imagesArray.length);
 
             if(introData['imageShape'] === 'square'){
                 $('#galleryIntroImage').removeClass('col-md-6').addClass('col-md-5');
                 $('#galleryIntroImage').removeClass('col-12').addClass('col-10');
-                $('.extra-col').removeClass('d-none');
+                //$('.extra-col').removeClass('d-none');
 
             }else{
                 $('#galleryIntroImage').removeClass('col-md-5').addClass('col-md-6');
@@ -66,13 +60,14 @@ $(document).ready(function () {
             const img = $('<a></a>').attr('href', 'downloads/' + letter + '/' + image.split('.')[0] + '.jpg').attr('data-fancybox', 'images').addClass('d-block'); // Link to SVG file
 
             const imgElem = $('<img>').attr('src', 'downloads/' + letter + '/' + image).addClass('img-fluid w-100 thumbnail'); // Image source
-
+            imgElem.attr('width',introData['width'] );
+            imgElem.attr('height',introData['height'] );
             img.append(imgElem);
 
             // Optional: Add the file name as a caption or label
             const fileName = image.split('.')[0]; // Getting the file name without extension
             const number = index + 1;
-            const fileNameDiv = $('<div></div>').text(number).addClass('text-center fileNameDiv d-none d-md-block'); // Center-align the file name
+            const fileNameDiv = $('<div></div>').text(number).addClass('text-center fileNameDiv'); // Center-align the file name
 
             // Append elements together
             column.append(img);

@@ -32,7 +32,7 @@
                 <nav class="navbar navbar-light light-blue lighten-4">
 
                     <!-- Navbar brand -->
-                    <h1><a class="navbar-brand" href="index.html">Arthur Saunders</a></h1>
+                    <h2><a class="navbar-brand" href="index.html">ARTHUR SAUNDERS</a></h2>
 
                     <!-- Collapse button -->
                     <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse"
@@ -47,8 +47,16 @@
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item"><a href="#" class="btn btn-link gallery-link" data-letter="02"
                                     data-query-string="sphere-1">Sphere 1</a></li>
+
                             <li class="nav-item"><a href="#" class="btn btn-link gallery-link" data-letter="03"
                                     data-query-string="sphere-2">Sphere 2</a></li>
+
+                            <li class="nav-item"><a href="#" class="btn btn-link gallery-link" data-letter="04"
+                                    data-query-string="sphere-3">Sphere 3</a></li>
+
+
+
+
                             <li class="nav-item"><a href="#" class="btn btn-link gallery-link" data-letter="05"
                                     data-query-string="spirals-1">Spirals 2</a></li>
                             <li class="nav-item"><a href="#" class="btn btn-link gallery-link" data-letter="A"
@@ -75,7 +83,7 @@
         <div class="row d-none d-md-flex">
             <div class="col-md-6">
                 <a href="   index.html">
-                    <h1 class="text-left font-weight-bold">Arthur Saunders</h1>
+                    <h3 class="text-left font-weight-bold">ARTHUR SAUNDERS</h3>
                 </a>
             </div>
 
@@ -97,8 +105,9 @@
                 <a href="#" class="btn btn-link gallery-link pl-0" data-letter="02" data-query-string="sphere-1">Sphere
                     1</a>
                 <a href="#" class="btn btn-link gallery-link" data-letter="03" data-query-string="sphere-2">Sphere 2</a>
+                <a href="#" class="btn btn-link gallery-link" data-letter="04" data-query-string="sphere-3">Sphere 3</a>
                 <a href="#" class="btn btn-link gallery-link" data-letter="05" data-query-string="spirals-1">Spirals
-                    2</a>
+                    1</a>
                 <a href="#" class="btn btn-link gallery-link" data-letter="A" data-query-string="monoprint-1">Monoprint
                     1</a>
                 <a href="#" class="btn btn-link gallery-link" data-letter="B" data-query-string="monoprint-2">Monoprint
@@ -113,17 +122,19 @@
         </div>
 
         <div id="introAndGallery" class="row">
-            <div class="col-md-1 extra-col d-none"></div>
-            <div class="col-12 d-md-none"><h2 id="titleMobile" class="slot"></h2></div>
+
             <div id="galleryIntroImage" class="col-10 col-md-5 pb-3 pb-md-0 slot"></div>
+            <div class="col-md-1 extra-col d-none"></div>
             <div id="galleryIntroText" class="col-12 col-md-6">
-                <h2 id="title" class="d-none d-md-block slot"></h2>
-                <h4 id="index" class="slot"></h4>
-                <div id="description" class="slot"></div>
+                <p">
+                    <span id="title" class="slot d-block font-weight-bold"></span>
+                    <span id="index" class="slot d-block"></span>
+                    <span id="medium" class="slot d-block"></span>
+                    <p id="description" class="slot"></p>
             </div>
             <div class="col-12">
                 <hr>
-                <h4>Numbers 1-<span id="count" class="slot"></span></h4>
+                <p class="">Numbers 1-<span id="count" class="slot"></span></p>
                 <div id="image-gallery" class="slot"></div>
             </div>
         </div>
@@ -131,6 +142,19 @@
         <div id="statement" class="row">
             <div class="col-12 col-lg-10 col-xl-8 mx-auto p-4 p-md-5 words">
                 <h2 class="text-center mb-4">Digital Monoprinting</h2>
+
+                <div class="container mb-4">
+                    <div class="row image-container">
+                        <div class="col-6 p-0 pr-2 pr-md-3">
+                            <img src="downloads/A/1709336694052.jpg" alt="Image">
+                        </div>
+                        <div class="col-6 p-0 pl-2 pl-md-3">
+                            <img src="downloads/D/1710542704135.jpg" alt="Image">
+                        </div>
+                    </div>
+                </div>
+
+
                 <p>I make web-based tools that generate images. Currently, I am working on a tool that:</p>
                 <ol>
                     <li>Allows me to record a line drawing.</li>

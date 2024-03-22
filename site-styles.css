@@ -4,6 +4,7 @@ body {
     color: #333;
     background-color: #fff;
     margin: 0;
+    font-family: Roboto, sans-serif;
 
 }
 
@@ -82,9 +83,43 @@ a:focus {
 }
 
 #statement .words {
-    background-color: #eee;
+    background-color: #f6f6f6;
     border: 1px solid #ddd;
 }
+
+
+
+
+
+
+
+
+
+
+
+.image-container {
+    text-align: center;
+    background-color: #f6f6f6;
+  }
+
+  .image-container img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #666;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -160,9 +195,7 @@ a:focus {
 }
 
 
-
-
 .navbar .navbar-brand {
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: bold;
 }
