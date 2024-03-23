@@ -65,7 +65,7 @@ intro['B'] = {};
 intro['C'] = {};
 intro['D'] = {};
 
-intro['02']['title'] = 'Sphere Series 1 ';
+intro['02']['title'] = 'Sphere Series 1 [2019]';
 intro['02']['index'] = 75;
 intro['02']['medium'] = mediums['B'];
 intro['02']['description'] = '';
@@ -73,7 +73,7 @@ intro['02']['imageShape'] = 'square';
 intro['02']['width'] = '800px';
 intro['02']['height'] = '800px'; 
 
-intro['03']['title'] = 'Sphere Series 2 ';
+intro['03']['title'] = 'Sphere Series 2 [2020]';
 intro['03']['index'] = 50;
 intro['03']['medium'] = mediums['B'];
 intro['03']['description'] = '';
@@ -81,7 +81,7 @@ intro['03']['imageShape'] = 'square';
 intro['03']['width'] = '800px';
 intro['03']['height'] = '800px'; 
 
-intro['04']['title'] = 'Sphere Series 3 ';
+intro['04']['title'] = 'Sphere Series 3 [2021]';
 intro['04']['index'] = 2;
 intro['04']['medium'] = mediums['B'];
 intro['04']['description'] = '';
@@ -89,8 +89,8 @@ intro['04']['imageShape'] = 'square';
 intro['04']['width'] = '800px';
 intro['04']['height'] = '800px'; 
 
-intro['05']['title'] = 'Spirals Series 1';
-intro['05']['index'] = pickRandomItem([31,47,60]);
+intro['05']['title'] = 'Spirals Series 1 [2021]';
+intro['05']['index'] = 31;//31,47,60
 intro['05']['medium'] = mediums['B'];
 intro['05']['description'] = '';
 intro['05']['imageShape'] = 'square';
@@ -98,7 +98,7 @@ intro['05']['width'] = '800px';
 intro['05']['height'] = '800px'; 
 
 intro['A']['title'] = 'Monoprint Series 1 [2024]';
-intro['A']['index'] = pickRandomItem([242,535,571]);
+intro['A']['index'] = 242;//242,535,571
 intro['A']['medium'] = mediums['B'];
 intro['A']['description'] = '';
 intro['A']['imageShape'] = 'rectangle';

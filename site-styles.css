@@ -82,9 +82,8 @@ a:focus {
     padding: 0 10px;
 }
 
-#statement .words {
+#statement .words{
     background-color: #f6f6f6;
-    border: 1px solid #ddd;
 }
 
 
@@ -191,11 +190,23 @@ a:focus {
 
 .navbar {
     width: 100%;
-    padding: 0.5rem 0;
+    padding: 0 0 0.5rem 0;
 }
 
 
 .navbar .navbar-brand {
     font-size: 1rem;
     font-weight: bold;
+}
+
+
+hr {
+    margin-top: 0rem;
+    margin-bottom: 1rem;
+}
+
+#statement {
+    background-color: #f6f6f6;
+    border: 1px solid #ddd;
+
 }

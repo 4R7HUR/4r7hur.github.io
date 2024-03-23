@@ -4,6 +4,10 @@
 $(document).ready(function () {
 
 
+    var email = "arthursaunders1973@gmail.com"; // Replace this with your email address
+    var encodedEmail = encodeEmail(email);
+    document.getElementById("encoded-email").innerHTML = encodedEmail;  
+
     // Function to update the image gallery based on the selected letter
     function updateImageGallery(letter) {
         const imagesArray = file_names[letter.toUpperCase()]; // Accessing arrays based on selected letter
@@ -144,6 +148,25 @@ $(document).ready(function () {
 
 });
 
+function encodeEmail(email) {
+    var encoded = "";
+    for (var i = 0; i < email.length; i++) {
+      var charCode = email.charCodeAt(i);
+      encoded += "&#" + charCode + ";";
+    }
+    return encoded;
+  }
+
+  function decodeEmail(encodedEmail) {
+    var email = "";
+    var parts = encodedEmail.split(";");
+    parts.pop(); // Remove the last empty element
+    for (var i = 0; i < parts.length; i++) {
+      var charCode = parseInt(parts[i].substring(2)); // Remove "&#"
+      email += String.fromCharCode(charCode);
+    }
+    return email;
+  }
 
 
 
