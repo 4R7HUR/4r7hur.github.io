@@ -58,6 +58,11 @@ a:focus {
     outline: none;
 }
 
+
+#galleryIntroImage img {
+    background-color: #eee;
+}
+
 /* Images */
 .img-fluid {
     border: 1px solid #999;

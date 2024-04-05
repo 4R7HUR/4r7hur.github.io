@@ -3,7 +3,6 @@
 // Ready block
 $(document).ready(function () {
 
-
     var email = "arthursaunders1973@gmail.com"; // Replace this with your email address
     var encodedEmail = encodeEmail(email);
     document.getElementById("encoded-email").innerHTML = encodedEmail;  
@@ -25,8 +24,7 @@ $(document).ready(function () {
 
             let introImage = $('<img>').attr('src', 'downloads/' + letter + '/' + introImageFileName).addClass('img-fluid w-100');
             introImage.attr('width',introData['width'] );
-            introImage.attr('height',introData['height'] );
-            
+            introImage.attr('height',introData['height'] );            
 
             $('#galleryIntroImage').append(introImage); 
             $('#galleryIntroText #index').append('Number ' + (introData['index'] + 1));
@@ -45,11 +43,9 @@ $(document).ready(function () {
                 $('#galleryIntroImage').removeClass('col-10').addClass('col-12');
                 $('.extra-col').addClass('d-none');
             }
-
-
         }    
 
-        let row = $('<div class="row"></div>');
+        //let row = $('<div class="row"></div>');
 
         // Loop through the images array and assign `col-3` to each to ensure they take up 1/4th the width.
         imagesArray.forEach((image,index) => {
@@ -59,7 +55,7 @@ $(document).ready(function () {
             }else{
                 colClass = 'col-4';
             }
-            const column = $('<div></div>').addClass('thumbnail-wrapper mb-4 ' + colClass);
+            const column = $('<div></div>').addClass('thumbnail-wrapper mb-4 ' + colClass).attr('style', 'display:none');
             column.attr('data-index', index); // Store the index in the column data
             const img = $('<a></a>').attr('href', 'downloads/' + letter + '/' + image.split('.')[0] + '.jpg').attr('data-fancybox', 'images').addClass('d-block'); // Link to SVG file
 
@@ -75,13 +71,39 @@ $(document).ready(function () {
 
             // Append elements together
             column.append(img);
-            column.append(fileNameDiv); // Append file name div if needed
-            row.append(column);
+            column.append(fileNameDiv); // Append file name div if needed            
+            
+            // Append the column to the container
+            $('#image-gallery .row').append(column);            
+            
         });
 
-        // Append the row to the container
-        $('#image-gallery').append(row);
+        fadeInGallery(); // Fade in the images after they have been added to the DOM
 
+
+
+    }
+
+    function fadeInGallery(){
+        var fadeTime = 100; // Set the fade time in milliseconds
+        var overlap = 50; // Set the overlap time in milliseconds
+        var columns = $('#image-gallery .row').children(); // Select all columns inside #image-gallery .row
+        var currentIndex = 0; // Initialize index for tracking current column
+        
+        function fadeInNext() {
+            // Check if there are more columns to fade in
+            if (currentIndex < columns.length) {
+                // Fade in the current column
+                $(columns[currentIndex]).fadeIn(fadeTime);
+                currentIndex++;
+    
+                // Schedule the next fade after an overlap
+                setTimeout(fadeInNext, fadeTime - overlap);
+            }
+        }
+    
+        // Start fading in the columns
+        fadeInNext();
     }
 
     // Function to show the statement div and hide the gallery
@@ -116,6 +138,7 @@ $(document).ready(function () {
         history.pushState({}, null, '?' + queryString); // Update URL with query string
         $('.gallery-link').removeClass('active');
         $(this).addClass('active');
+        $('.navbar-collapse').toggleClass('show');
         updateImageGallery(selectedLetter);
         hideStatement();
     });
