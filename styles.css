@@ -3,8 +3,8 @@ html, body {
     padding: 0;
     height: 100%;
     overflow: hidden; 
-    /*Jquery handels the background image*/
-    /*background-image: url('images/sketch-book/IMG_3995_crop.jpg');*/
+    
+    /*background-image: url('images/base-drawings/burnt-umber+white+12-colours-A3-ratio.JPG');*/
     
     background-repeat: no-repeat;
     background-size: contain;

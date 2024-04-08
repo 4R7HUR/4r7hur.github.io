@@ -138,7 +138,9 @@ $(document).ready(function () {
         history.pushState({}, null, '?' + queryString); // Update URL with query string
         $('.gallery-link').removeClass('active');
         $(this).addClass('active');
-        $('.navbar-collapse').toggleClass('show');
+        
+        //$('.navbar-collapse').toggleClass('show');
+        
         updateImageGallery(selectedLetter);
         hideStatement();
     });

@@ -18,7 +18,7 @@ dynamicSvg.setAttribute("id", "dynamicSvg");
 dynamicSvg.setAttribute("width", maxXmaxY[0] + "px");
 dynamicSvg.setAttribute("height", maxXmaxY[1] + "px");
 
-let path1 = createPath('', 'active', 'description', '', drawingPx, '#222',1);
+let path1 = createPath('', 'active', 'description', '', drawingPx, 'red',1);
 dynamicSvg.appendChild(path1);
 let path2 = createPath('', 'active', 'description', '', drawingPx, '#111',0.9);
 dynamicSvg.appendChild(path2);
@@ -62,7 +62,7 @@ if(parseInt(historyPaths)){
 
 //set paper
 let paper = createRectangle('papper', '', 0, 0, maxXmaxY[0], maxXmaxY[1], paperColour);
-dynamicSvg.prepend(paper);
+//dynamicSvg.prepend(paper);
 
 
 
@@ -302,8 +302,10 @@ function getRandomItem(array) {
 }
 
 $(document).ready(function () {
-    //let imageURL = 'images/sketch-book/IMG_' + imageName + '_crop.jpg';
-    //$('body').css('background-image', 'url(' + imageURL + ')');
+    let imageURL = 'images/base-drawings/' + imageName;
+    $('body').css('background-image', 'url(' + imageURL + ')');
+
+    
 });
 
 

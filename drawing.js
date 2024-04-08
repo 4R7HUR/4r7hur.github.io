@@ -31,7 +31,7 @@ $(function () {
 
         setTimeout(function () {
 
-            window.location.href = redirect_url;
+            //window.location.href = redirect_url;
 
         }, 1000);
 
@@ -96,7 +96,7 @@ function trackMouse(event) {
         //Test if its time to start a new path based on the length of this ddd index
         if (countCommas(ddd[index]) > pathLength) {
 
-            newPath = createPath('', 'complete', 'drawing', '', drawingPx, '#000', 1);
+            newPath = createPath('', 'complete', 'drawing', '', drawingPx, '#47473d', 1);
             newPath.setAttribute("d", ddd[index]);
             groupComplete.appendChild(newPath);
 
@@ -112,7 +112,7 @@ function trackMouse(event) {
 
                 let strokeWidth = parseInt(charcterPx.charAt(0));
                 charcterPx = charcterPx.slice(1) + strokeWidth;
-                strokeWidth = (strokeWidth * 1) + 'px';
+                strokeWidth = (strokeWidth * 2) + 'px';
 
                 description = 'character path';
 

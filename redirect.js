@@ -1,18 +1,27 @@
 const urlParams = new URLSearchParams(window.location.search);
 const defaultParams = {
+
+
+    'charcterPx': getCharcterPx('818822811119111'),
+    'colours': getColours('0.1.2.3.4.5.6.7.8.9.10.11.7.7.7'),
+    'string': getCharacters('asdfghjjlasdddd'),
+
+
     'historyConfig': getHistoryConfig(),
-    'historyPx': 0.3,
+    'historyPx': 1,
+    'historyPaths': getHistoryPaths(6),
+    'historyColours': gethistoryColours('4.9.9'),//starts at 0
+
+
     'drawingPx': getDrawingPx('3'),
-    'charcterPx': getCharcterPx('999'),
-    'historyPaths': getHistoryPaths(7),
-    //'imageName': getBackgroundImage(),
+    
+    
+    'imageName': getBackgroundImage('burnt-umber+white+12-colours-A3-ratio.JPG'),
     'pathLength': getPathLength(),
-    'string': getCharacters('aads'),
     'processHistory': ["fast", "animate", "no"][0],
     'paperColour': getPaperColour('lightgrey'),
-    'historyColours': gethistoryColours('133'),
-    'colours': getColours('7.45.69.79.78.97.146.96.134.134.134.134.134.134.134.134.134.134.134.134.134'),
-    'characterStrokeOpacity': getCharacterStrokeOpacity(),
+    
+    'characterStrokeOpacity': getCharacterStrokeOpacity(777777777777),
 }
 
 const defaultParamsB = {
@@ -30,6 +39,22 @@ const defaultParamsB = {
     'colours': getColours(getRandomItem(['22.50.58.61.36.66.56','30.96.46.37.139.109.145','120.135.17.16.63.95.5','34.126.73.86.61.127.52','105.57.51.64.38.32.37.136','130.45.66.2.120.18.52','70.105.61.110.88.99.136','5.100.27.6.113.119.107'])),
     'characterStrokeOpacity': getCharacterStrokeOpacity(),
 };
+
+const defaultParamsC = {
+    'historyConfig': getHistoryConfig(),
+    'historyPx': 0.3,
+    'drawingPx': getDrawingPx('3'),
+    'charcterPx': getCharcterPx('999'),
+    'historyPaths': getHistoryPaths(7),
+    //'imageName': getBackgroundImage(),
+    'pathLength': getPathLength(),
+    'string': getCharacters('aads'),
+    'processHistory': ["fast", "animate", "no"][0],
+    'paperColour': getPaperColour('lightgrey'),
+    'historyColours': gethistoryColours('133'),
+    'colours': getColours('7.45.69.79.78.97.146.96.134.134.134.134.134.134.134.134.134.134.134.134.134'),
+    'characterStrokeOpacity': getCharacterStrokeOpacity(),
+}
 
 
 
