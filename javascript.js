@@ -55,7 +55,7 @@ $(document).ready(function () {
             }else{
                 colClass = 'col-4';
             }
-            const column = $('<div></div>').addClass('thumbnail-wrapper mb-4 ' + colClass).attr('style', 'display:none');
+            const column = $('<div></div>').addClass('thumbnail-wrapper mb-4 ' + colClass);
             column.attr('data-index', index); // Store the index in the column data
             const img = $('<a></a>').attr('href', 'downloads/' + letter + '/' + image.split('.')[0] + '.jpg').attr('data-fancybox', 'images').addClass('d-block'); // Link to SVG file
 
@@ -78,32 +78,6 @@ $(document).ready(function () {
             
         });
 
-        fadeInGallery(); // Fade in the images after they have been added to the DOM
-
-
-
-    }
-
-    function fadeInGallery(){
-        var fadeTime = 100; // Set the fade time in milliseconds
-        var overlap = 50; // Set the overlap time in milliseconds
-        var columns = $('#image-gallery .row').children(); // Select all columns inside #image-gallery .row
-        var currentIndex = 0; // Initialize index for tracking current column
-        
-        function fadeInNext() {
-            // Check if there are more columns to fade in
-            if (currentIndex < columns.length) {
-                // Fade in the current column
-                $(columns[currentIndex]).fadeIn(fadeTime);
-                currentIndex++;
-    
-                // Schedule the next fade after an overlap
-                setTimeout(fadeInNext, fadeTime - overlap);
-            }
-        }
-    
-        // Start fading in the columns
-        fadeInNext();
     }
 
     // Function to show the statement div and hide the gallery
