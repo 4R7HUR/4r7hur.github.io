@@ -1,63 +1,48 @@
+
+let historyPaths = 4;
+
+
 const urlParams = new URLSearchParams(window.location.search);
 const defaultParams = {
 
-
-    'charcterPx': getCharcterPx('818822811119111'),
-    'colours': getColours('0.1.2.3.4.5.6.7.8.9.10.11.7.7.7'),
-    'string': getCharacters('asdfghjjlasdddd'),
-
-
+    //history variables
+    'historyPens': getPens('history', historyPaths),
     'historyConfig': getHistoryConfig(),
-    'historyPx': 1,
-    'historyPaths': getHistoryPaths(6),
-    'historyColours': gethistoryColours('4.9.9'),//starts at 0
+    'historyPaths': historyPaths,
 
+    //drawing variables
+    'drawingPens': getPens('drawing', 3),//must be 3!
 
-    'drawingPx': getDrawingPx('3'),
-    
-    
+    //charcter variables
+    'charcterPens': getPens('character', 9),
+    'string': getCharacters('asdfghjkl'),
+
+    //other variables    
     'imageName': getBackgroundImage('burnt-umber+white+12-colours-A3-ratio.JPG'),
     'pathLength': getPathLength(),
     'processHistory': ["fast", "animate", "no"][0],
-    'paperColour': getPaperColour('lightgrey'),
-    
-    'characterStrokeOpacity': getCharacterStrokeOpacity(777777777777),
-}
+    'paperColour': getPaperColour('#fefefe'),
 
-const defaultParamsB = {
-    'historyConfig': getHistoryConfig(),
-    'historyPx': randomInteger(2, 8)/10,
-    'drawingPx': getDrawingPx(),
-    'charcterPx': getCharcterPx(),
-    'historyPaths': getHistoryPaths(5),
-    //'imageName': getBackgroundImage(),
-    'pathLength': getPathLength(),
-    'string': getCharacters(),
-    'processHistory': ["fast", "animate", "no"][0],
-    'paperColour': getPaperColour(getRandomItem(['darkslategray','lightslategray','slategray', 'gray', 'aliceblue','gainsboro','lightsteelblue','honeydew'])),
-    'historyColours': gethistoryColours(getRandomItem(['77.52.131.25.13','0.6.41.88.85.142.131','57.137.57.87.88.19.117.85','63.78.86.72.79.23.127.109.11.77'])),
-    'colours': getColours(getRandomItem(['22.50.58.61.36.66.56','30.96.46.37.139.109.145','120.135.17.16.63.95.5','34.126.73.86.61.127.52','105.57.51.64.38.32.37.136','130.45.66.2.120.18.52','70.105.61.110.88.99.136','5.100.27.6.113.119.107'])),
-    'characterStrokeOpacity': getCharacterStrokeOpacity(),
 };
 
-const defaultParamsC = {
-    'historyConfig': getHistoryConfig(),
-    'historyPx': 0.3,
-    'drawingPx': getDrawingPx('3'),
-    'charcterPx': getCharcterPx('999'),
-    'historyPaths': getHistoryPaths(7),
-    //'imageName': getBackgroundImage(),
-    'pathLength': getPathLength(),
-    'string': getCharacters('aads'),
-    'processHistory': ["fast", "animate", "no"][0],
-    'paperColour': getPaperColour('lightgrey'),
-    'historyColours': gethistoryColours('133'),
-    'colours': getColours('7.45.69.79.78.97.146.96.134.134.134.134.134.134.134.134.134.134.134.134.134'),
-    'characterStrokeOpacity': getCharacterStrokeOpacity(),
+
+function getPens(type, numberOfIndexes) {
+
+    const randomIndexes = getRandomIndexes(numberOfIndexes);
+
+    return randomIndexes
 }
 
+// Function to get random indexes from the stationary array
+function getRandomIndexes(n) {
+    const indexes = [];
+    for (let i = 0; i < n; i++) {
+        const randomIndex = Math.floor(Math.random() * pens.length);
+        indexes.push(randomIndex);
+    }
 
-
+    return indexes.join(".");
+}
 
 function randomInteger(min, max) {
     let integer = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -133,7 +118,7 @@ function gethistoryColours(defaultNamedColours) {
         if (defaultNamedColours) {
             return defaultNamedColours;
         }
-    
+
         let numberOfColours = randomInteger(3, 10);
         let numOfNamedColours = svgNamedColors.length;
 
@@ -162,7 +147,7 @@ function getColours(defaultColours) {
         if (defaultColours) {
             return defaultColours;
         }
-    
+
         let numberOfColours = randomInteger(6, 7);
         let numOfNamedColours = svgNamedColors.length;
 
@@ -268,9 +253,9 @@ function getHistoryConfig(default_config) {
         return default_config;
     } else {
         let config = "";
-        let chunks = getRandomItem([80,160,320]);//the number of chunks we split the history into
+        let chunks = getRandomItem([80, 160, 320]);//the number of chunks we split the history into
         //chunks = getRandomItem([60, 65, 70]);//the number of chunks we split the history into
-        let chunksDenominator = getRandomItem([4,8,16,32,64]);//the number we divide the chunks by to get the chunksUsed
+        let chunksDenominator = getRandomItem([4, 8, 16, 32, 64]);//the number we divide the chunks by to get the chunksUsed
         //chunksDenominator = getRandomItem([6]);//the number we divide the chunks by to get the chunksUsed
 
         let chunksUsed = parseInt(chunks / chunksDenominator);

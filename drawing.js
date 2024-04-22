@@ -6,9 +6,6 @@ let CCC = [[], [], []];//Home for the coordinates that form the beizer curves.
 let character = '';
 let history = [];
 
-colours = colours.split('.');
-
-
 $("#dynamicSvg").on("mousemove", trackMouse);
 
 $(function () {
@@ -95,37 +92,40 @@ function trackMouse(event) {
     CCC.forEach(function (element, index) {
         //Test if its time to start a new path based on the length of this ddd index
         if (countCommas(ddd[index]) > pathLength) {
+            
+            pen = getPen(drawingPens.split('.')[index]);
 
-            newPath = createPath('', 'complete', 'drawing', '', drawingPx, '#47473d', 1);
+            newPath = createPath('', 'complete', 'drawing', '', (pen.tip_width_mm * 10) + 'px', pen.hex, 1);
             newPath.setAttribute("d", ddd[index]);
-            groupComplete.appendChild(newPath);
-
-            //if ($("#dynamicSvg g path.complete").length > paths * 3) {                    
-            //$("#dynamicSvg g path.complete").eq(0).remove();
-            //}
+            groupComplete.appendChild(newPath);                     
 
 
             if (index === 0) {
 
+
                 let character = string.charAt(0);
-                string = string.slice(1) + character;
+                string = string.slice(1) + character;  
+            
 
-                let strokeWidth = parseInt(charcterPx.charAt(0));
-                charcterPx = charcterPx.slice(1) + strokeWidth;
-                strokeWidth = (strokeWidth * 2) + 'px';
+                let integers = charcterPens.split(".");
+                let penIndex = parseInt(integers[0]);
+                let firstInteger = integers.shift();
+                integers.push(firstInteger);
+                charcterPens = integers.join(".");
 
-                description = 'character path';
+                let pen = getPen(penIndex);
+                console.log();
+                
+                let stroke_width = Array.isArray(pen.tip_width_mm) ? pen.tip_width_mm[Math.floor(Math.random() * pen.tip_width_mm.length)] : pen.tip_width_mm;
 
-                svgNamedColorsIndex = colours.shift();
-                colours.push(svgNamedColorsIndex);
-                thisColour = svgNamedColors[svgNamedColorsIndex]
-
-                let opacity = parseInt(characterStrokeOpacity.charAt(0));
-                characterStrokeOpacity = characterStrokeOpacity.slice(1) + opacity;
-                opacity = (opacity + 1)/10;                
+                if(38 === pen.id){
+                    console.log(pen.colour_name);
+                    console.log(pen.hex);
+                    console.log(stroke_width);
+                }
 
                 //create a new path [into the end of the group] and then apply a character function to it
-                newPath = createPath(character, character + ' character-path', description, '', strokeWidth, thisColour, opacity);
+                newPath = createPath(character, character + ' character-path', 'description', '', (stroke_width * 10) + 'px', pen.hex, 1);
                 groupComplete.appendChild(newPath);
                 coords_array = parseSVGPath(ddd[index]);
 

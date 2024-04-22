@@ -1,6 +1,9 @@
 let maxXmaxY = getMaxXmaxY(history_data);
-drawingPx = drawingPx + 'px';
-historyPx = historyPx + 'px';
+
+let path1Pen = getPen(drawingPens.split('.')[0]);
+let path2Pen = getPen(drawingPens.split('.')[1]);
+let path3Pen = getPen(drawingPens.split('.')[2]);
+
 let pathData = Array.from({ length: historyPaths }, () => []);
 
 const dynamicSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -18,11 +21,11 @@ dynamicSvg.setAttribute("id", "dynamicSvg");
 dynamicSvg.setAttribute("width", maxXmaxY[0] + "px");
 dynamicSvg.setAttribute("height", maxXmaxY[1] + "px");
 
-let path1 = createPath('', 'active', 'description', '', drawingPx, 'red',1);
+let path1 = createPath('', 'active', 'description', '', path1Pen.tip_width_mm, path1Pen.hex,1);
 dynamicSvg.appendChild(path1);
-let path2 = createPath('', 'active', 'description', '', drawingPx, '#111',0.9);
+let path2 = createPath('', 'active', 'description', '', path2Pen.tip_width_mm, path2Pen.hex,0.9);
 dynamicSvg.appendChild(path2);
-let path3 = createPath('', 'active', 'description', '', drawingPx, '#000',0.8);
+let path3 = createPath('', 'active', 'description', '', path3Pen.tip_width_mm, path3Pen.hex,0.8);
 dynamicSvg.appendChild(path3);
 
 const groupComplete = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -32,19 +35,21 @@ dynamicSvg.prepend(groupComplete);
 
 document.body.appendChild(dynamicSvg);
 
+
+function getPen(index){
+    return pens[index];
+}
+
 //Set Background paths
 let svgNamedColorsIndex
 
 if(parseInt(historyPaths)){
     
     for (let i = 1; i <= historyPaths; i++) {
+
+        let pen = getPen(historyPens.split('.')[i-1]);    
     
-        let parts = historyColours.split(".");
-        svgNamedColorsIndex = parseInt(parts.shift());
-        parts.push(svgNamedColorsIndex);
-        historyColours = parts.join(".");
-    
-        let background = createPath('background_' + i, 'background', 'background', '', historyPx, svgNamedColors[svgNamedColorsIndex], 1);
+        let background = createPath('background_' + i, 'background', 'background', '', pen.tip_width_mm, pen.hex, 1);
         dynamicSvg.prepend(background);
     }
     
@@ -62,7 +67,7 @@ if(parseInt(historyPaths)){
 
 //set paper
 let paper = createRectangle('papper', '', 0, 0, maxXmaxY[0], maxXmaxY[1], paperColour);
-//dynamicSvg.prepend(paper);
+dynamicSvg.prepend(paper);
 
 
 
@@ -232,6 +237,8 @@ function createPath(id, c1ass, description, d, stroke_width, stroke, strokeOpaci
     path.setAttribute('stroke-opacity', strokeOpacity);//ranges from 0 (completely transparent) to 1 (completely opaque)
 
     path.setAttribute('fill', 'none');
+    //path.setAttribute('filter', 'url(#multiply)');
+
     //path.setAttribute('stroke-dasharray', "5 5 31");
     //path.setAttribute('opacity', 1);
     //path.setAttribute('fill-opacity', 1);
@@ -261,7 +268,6 @@ function createRectangle(id, c1ass, x, y, width, height, fill) {
 // Event Listeners
 document.addEventListener('keydown', function (event) {
     const keyPressed = event.key.toLowerCase(); // Convert the typed key to lowercase for case-insensitive comparison
-    //console.log("The " + keyPressed + " key was pressed..");
     handleKeyPress(keyPressed);
 });
 
@@ -303,7 +309,7 @@ function getRandomItem(array) {
 
 $(document).ready(function () {
     let imageURL = 'images/base-drawings/' + imageName;
-    $('body').css('background-image', 'url(' + imageURL + ')');
+    //$('body').css('background-image', 'url(' + imageURL + ')');
 
     
 });

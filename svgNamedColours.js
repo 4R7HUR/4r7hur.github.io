@@ -167,7 +167,7 @@ let sampledColours = [
 ];
 
 svgNamedColors = sampledColours;
-console.log(svgNamedColors);
+
 
 let sampledColoursInfo = {
   "#71a72e": {

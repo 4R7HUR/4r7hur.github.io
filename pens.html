@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pen Data</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="pens.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            // Function to populate table headers
+            function populateTableHeaders(data) {
+                let thead = "<tr>";
+                for (let key in data[0]) {
+                    let formattedKey = key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()); // Convert to title case and remove underscores
+                    
+                    if( 'Tip Width Mm' === formattedKey ){
+
+                        formattedKey = 'Tip Width (mm)';
+
+                    }else if( 'Id' === formattedKey ){
+                        formattedKey = 'ID';
+
+                    }
+                    
+                    thead += "<th>" + formattedKey + "</th>";
+                }
+                thead += "</tr>";
+                $('#pens thead').html(thead);
+            }
+
+            // Function to format tip_width_mm field
+            function formatTipWidth(value) {
+
+                if (Array.isArray(value)) {
+                    // Format each element to have one decimal place and join with hyphen
+                    return value.map(v => v.toFixed(1).replace('.0', '.0')).join(' - ') + 'mm';
+                } else {
+                    // Keep decimal places for non-array values
+                    return value + 'mm';
+                }
+            }
+
+
+
+            // Function to populate table
+            function populateTable(data) {
+                let tbody = "";
+                $.each(data, function (index, item) {
+                    let row = "<tr>";
+                    $.each(item, function (key, value) {
+                        if (key === "hex") {
+                            row += "<td style='background-color:" + value + ";'><span style='background-color:white;'>" + value + "</span></td>";
+                        } else if (key === "tip_width_mm") {
+                            row += "<td>" + formatTipWidth(value) + "</td>"; // Format tip_width
+                        } else {
+                            row += "<td>" + value + "</td>";
+                        }
+                    });
+                    row += "</tr>";
+                    tbody += row;
+                });
+                $('#pens tbody').html(tbody);
+            }
+
+            // Initial table population
+            populateTableHeaders(pens);
+            populateTable(pens);
+        });
+    </script>
+</head>
+
+<body>
+    
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Pens</h3>
+                <table id="pens" class="table table-bordered">
+                    <thead>
+                        <!-- Table headers will be generated dynamically using JavaScript -->
+                    </thead>
+                    <tbody>
+                        <!-- Table content will be generated dynamically using JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
